@@ -27,7 +27,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
 
 
-# In[47]:
+# In[1]:
 
 
 class ShallowSemanticParser():
@@ -43,6 +43,7 @@ class ShallowSemanticParser():
         print('srl model:', self.srl)
         print('language:', self.language)
         print('using viterbi:', self.viterbi)
+        print('using masking:', self.masking)
         
         #load model
         if model_dir:
@@ -68,15 +69,15 @@ class ShallowSemanticParser():
                 pass
             else:
                 input_conll = [input_conll]
-            tgt_conll = input_conll
+            tgt_data = input_conll
         else:
             if self.srl == 'framenet':
                 tgt_conll = self.targetid.target_id(input_conll)
             else:
                 tgt_conll = self.targetid.pred_id(input_conll)
         
-        # add <tgt> and </tgt> to target word
-        tgt_data = dataio.data2tgt_data(tgt_conll, mode='parse')
+            # add <tgt> and </tgt> to target word
+            tgt_data = dataio.data2tgt_data(tgt_conll, mode='parse')
 
         if tgt_data:
             
@@ -94,11 +95,15 @@ class ShallowSemanticParser():
                                          lus=b_lus, attention_mask=b_masks)
                     sense_logits, arg_logits = self.model(b_input_ids, token_type_ids=None, 
                                     lus=b_lus, attention_mask=b_masks)
-
-                lufr_masks = utils.get_masks(b_lus, 
-                                             self.bert_io.lufrmap, 
-                                             num_label=len(self.bert_io.sense2idx), 
-                                             masking=self.masking).to(device)
+                    
+                    
+                if self.srl == 'framenet':
+                    lufr_masks = utils.get_masks(b_lus, 
+                                                 self.bert_io.lufrmap, 
+                                                 num_label=len(self.bert_io.sense2idx), 
+                                                 masking=self.masking).to(device)
+                else:
+                    pass
 
                 b_input_ids_np = b_input_ids.detach().cpu().numpy()  
                 arg_logits_np = arg_logits.detach().cpu().numpy()
@@ -129,28 +134,33 @@ class ShallowSemanticParser():
                     input_id = b_input_ids[b_idx]
                     sense_logit = sense_logits[b_idx]
                     arg_logit = arg_logits[b_idx]
-                    lufr_mask = lufr_masks[b_idx]
                     
-                    arg_logit_np = arg_logit.detach().cpu().numpy()
-
-                    lufr_mask = lufr_masks[b_idx]
-                    orig_tok_to_map = b_orig_tok_to_maps[b_idx]
-            
-                    masked_sense_logit = utils.masking_logit(sense_logit, lufr_mask)
-                    pred_sense, sense_score = utils.logit2label(masked_sense_logit)
-                    
-                    frarg_mask = utils.get_masks([pred_sense], 
+                    if self.srl == 'framenet':
+                        lufr_mask = lufr_masks[b_idx]
+                        frarg_mask = utils.get_masks([pred_sense], 
                                                  self.bert_io.bio_frargmap, 
                                                  num_label=len(self.bert_io.bio_arg2idx), 
                                                  masking=True).to(device)[0]
+                        masked_sense_logit = utils.masking_logit(sense_logit, lufr_mask)
+                        pred_sense, sense_score = utils.logit2label(masked_sense_logit)
+                    else:
+                        pred_sense, sense_score = utils.logit2label(sense_logit)
                     
-                    arg_logit = []
-                    for logit in arg_logit_np:
-                        masked_logit = utils.masking_logit(logit, frarg_mask)
-                        arg_logit.append(np.array(masked_logit))
-                    arg_logit = torch.Tensor(arg_logit).to(device)
+
+#                     lufr_mask = lufr_masks[b_idx]
+                    orig_tok_to_map = b_orig_tok_to_maps[b_idx]            
                     
-                    if self.viterbi:
+                    if self.srl == 'framenet':
+                        arg_logit_np = arg_logit.detach().cpu().numpy()
+                        arg_logit = []
+                        for logit in arg_logit_np:
+                            masked_logit = utils.masking_logit(logit, frarg_mask)
+                            arg_logit.append(np.array(masked_logit))
+                        arg_logit = torch.Tensor(arg_logit).to(device)
+                    else:
+                        pass
+                    
+                    if self.viterbi and len(arg_logit) > 1:
                         sm = nn.Softmax(dim=1)
                         arg_logit_softmax = sm(arg_logit)
                         arg_logit = arg_logit.detach().cpu().numpy()
@@ -193,6 +203,7 @@ class ShallowSemanticParser():
                     if conll[1][idx] != '_':
                         sense_seq[idx] = pred_sense_tags[i]
                         
+                conll.append(sense_seq)
                 conll.append(pred_arg_tags[i])
                 
                 result.append(conll)

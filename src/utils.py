@@ -34,6 +34,7 @@ class for_BERT():
         
         if srl == 'framenet':
             if language == 'en':
+                fnversion=1.7
                 data_path = dir_path+'/koreanframenet/resource/info/fn'+str(fnversion)+'_'
             else:
                 data_path = dir_path+'/koreanframenet/resource/info/kfn'+str(fnversion)+'_'
@@ -46,7 +47,7 @@ class for_BERT():
                 self.sense2idx = json.load(f)
                 
             with open(data_path+'lufrmap.json','r') as f:
-                self.lufrmap = json.load(f)            
+                self.lufrmap = json.load(f)
                 
             with open(dir_path+'/koreanframenet/resource/info/fn1.7_fe2idx.json','r') as f:
                 self.arg2idx = json.load(f)

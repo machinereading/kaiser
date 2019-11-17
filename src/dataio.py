@@ -68,7 +68,7 @@ def load_data(srl='framenet', language='ko', fnversion=1.1, path=False):
     else:
         if language == 'ko':
             if path == False:
-                fn_dir = '/disk/data/corpus/koreanPropBank/revised/'
+                fn_dir = '/disk/data/corpus/koreanPropBank/original/'
             else:
                 fn_dir = path
             if srl == 'propbank-dp':

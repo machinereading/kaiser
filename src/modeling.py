@@ -31,6 +31,7 @@ n_gpu = torch.cuda.device_count()
 class BertForJointShallowSemanticParsing(BertPreTrainedModel):
     def __init__(self, config, num_senses=2, num_args=2, lufrmap=None, frargmap=None, srl='framenet', masking=True):
         super(BertForJointShallowSemanticParsing, self).__init__(config)
+        self.srl = srl
         self.masking = masking
         self.num_senses = num_senses # total number of all frames
         self.num_args = num_args # total number of all frames
@@ -61,7 +62,10 @@ class BertForJointShallowSemanticParsing(BertPreTrainedModel):
         sense_logits = self.sense_classifier(pooled_output)
         arg_logits = self.arg_classifier(sequence_output)
         
-        lufr_masks = utils.get_masks(lus, self.lufrmap, num_label=self.num_senses, masking=self.masking).to(device)
+        if self.srl == 'framenet':
+            lufr_masks = utils.get_masks(lus, self.lufrmap, num_label=self.num_senses, masking=self.masking).to(device)
+        else:
+            pass
         
         sense_loss = 0 # loss for sense id
         arg_loss = 0 # loss for arg id
@@ -69,20 +73,33 @@ class BertForJointShallowSemanticParsing(BertPreTrainedModel):
             for i in range(len(sense_logits)):
                 sense_logit = sense_logits[i]
                 arg_logit = arg_logits[i]
-                lufr_mask = lufr_masks[i]
+                
+                if self.srl == 'framenet':
+                    lufr_mask = lufr_masks[i]
+                    
                 gold_sense = senses[i]
                 gold_arg = args[i]
                 
                 #train sense classifier
-                loss_fct_sense = CrossEntropyLoss(weight = lufr_mask)
+                if self.srl == 'framenet':
+                    loss_fct_sense = CrossEntropyLoss(weight = lufr_mask)
+                else:
+                    loss_fct_sense = CrossEntropyLoss()
                 loss_per_seq_for_sense = loss_fct_sense(sense_logit.view(-1, self.num_senses), gold_sense.view(-1))
                 sense_loss += loss_per_seq_for_sense
                 
                 #train arg classifier
-                pred_sense, sense_score = utils.logit2label(sense_logit, lufr_mask)
-                frarg_mask = utils.get_masks([pred_sense], self.frargmap, num_label=self.num_args, masking=True).to(device)[0]
+                if self.srl == 'framenet':
+                    masked_sense_logit = utils.masking_logit(sense_logit, lufr_mask)
+                    pred_sense, sense_score = utils.logit2label(masked_sense_logit)
+                else:
+                    pred_sense, sense_score = utils.logit2label(sense_logit)
                 
-                loss_fct_arg = CrossEntropyLoss(weight = frarg_mask)
+                if self.srl == 'framenet':
+                    frarg_mask = utils.get_masks([pred_sense], self.frargmap, num_label=self.num_args, masking=True).to(device)[0]                
+                    loss_fct_arg = CrossEntropyLoss(weight = frarg_mask)
+                else:
+                    loss_fct_arg = CrossEntropyLoss()
                 
                 # only keep active parts of loss
                 if attention_mask is not None:
