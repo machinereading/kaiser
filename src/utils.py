@@ -28,9 +28,12 @@ class for_BERT():
         self.mode = mode
         self.masking = masking
         self.srl = srl
-        never_split = ["[UNK]", "[SEP]", "[PAD]", "[CLS]", "[MASK]", '<tgt>', '</tgt>']
+        
+        # add <tgt> and </tgt> to special token
+#         never_split = ["[UNK]", "[SEP]", "[PAD]", "[CLS]", "[MASK]", '<tgt>', '</tgt>']
         vocab_file_path = dir_path+'/data/bert-multilingual-cased-dict-add-tgt'
-        self.tokenizer = BertTokenizer(vocab_file_path, do_lower_case=False, max_len=256, never_split=never_split)
+        self.tokenizer = BertTokenizer(vocab_file_path, do_lower_case=False, max_len=256)
+        self.tokenizer.additional_special_tokens = ['<tgt>', '</tgt>']
         
         if srl == 'framenet':
             if language == 'en':

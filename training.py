@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[2]:
 
 
 import sys
@@ -25,7 +25,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
 
 
-# In[7]:
+# In[3]:
 
 
 # 실행시간 측정 함수
@@ -46,32 +46,7 @@ def tac():
     return result
 
 
-# In[8]:
-
-
-# srl = 'framenet'
-srl = 'propbank-dp'
-language = 'ko'
-# language = 'en'
-masking = True
-# model_dir = '/disk/data/models/enframenet_1105/'
-model_dir = '/disk/data/models/kosrl_1116/'
-if language == 'en':
-    fnversion = 1.7
-#     PRETRAINED_MODEL = "bert-large-cased"
-    MAX_LEN = 256
-    batch_size = 6
-    PRETRAINED_MODEL = "bert-base-multilingual-cased"
-else:
-    fnversion = 1.1
-    PRETRAINED_MODEL = "bert-base-multilingual-cased"
-    MAX_LEN = 256
-    batch_size = 6
-
-epochs = 50
-
-
-# In[9]:
+# In[4]:
 
 
 try:
@@ -80,22 +55,7 @@ except:
     dir_path = '.'
 
 
-# In[10]:
-
-
-trn, dev, tst = dataio.load_data(srl=srl, language=language)
-print('')
-print('MODEL:', srl)
-print('LANGUAGE:', language)
-
-
-# In[11]:
-
-
-bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=True, fnversion=fnversion)
-
-
-# In[14]:
+# In[5]:
 
 
 def train():
@@ -103,15 +63,17 @@ def train():
     
     if srl == 'propbank-dp':
         model = BertForJointShallowSemanticParsing.from_pretrained(PRETRAINED_MODEL, 
-                                                         num_senses = len(bert_io.sense2idx), 
-                                                         num_args = len(bert_io.arg2idx),
-                                                                  srl=srl,
-                                                                  masking=False)
+                                                                   num_senses = len(bert_io.sense2idx), 
+                                                                   num_args = len(bert_io.arg2idx),
+                                                                   srl=srl,
+                                                                   masking=False)
     else:
         model = BertForJointShallowSemanticParsing.from_pretrained(PRETRAINED_MODEL, 
-                                                         num_senses = len(bert_io.sense2idx), 
-                                                         num_args = len(bert_io.bio_arg2idx),
-                                                         lufrmap=bert_io.lufrmap, frargmap = bert_io.bio_frargmap)
+                                                                   num_senses = len(bert_io.sense2idx), 
+                                                                   num_args = len(bert_io.bio_arg2idx),
+                                                                   lufrmap=bert_io.lufrmap, 
+                                                                   frargmap = bert_io.bio_frargmap,
+                                                                   srl=srl)
     model.to(device);
     
     trn_data = bert_io.convert_to_bert_input_JointShallowSemanticParsing(trn)
@@ -173,8 +135,95 @@ def train():
     print('...training is done')
 
 
-# In[15]:
+# In[7]:
 
+
+# srl = 'propbank-dp'
+# language = 'ko'
+# masking = False
+# model_dir = '/disk/data/models/ko-srl-tgt-1117/'
+# if language == 'en':
+#     fnversion = 1.7
+# #     PRETRAINED_MODEL = "bert-large-cased"
+#     MAX_LEN = 256
+#     batch_size = 6
+#     PRETRAINED_MODEL = "bert-base-multilingual-cased"
+# else:
+#     fnversion = 1.1
+#     PRETRAINED_MODEL = "bert-base-multilingual-cased"
+#     MAX_LEN = 256
+#     batch_size = 6
+
+# epochs = 50
+
+# trn, dev, tst = dataio.load_data(srl=srl, language=language)
+# print('')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion)
+
+# train()
+
+
+# In[8]:
+
+
+# srl = 'framenet'
+# language = 'ko'
+# masking = True
+# model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
+# if language == 'en':
+#     fnversion = 1.7
+# #     PRETRAINED_MODEL = "bert-large-cased"
+#     MAX_LEN = 256
+#     batch_size = 6
+#     PRETRAINED_MODEL = "bert-base-multilingual-cased"
+# else:
+#     fnversion = 1.1
+#     PRETRAINED_MODEL = "bert-base-multilingual-cased"
+#     MAX_LEN = 256
+#     batch_size = 6
+
+# epochs = 50
+
+# trn, dev, tst = dataio.load_data(srl=srl, language=language)
+# print('')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion)
+
+# train()
+
+
+# In[9]:
+
+
+srl = 'framenet'
+language = 'en'
+masking = True
+model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+if language == 'en':
+    fnversion = 1.7
+#     PRETRAINED_MODEL = "bert-large-cased"
+    MAX_LEN = 256
+    batch_size = 6
+    PRETRAINED_MODEL = "bert-base-multilingual-cased"
+else:
+    fnversion = 1.1
+    PRETRAINED_MODEL = "bert-base-multilingual-cased"
+    MAX_LEN = 256
+    batch_size = 6
+
+epochs = 50
+
+trn, dev, tst = dataio.load_data(srl=srl, language=language)
+print('')
+print('MODEL:', srl)
+print('LANGUAGE:', language)
+
+bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion)
 
 train()
 

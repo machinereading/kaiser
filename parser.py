@@ -40,6 +40,10 @@ class ShallowSemanticParser():
         self.gold_pred = gold_pred
         self.viterbi = viterbi
         
+        if self.srl == 'propbank-dp':
+            self.viterbi = False
+            self.masking = False
+        
         print('srl model:', self.srl)
         print('language:', self.language)
         print('using viterbi:', self.viterbi)
@@ -95,8 +99,7 @@ class ShallowSemanticParser():
                                          lus=b_lus, attention_mask=b_masks)
                     sense_logits, arg_logits = self.model(b_input_ids, token_type_ids=None, 
                                     lus=b_lus, attention_mask=b_masks)
-                    
-                    
+                
                 if self.srl == 'framenet':
                     lufr_masks = utils.get_masks(b_lus, 
                                                  self.bert_io.lufrmap, 
@@ -136,23 +139,21 @@ class ShallowSemanticParser():
                     arg_logit = arg_logits[b_idx]
                     
                     if self.srl == 'framenet':
-                        lufr_mask = lufr_masks[b_idx]
-                        frarg_mask = utils.get_masks([pred_sense], 
-                                                 self.bert_io.bio_frargmap, 
-                                                 num_label=len(self.bert_io.bio_arg2idx), 
-                                                 masking=True).to(device)[0]
+                        lufr_mask = lufr_masks[b_idx]                        
                         masked_sense_logit = utils.masking_logit(sense_logit, lufr_mask)
                         pred_sense, sense_score = utils.logit2label(masked_sense_logit)
                     else:
                         pred_sense, sense_score = utils.logit2label(sense_logit)
-                    
-
-#                     lufr_mask = lufr_masks[b_idx]
-                    orig_tok_to_map = b_orig_tok_to_maps[b_idx]            
+                        
+                    orig_tok_to_map = b_orig_tok_to_maps[b_idx]
                     
                     if self.srl == 'framenet':
                         arg_logit_np = arg_logit.detach().cpu().numpy()
                         arg_logit = []
+                        frarg_mask = utils.get_masks([pred_sense], 
+                                                     self.bert_io.bio_frargmap, 
+                                                     num_label=len(self.bert_io.bio_arg2idx), 
+                                                     masking=True).to(device)[0]
                         for logit in arg_logit_np:
                             masked_logit = utils.masking_logit(logit, frarg_mask)
                             arg_logit.append(np.array(masked_logit))

@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[15]:
+# In[1]:
 
 
 import json
@@ -13,7 +13,7 @@ from sklearn.metrics import accuracy_score
 from seqeval.metrics import f1_score, precision_score, recall_score
 
 
-# In[ ]:
+# In[2]:
 
 
 try:
@@ -22,7 +22,7 @@ except:
     dir_path = '.'
 
 
-# In[68]:
+# In[3]:
 
 
 # 실행시간 측정 함수
@@ -43,7 +43,7 @@ def tac():
     return result
 
 
-# In[57]:
+# In[4]:
 
 
 def flat_accuracy(preds, labels):
@@ -65,7 +65,7 @@ def weighting(frame, args):
     return weighted_args
 
 
-# In[17]:
+# In[5]:
 
 
 def test(srl=False, masking=False, viterbi=False, language=False, model_dir=False, result_dir=False, train_lang=False):
@@ -200,15 +200,15 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
             f.write(line+'\n')
 
 
-# In[ ]:
+# In[7]:
 
 
 srl = 'propbank-dp'
 language = 'ko'
-model_dir = '/disk/data/models/kosrl_1115/'
+model_dir = '/disk/data/models/kosrl_1116/'
 
 result_dir = '/disk/data/models/results/srl/'
-test(srl=srl, language=language, masking=True, viterbi=False, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+test(srl=srl, language=language, masking=False, viterbi=False, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
 
 
 # In[ ]:
