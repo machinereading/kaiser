@@ -20,8 +20,9 @@ jpype.attachThreadToJVM()
 class KaiserSerive(Resource):
     def __init__(self):
 #         model_dir = '/disk_4/resource/models'
-        model_path = '/home/hahmyg/FrameNet-RE/models/bert_ko_framenet_model.pt'
-        model_path = '/disk/data/models/bert_ko_framenet_model.pt'
+#         model_path = '/home/hahmyg/FrameNet-RE/models/bert_ko_framenet_model.pt'
+#         model_path = '/disk/data/models/bert_ko_framenet_model.pt'
+        model_path = '/home/hahmyg/bert_ko_framenet_model.pt'
         self.parser = parser.ShallowSemanticParser(model_path=model_path)
     def post(self):
         try:

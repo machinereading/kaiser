@@ -38,11 +38,15 @@ class ShallowSemanticParser():
         self.language = language
         self.masking = masking
         self.srl = srl
-        self.targetid = target_identifier.targetIdentifier()
         self.gold_pred = gold_pred
         self.viterbi = viterbi
         self.tgt = tgt #using <tgt> and </tgt> as a special token
         
+        if self.masking==True:
+            self.targetid = target_identifier.targetIdentifier()
+        else:
+            self.targetid = target_identifier.targetIdentifier(only_lu=False)
+            
         if self.srl == 'propbank-dp':
             self.viterbi = False
             self.masking = False
@@ -57,7 +61,7 @@ class ShallowSemanticParser():
             self.model_path = model_path
         else:
             print('model_path={your_model.pt}')
-        self.model = torch.load(model_path)
+        self.model = torch.load(model_path, map_location=device)
         self.model.eval()
         print('...model is loaded')
         

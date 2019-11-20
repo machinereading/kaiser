@@ -166,7 +166,11 @@ class for_BERT():
             for idx in range(len(lu_items)):
                 if lu_items[idx] != '_':
                     if len(lu) == 0:
-                        lu.append(self.lu2idx[lu_items[idx]])
+                        if self.mode != 'train' and self.masking == False:
+                            lu.append(1)
+                        else:
+                            lu.append(self.lu2idx[lu_items[idx]])
+                            
             lu_seq.append(lu)
             
             if self.mode == 'train':

@@ -178,12 +178,14 @@ def preprocessor(input_data):
     return result
              
     
-def get_frame(frames):
+def get_frame_lu(frames, lus):
     frame = False
-    for f in frames:
+    for i in range(len(frames)):
+        f = frames[i]
         if f != '_':
-            frame = f   
-    return frame
+            frame = f
+            lu = lus[i]
+    return frame, lu
             
 def remove_josa(phrase):
     tokens = phrase.split(' ')
@@ -206,10 +208,15 @@ def frame2rdf(frame_conll, sent_id=False):
     triples = []
     for anno in frame_conll:
         tokens, lus, frames, args = anno[0],anno[1],anno[2],anno[3]
-        frame = get_frame(frames)
+        frame, lu = get_frame_lu(frames, lus)
+        if frame:      
+            triple = ('frame:'+frame, 'frdf:lu', lu)
+            triples.append(triple)
+
         if frame:
             sbj = False
             pred_obj_tuples = []
+            
             for idx in range(len(args)):
                 arg_tag = args[idx]
                 arg_tokens = []
