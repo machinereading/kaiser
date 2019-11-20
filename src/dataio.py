@@ -209,8 +209,11 @@ def frame2rdf(frame_conll, sent_id=False):
     for anno in frame_conll:
         tokens, lus, frames, args = anno[0],anno[1],anno[2],anno[3]
         frame, lu = get_frame_lu(frames, lus)
-        if frame:      
-            triple = ('frame:'+frame, 'frdf:lu', lu)
+        if frame:
+            if sent_id:
+                triple = ('frame:'+frame+'#'+str(sent_id), 'frdf:lu', lu)
+            else:
+                triple = ('frame:'+frame, 'frdf:lu', lu)
             triples.append(triple)
 
         if frame:
