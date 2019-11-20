@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 
 import sys
@@ -16,6 +16,7 @@ from kaiser.src import dataio
 from kaiser import target_identifier
 from kaiser import inference
 from kaiser.src.modeling import BertForJointShallowSemanticParsing
+from kaiser.koreanframenet.src import conll2textae
 from torch.utils.data import TensorDataset, DataLoader, RandomSampler, SequentialSampler
 import torch
 from torch import nn
@@ -31,7 +32,8 @@ n_gpu = torch.cuda.device_count()
 
 
 class ShallowSemanticParser():
-    def __init__(self, fnversion=1.1, language='ko',masking=True, srl='framenet', model_dir=False, gold_pred=False, viterbi=True, tgt=False):
+    def __init__(self, fnversion=1.1, language='ko',masking=True, srl='framenet', 
+                 model_path=False, gold_pred=False, viterbi=False, tgt=True):
         self.fnversion = fnversion
         self.language = language
         self.masking = masking
@@ -51,11 +53,11 @@ class ShallowSemanticParser():
         print('using masking:', self.masking)
         
         #load model
-        if model_dir:
-            self.model_dir = model_dir
+        if model_path:
+            self.model_path = model_path
         else:
-            print('model_dir={your_model.pt}')
-        self.model = torch.load(model_dir)
+            print('model_path={your_model.pt}')
+        self.model = torch.load(model_path)
         self.model.eval()
         print('...model is loaded')
         
@@ -65,7 +67,7 @@ class ShallowSemanticParser():
         if self.srl != 'propbank-dp':
             self.transition_param = inference.get_transition_params(self.bert_io.idx2bio_arg.values())
         
-    def parser(self, input_d):
+    def parser(self, input_d, sent_id=False, result_format=False):
         input_conll = dataio.preprocessor(input_d)
         
         #target identification
@@ -183,7 +185,7 @@ class ShallowSemanticParser():
             else:
                 pred_arg_tags = [[self.bert_io.idx2bio_arg[p_i] for p_i in p] for p in pred_args]
 
-            result = []
+            conll_result = []
 
             for i in range(len(pred_arg_tags)):       
                 
@@ -208,12 +210,39 @@ class ShallowSemanticParser():
                 conll.append(sense_seq)
                 conll.append(pred_arg_tags[i])
                 
-                result.append(conll)
+                conll_result.append(conll)
         else:
-            result = []
+            conll_result = []
             
-        return result        
+            
+        if result_format == 'all':            
+            result = {}
+            result['conll'] = conll_result
+
+            if conll_result:
+                textae = conll2textae.get_textae(conll_result)
+                frdf = dataio.frame2rdf(conll_result, sent_id=sent_id)
+            else:
+                textae = []
+                frdf = []
+            result['textae'] = textae
+            result['graph'] = frdf
+        elif result_format == 'textae':
+            if conll_result:
+                textae = conll2textae.get_textae(conll_result)
+            else:
+                textae = []
+            result = textae
+        elif result_format == 'graph':
+            if conll_result:
+                frdf = dataio.frame2rdf(conll_result, sent_id=sent_id)
+            else:
+                frdf = []
+            result = frdf
+        else:
+            result = conll_result
         
+        return result     
 
 
 # In[48]:

@@ -9,6 +9,12 @@ from torch.utils.data import TensorDataset, DataLoader, RandomSampler, Sequentia
 from keras.preprocessing.sequence import pad_sequences
 
 from kaiser.koreanframenet import koreanframenet
+from kaiser.src import kotimex
+
+from konlpy.tag import Kkma
+kkma = Kkma()
+import jpype
+jpype.attachThreadToJVM()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
@@ -170,8 +176,82 @@ def preprocessor(input_data):
         result = []
         result.append(data)
     return result
-                
+             
+    
+def get_frame(frames):
+    frame = False
+    for f in frames:
+        if f != '_':
+            frame = f   
+    return frame
             
+def remove_josa(phrase):
+    tokens = phrase.split(' ')
+
+    result = []
+    for i in range(len(tokens)):
+        token = tokens[i]
+        if i < len(tokens)-1:
+            result.append(token)
+        else:
+            m = kkma.pos(tokens[i])
+            if m[-1][-1].startswith('J'):
+                m.pop(-1)
+                token = ''.join([t for t,p in m])
+            result.append(token)
+    result = ' '.join(result)
+    return result
             
-            
+def frame2rdf(frame_conll, sent_id=False):
+    triples = []
+    for anno in frame_conll:
+        tokens, lus, frames, args = anno[0],anno[1],anno[2],anno[3]
+        frame = get_frame(frames)
+        if frame:
+            sbj = False
+            pred_obj_tuples = []
+            for idx in range(len(args)):
+                arg_tag = args[idx]
+                arg_tokens = []
+                if arg_tag.startswith('B'):
+                    fe_tag = arg_tag.split('-')[1]
+                    arg_tokens.append(tokens[idx])
+                    next_idx = idx + 1
+                    while next_idx < len(args) and args[next_idx] == 'I-'+fe_tag:
+                        arg_tokens.append(tokens[next_idx])
+                        next_idx +=1
+                    arg_text = ' '.join(arg_tokens)
+                    arg_text = remove_josa(arg_text)
+                    fe = fe_tag
+
+                    # string to xsd
+                    if fe == 'Time':
+                        arg_text = kotimex.time2xsd(arg_text)
+                    else:
+                        pass
+#                         arg_text = '\"'+arg_text+'\"'+'^^xsd:string'
+
+                    rel = 'frdf:'+frame+'-'+fe
+
+                    if rel == 'S':
+                        pass
+                    else:
+                        p = rel
+                        o = arg_text
+                        pred_obj_tuples.append( (p,o) )
+
+            for p, o in pred_obj_tuples:
+                if sbj:
+                    s = sbj
+                else:
+                    if sent_id:
+                        s = 'frame:'+frame+'#'+str(sent_id)
+                    else:
+                        s = 'frame:'+frame
+                triple = (s, p, o)
+                triples.append(triple)
+    return triples
+
+
+        
     
