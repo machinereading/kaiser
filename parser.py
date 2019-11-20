@@ -31,7 +31,7 @@ n_gpu = torch.cuda.device_count()
 
 
 class ShallowSemanticParser():
-    def __init__(self, fnversion=1.1, language='ko',masking=True,srl='framenet', model_dir=False, gold_pred=False, viterbi=True):
+    def __init__(self, fnversion=1.1, language='ko',masking=True, srl='framenet', model_dir=False, gold_pred=False, viterbi=True, tgt=False):
         self.fnversion = fnversion
         self.language = language
         self.masking = masking
@@ -39,6 +39,7 @@ class ShallowSemanticParser():
         self.targetid = target_identifier.targetIdentifier()
         self.gold_pred = gold_pred
         self.viterbi = viterbi
+        self.tgt = tgt #using <tgt> and </tgt> as a special token
         
         if self.srl == 'propbank-dp':
             self.viterbi = False
@@ -58,7 +59,7 @@ class ShallowSemanticParser():
         self.model.eval()
         print('...model is loaded')
         
-        self. bert_io = utils.for_BERT(mode='predict', srl=self.srl, language=self.language, masking=self.masking, fnversion=self.fnversion)      
+        self.bert_io = utils.for_BERT(mode='predict', srl=self.srl, language=self.language, masking=self.masking, fnversion=self.fnversion)      
         
         # trainsition parameter for vitervi decoding
         if self.srl != 'propbank-dp':
@@ -116,7 +117,7 @@ class ShallowSemanticParser():
                 for b_idx in range(len(b_orig_tok_to_maps)):
                     orig_tok_to_map = b_orig_tok_to_maps[b_idx]
                     bert_token = self.bert_io.tokenizer.convert_ids_to_tokens(b_input_ids_np[b_idx])
-                    tgt_idx = utils.get_tgt_idx(bert_token)                                      
+                    tgt_idx = utils.get_tgt_idx(bert_token, tgt=self.tgt)                                      
                     
                     input_id, sense_logit, arg_logit = [],[],[]
 

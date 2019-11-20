@@ -33,6 +33,7 @@ class for_BERT():
 #         never_split = ["[UNK]", "[SEP]", "[PAD]", "[CLS]", "[MASK]", '<tgt>', '</tgt>']
         vocab_file_path = dir_path+'/data/bert-multilingual-cased-dict-add-tgt'
         self.tokenizer = BertTokenizer(vocab_file_path, do_lower_case=False, max_len=256)
+#         self.tokenizer = BertTokenizer.from_pretrained("bert-base-multilingual-cased", do_lower_case=False, max_len=256)
         self.tokenizer.additional_special_tokens = ['<tgt>', '</tgt>']
         
         if srl == 'framenet':
@@ -230,22 +231,28 @@ def logit2label(masked_logit):
     
     return label, score
 
-def get_tgt_idx(bert_tokens):
+def get_tgt_idx(bert_tokens, tgt=False):
     tgt_idx = []
     try:
-        for i in range(len(bert_tokens)):
-            if bert_tokens[i] == '<':
-                if bert_tokens[i+1] == 't' and bert_tokens[i+2] == '##gt' and bert_tokens[i+3] == '>':
+        if tgt == False:
+            for i in range(len(bert_tokens)):
+                if bert_tokens[i] == '<':
+                    if bert_tokens[i+1] == 't' and bert_tokens[i+2] == '##gt' and bert_tokens[i+3] == '>':
+                        tgt_idx.append(i)
+                        tgt_idx.append(i+1)
+                        tgt_idx.append(i+2)
+                        tgt_idx.append(i+3)
+                    elif bert_tokens[i+1] == '/' and bert_tokens[i+2] == 't' and bert_tokens[i+3] == '##gt' and bert_tokens[i+4] == '>':
+                        tgt_idx.append(i)
+                        tgt_idx.append(i+1)
+                        tgt_idx.append(i+2)
+                        tgt_idx.append(i+3)
+                        tgt_idx.append(i+4)
+        else:
+            tgt_token_list = ['<tgt>', '</tgt>']
+            for i in range(len(bert_tokens)):
+                if bert_tokens[i] in tgt_token_list:
                     tgt_idx.append(i)
-                    tgt_idx.append(i+1)
-                    tgt_idx.append(i+2)
-                    tgt_idx.append(i+3)
-                elif bert_tokens[i+1] == '/' and bert_tokens[i+2] == 't' and bert_tokens[i+3] == '##gt' and bert_tokens[i+4] == '>':
-                    tgt_idx.append(i)
-                    tgt_idx.append(i+1)
-                    tgt_idx.append(i+2)
-                    tgt_idx.append(i+3)
-                    tgt_idx.append(i+4)
     except KeyboardInterrupt:
         raise
     except:

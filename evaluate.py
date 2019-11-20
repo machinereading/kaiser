@@ -68,7 +68,7 @@ def weighting(frame, args):
 # In[5]:
 
 
-def test(srl=False, masking=False, viterbi=False, language=False, model_dir=False, result_dir=False, train_lang=False):
+def test(srl=False, masking=False, viterbi=False, language=False, model_dir=False, result_dir=False, train_lang=False, tgt=False):
     if not result_dir:
         result_dir = '/disk/data/models/'+model_dir.split('/')[-2]+'-result/'
     else:
@@ -92,14 +92,15 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
     else:
         pass
         
-    fname = fname + '_result.txt'
+    fname = fname + '_tgt_result.txt'
         
     print('### Your result would be saved to:', fname)
         
     trn, dev, tst = dataio.load_data(srl=srl, language=language)
     print('')
     print('MODE:', srl)
-    print('LANGUAGE:', language)
+    print('target LANGUAGE:', language)
+    print('trained LANGUAGE:', train_lang)
     print('Viterbi:', viterbi)
     print('masking:', masking)
     tic()    
@@ -111,7 +112,7 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
         
         print('model:', m)
 
-        model = parser.ShallowSemanticParser(srl=srl,gold_pred=True, model_dir=m, viterbi=viterbi, masking=masking, language=language)
+        model = parser.ShallowSemanticParser(srl=srl,gold_pred=True, model_dir=m, viterbi=viterbi, masking=masking, language=language, tgt=tgt)
 
         gold_senses, pred_senses, gold_args, pred_args = [],[],[],[]        
         gold_full_all, pred_full_all = [],[]
@@ -194,21 +195,121 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
     
     
     with open(fname,'w') as f:
-        f.write('epoch'+'\t''SenseID'+'\t'+'Arg_P'+'\t'+'Arg_R'+'\t'+'ArgF1'+'\t'+'full_P'+'\t'+'full_R'+'\t'+'full_F1'+'\n')
+        if srl == 'framenet':
+            f.write('epoch'+'\t''SenseID'+'\t'+'Arg_P'+'\t'+'Arg_R'+'\t'+'ArgF1'+'\t'+'full_P'+'\t'+'full_R'+'\t'+'full_F1'+'\n')
+        else:
+            f.write('epoch'+'\t''SenseID'+'\t'+'Arg_P'+'\t'+'Arg_R'+'\t'+'ArgF1'+'\n')
         for i in eval_result:
             line = '\t'.join(i)
             f.write(line+'\n')
 
 
-# In[7]:
+# In[1]:
 
 
-srl = 'propbank-dp'
+# print('\t### Ko-SRL')
+# srl = 'propbank-dp'
+# language = 'ko'
+# model_dir = '/disk/data/models/ko-srl-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/srl/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+print('\t###ko-for-ko-masking')
+srl = 'framenet'
 language = 'ko'
-model_dir = '/disk/data/models/kosrl_1116/'
+model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
 
-result_dir = '/disk/data/models/results/srl/'
-test(srl=srl, language=language, masking=False, viterbi=False, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+result_dir = '/disk/data/models/results/tgt/'
+test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+print('\t###en-for-en-masking')
+srl = 'framenet'
+language = 'en'
+model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+
+result_dir = '/disk/data/models/results/tgt/'
+test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+print('\t###ko-for-ko-no-masking')
+srl = 'framenet'
+language = 'ko'
+model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
+
+result_dir = '/disk/data/models/results/tgt/'
+test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+print('\t###en-for-en-no-masking')
+srl = 'framenet'
+language = 'en'
+model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+
+result_dir = '/disk/data/models/results/tgt/'
+test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###en-for-ko-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=True, viterbi=False, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###en-for-ko-no-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=False, viterbi=False, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###ko-for-en-no-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=False, viterbi=False, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###ko-for-en-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=True, viterbi=False, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
 
 
 # In[ ]:
