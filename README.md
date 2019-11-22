@@ -36,7 +36,9 @@ git clone https://github.com/machinereading/koreanframenet.git
 **Download the pretrained model**
 
 Download two pretrained model files to `{your_model_dir}` (e.g. `/home/model/bert_ko_srl_model.pt`). 
-* **Download:** ([not yet](https://drive.google.com/))
+* **Korean Model:** ([download](https://drive.google.com/open?id=1HTytgRg6xpXTJgZOvif1tcuLNr5yojRt))
+* **English Model:** ([download](https://drive.google.com/open?id=1HTytgRg6xpXTJgZOvif1tcuLNr5yojRt))
+* **Multilingual Model (En+Ko):** ([download](https://drive.google.com/open?id=1HTytgRg6xpXTJgZOvif1tcuLNr5yojRt))
 
 **Import model (in your python code)**
 (make sure that your code is in a parent folder of kaiser)
