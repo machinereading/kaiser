@@ -1,5 +1,5 @@
 # KAISER: KAIst Semantic parsER
-**\*\*\*\*\* \[Update\] July, 2019  \*\*\*\*\***
+**\*\*\*\*\* \[Update\] November, 2019  \*\*\*\*\***
 
 Kaiser is available for both of English FrameNet and [Korean FrameNet](https://github.com/machinereading/koreanframenet) 
 
