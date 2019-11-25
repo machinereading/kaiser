@@ -1,245 +1,0 @@
-I1117 17:43:40.015059 139697907730176 file_utils.py:39] PyTorch version 0.4.1 available.
-I1117 17:43:40.145361 139697907730176 modeling_xlnet.py:194] Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
-Using TensorFlow backend.
-### Korean FrameNet ###
-	# contact: hahmyg@kaist, hahmyg@gmail.com #
-
-# of instances in trn: 19306
-# of instances in dev: 0
-# of instances in tst: 3778
-data example: [['한국탁구가', '2000년', '시드니올림픽', '본선에', '남녀복식', '2개조씩을', '<tgt>', '파견할', '</tgt>', '수', '있게', '됐다.'], ['_', '_', '_', '_', '_', '_', '_', 'PRED', '_', '_', '_', '_'], ['_', '_', '_', '_', '_', '_', '_', '파견.01', '_', '_', '_', '_'], ['ARG0', 'O', 'O', 'ARG2', 'O', 'ARG1', 'X', 'O', 'X', 'O', 'AUX', 'AUX']]
-
-MODEL: propbank-dp
-LANGUAGE: ko
-your model would be saved at /disk/data/models/ko-srl-tgt-1117/
-I1117 17:43:42.227006 139697907730176 configuration_utils.py:151] loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-config.json from cache at /home/hahmyg/.cache/torch/transformers/45629519f3117b89d89fd9c740073d8e4c1f0a70f9842476185100a8afe715d1.83b0fa3d7f1ac0e113ad300189a938c6f14d0588a4200f30eef109d0a047c484
-I1117 17:43:42.228630 139697907730176 configuration_utils.py:168] Model config {
-  "attention_probs_dropout_prob": 0.1,
-  "directionality": "bidi",
-  "finetuning_task": null,
-  "hidden_act": "gelu",
-  "hidden_dropout_prob": 0.1,
-  "hidden_size": 768,
-  "initializer_range": 0.02,
-  "intermediate_size": 3072,
-  "layer_norm_eps": 1e-12,
-  "max_position_embeddings": 512,
-  "num_attention_heads": 12,
-  "num_hidden_layers": 12,
-  "num_labels": 2,
-  "output_attentions": false,
-  "output_hidden_states": false,
-  "output_past": true,
-  "pooler_fc_size": 768,
-  "pooler_num_attention_heads": 12,
-  "pooler_num_fc_layers": 3,
-  "pooler_size_per_head": 128,
-  "pooler_type": "first_token_transform",
-  "pruned_heads": {},
-  "torchscript": false,
-  "type_vocab_size": 2,
-  "use_bfloat16": false,
-  "vocab_size": 119547
-}
-
-I1117 17:43:43.518143 139697907730176 modeling_utils.py:337] loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-pytorch_model.bin from cache at /home/hahmyg/.cache/torch/transformers/5b5b80054cd2c95a946a8e0ce0b93f56326dff9fbda6a6c3e02de3c91c918342.7131dcb754361639a7d5526985f880879c9bfd144b65a0bf50590bddb7de9059
-I1117 17:43:47.300894 139697907730176 modeling_utils.py:405] Weights of BertForJointShallowSemanticParsing not initialized from pretrained model: ['sense_classifier.weight', 'sense_classifier.bias', 'arg_classifier.weight', 'arg_classifier.bias']
-I1117 17:43:47.301007 139697907730176 modeling_utils.py:408] Weights from pretrained model not used in BertForJointShallowSemanticParsing: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
-Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]../kaiser/src/utils.py:227: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
-  pred_logits = sm(masked_logit).view(1,-1)
-Train loss: 2.783592779603784
-Epoch:   2%|█▍                                                                        | 1/50 [18:25<15:02:32, 1105.15s/it]Train loss: 1.540330347494495
-Epoch:   4%|██▉                                                                       | 2/50 [37:05<14:50:15, 1112.82s/it]Train loss: 1.0020702477264396
-Epoch:   6%|████▍                                                                     | 3/50 [55:46<14:33:53, 1115.61s/it]Train loss: 0.7135256967892797
-Epoch:   8%|█████▊                                                                  | 4/50 [1:14:27<14:16:19, 1116.95s/it]Train loss: 0.5388175868640513
-Epoch:  10%|███████▏                                                                | 5/50 [1:33:08<13:58:13, 1117.64s/it]Train loss: 0.4211217316655897
-Epoch:  12%|████████▋                                                               | 6/50 [1:51:46<13:39:43, 1117.82s/it]Train loss: 0.3338647460177306
-Epoch:  14%|██████████                                                              | 7/50 [2:10:24<13:21:04, 1117.79s/it]Train loss: 0.27041339764168637
-Epoch:  16%|███████████▌                                                            | 8/50 [2:29:03<13:02:32, 1117.92s/it]Train loss: 0.2212210437880914
-Epoch:  18%|████████████▉                                                           | 9/50 [2:47:41<12:43:55, 1117.95s/it]Train loss: 0.18247215071409587
-Epoch:  20%|██████████████▏                                                        | 10/50 [3:06:18<12:25:14, 1117.86s/it]Train loss: 0.15054785036776572
-Epoch:  22%|███████████████▌                                                       | 11/50 [3:24:55<12:06:34, 1117.80s/it]Train loss: 0.12568031724129897
-Epoch:  24%|█████████████████                                                      | 12/50 [3:43:32<11:47:54, 1117.75s/it]Train loss: 0.10349029143179413
-Epoch:  26%|██████████████████▍                                                    | 13/50 [4:02:10<11:29:16, 1117.76s/it]Train loss: 0.08698398268388656
-Epoch:  28%|███████████████████▉                                                   | 14/50 [4:20:48<11:10:38, 1117.74s/it]Train loss: 0.07301675155530042
-Epoch:  30%|█████████████████████▎                                                 | 15/50 [4:39:24<10:51:58, 1117.67s/it]Train loss: 0.05959145278601647
-Epoch:  32%|██████████████████████▋                                                | 16/50 [4:58:01<10:33:18, 1117.61s/it]Train loss: 0.047754430869586924
-Epoch:  34%|████████████████████████▏                                              | 17/50 [5:16:37<10:14:37, 1117.50s/it]Train loss: 0.03832409886718972
-Epoch:  36%|█████████████████████████▉                                              | 18/50 [5:35:13<9:55:57, 1117.43s/it]Train loss: 0.030437370321260263
-Epoch:  38%|███████████████████████████▎                                            | 19/50 [5:53:50<9:37:19, 1117.40s/it]Train loss: 0.023374032119634236
-Epoch:  40%|████████████████████████████▊                                           | 20/50 [6:12:27<9:18:41, 1117.40s/it]Train loss: 0.018193920814926726
-Epoch:  42%|██████████████████████████████▏                                         | 21/50 [6:31:05<9:00:04, 1117.39s/it]Train loss: 0.01399033924993969
-Epoch:  44%|███████████████████████████████▋                                        | 22/50 [6:49:40<8:41:24, 1117.30s/it]Train loss: 0.010643030384165135
-Epoch:  46%|█████████████████████████████████                                       | 23/50 [7:08:16<8:22:45, 1117.22s/it]Train loss: 0.009372502664525051
-Epoch:  48%|██████████████████████████████████▌                                     | 24/50 [7:26:48<8:04:02, 1117.02s/it]Train loss: 0.008112634915365723
-Epoch:  50%|████████████████████████████████████                                    | 25/50 [7:45:21<7:45:21, 1116.85s/it]Train loss: 0.006279397428598069
-Epoch:  52%|█████████████████████████████████████▍                                  | 26/50 [8:03:53<7:26:40, 1116.68s/it]Train loss: 0.007056106726082925
-Epoch:  54%|██████████████████████████████████████▉                                 | 27/50 [8:22:26<7:08:00, 1116.54s/it]Train loss: 0.006408740442431528
-Epoch:  56%|████████████████████████████████████████▎                               | 28/50 [8:40:57<6:49:19, 1116.35s/it]Train loss: 0.007326202750422337
-Epoch:  58%|█████████████████████████████████████████▊                              | 29/50 [8:59:30<6:30:40, 1116.23s/it]Train loss: 0.0051576237963388855
-Epoch:  60%|███████████████████████████████████████████▏                            | 30/50 [9:18:01<6:12:00, 1116.05s/it]Train loss: 0.005068604170590208
-Epoch:  62%|████████████████████████████████████████████▋                           | 31/50 [9:36:33<5:53:22, 1115.92s/it]Train loss: 0.0053192066573791484
-Epoch:  64%|██████████████████████████████████████████████                          | 32/50 [9:55:04<5:34:43, 1115.76s/it]Train loss: 0.005846811466337912
-Epoch:  66%|██████████████████████████████████████████████▊                        | 33/50 [10:13:38<5:16:06, 1115.70s/it]Train loss: 0.00557502109477626
-Epoch:  68%|████████████████████████████████████████████████▎                      | 34/50 [10:32:10<4:57:29, 1115.61s/it]Train loss: 0.0059905071100293025
-Epoch:  70%|█████████████████████████████████████████████████▋                     | 35/50 [10:50:42<4:38:52, 1115.51s/it]Train loss: 0.008273861935401056
-Epoch:  72%|███████████████████████████████████████████████████                    | 36/50 [11:09:19<4:20:17, 1115.54s/it]Train loss: 0.005809716578417591
-Epoch:  74%|████████████████████████████████████████████████████▌                  | 37/50 [11:27:52<4:01:41, 1115.48s/it]Train loss: 0.00523649867346943
-Epoch:  76%|█████████████████████████████████████████████████████▉                 | 38/50 [11:46:25<3:43:04, 1115.41s/it]Train loss: 0.0032062473365448273
-Epoch:  78%|███████████████████████████████████████████████████████▍               | 39/50 [12:04:59<3:24:29, 1115.38s/it]Train loss: 0.00404026090595572
-Epoch:  80%|████████████████████████████████████████████████████████▊              | 40/50 [12:23:35<3:05:53, 1115.40s/it]Train loss: 0.004521233265855776
-Epoch:  82%|██████████████████████████████████████████████████████████▏            | 41/50 [12:42:10<2:47:18, 1115.38s/it]Train loss: 0.004970491058250147
-Epoch:  84%|███████████████████████████████████████████████████████████▋           | 42/50 [13:00:45<2:28:42, 1115.36s/it]Train loss: 0.005237440614137498
-Epoch:  86%|█████████████████████████████████████████████████████████████          | 43/50 [13:19:20<2:10:07, 1115.37s/it]Train loss: 0.0059779777217684495
-Epoch:  88%|██████████████████████████████████████████████████████████████▍        | 44/50 [13:37:56<1:51:32, 1115.37s/it]Train loss: 0.004299510994859255
-Epoch:  90%|███████████████████████████████████████████████████████████████▉       | 45/50 [13:56:32<1:32:56, 1115.38s/it]Train loss: 0.004486865081001718
-Epoch:  92%|█████████████████████████████████████████████████████████████████▎     | 46/50 [14:15:05<1:14:21, 1115.33s/it]Train loss: 0.004879783762543445
-Epoch:  94%|████████████████████████████████████████████████████████████████████▌    | 47/50 [14:33:33<55:45, 1115.18s/it]Train loss: 0.0038811678946853944
-Epoch:  96%|██████████████████████████████████████████████████████████████████████   | 48/50 [14:52:02<37:10, 1115.06s/it]Train loss: 0.0033884825431028287
-Epoch:  98%|███████████████████████████████████████████████████████████████████████▌ | 49/50 [15:10:38<18:35, 1115.07s/it]Train loss: 0.005468239335030798
-Epoch: 100%|█████████████████████████████████████████████████████████████████████████| 50/50 [15:29:14<00:00, 1115.10s/it]
-...training is done
-
-### loading Korean FrameNet 1.1 data...
-	# of instances in training data: 17838
-	# of instances in dev data: 2548
-	# of instances in test data: 5097
-# of instances in trn: 17838
-# of instances in dev: 2548
-# of instances in tst: 5097
-data example: [['태풍', 'Hugo가', '남긴', '피해들과', '회사', '내', '몇몇', '주요', '부서들의', '저조한', '실적들을', '반영하여,', 'Aetna', 'Life', 'and', 'Casualty', 'Co.의', '3분기', '<tgt>', '순이익이', '</tgt>', '182.6', '백만', '달러', '또는', '주당', '1.63', '달러로', '22', '%', '하락하였다.'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '이익.n', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'Earnings_and_losses', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'B-Time', 'X', 'O', 'X', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O']]
-
-MODEL: framenet
-LANGUAGE: ko
-your model would be saved at /disk/data/models/ko-framenet-tgt-1117/
-I1118 09:13:42.091160 139697907730176 configuration_utils.py:151] loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-config.json from cache at /home/hahmyg/.cache/torch/transformers/45629519f3117b89d89fd9c740073d8e4c1f0a70f9842476185100a8afe715d1.83b0fa3d7f1ac0e113ad300189a938c6f14d0588a4200f30eef109d0a047c484
-I1118 09:13:42.092912 139697907730176 configuration_utils.py:168] Model config {
-  "attention_probs_dropout_prob": 0.1,
-  "directionality": "bidi",
-  "finetuning_task": null,
-  "hidden_act": "gelu",
-  "hidden_dropout_prob": 0.1,
-  "hidden_size": 768,
-  "initializer_range": 0.02,
-  "intermediate_size": 3072,
-  "layer_norm_eps": 1e-12,
-  "max_position_embeddings": 512,
-  "num_attention_heads": 12,
-  "num_hidden_layers": 12,
-  "num_labels": 2,
-  "output_attentions": false,
-  "output_hidden_states": false,
-  "output_past": true,
-  "pooler_fc_size": 768,
-  "pooler_num_attention_heads": 12,
-  "pooler_num_fc_layers": 3,
-  "pooler_size_per_head": 128,
-  "pooler_type": "first_token_transform",
-  "pruned_heads": {},
-  "torchscript": false,
-  "type_vocab_size": 2,
-  "use_bfloat16": false,
-  "vocab_size": 119547
-}
-
-I1118 09:13:42.986031 139697907730176 modeling_utils.py:337] loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-pytorch_model.bin from cache at /home/hahmyg/.cache/torch/transformers/5b5b80054cd2c95a946a8e0ce0b93f56326dff9fbda6a6c3e02de3c91c918342.7131dcb754361639a7d5526985f880879c9bfd144b65a0bf50590bddb7de9059
-I1118 09:13:46.692317 139697907730176 modeling_utils.py:405] Weights of BertForJointShallowSemanticParsing not initialized from pretrained model: ['sense_classifier.weight', 'sense_classifier.bias', 'arg_classifier.weight', 'arg_classifier.bias']
-I1118 09:13:46.692430 139697907730176 modeling_utils.py:408] Weights from pretrained model not used in BertForJointShallowSemanticParsing: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
-Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]Train loss: 3.162353642733459
-Epoch:   2%|█▍                                                                        | 1/50 [17:44<14:29:21, 1064.53s/it]Train loss: 2.3247085874865765
-Epoch:   4%|██▉                                                                       | 2/50 [35:32<14:13:00, 1066.26s/it]Train loss: 1.7284940098858104
-Epoch:   6%|████▍                                                                     | 3/50 [53:21<13:55:59, 1067.23s/it]Train loss: 1.3439354910203556
-Epoch:   8%|█████▊                                                                  | 4/50 [1:11:11<13:38:42, 1067.88s/it]Train loss: 1.060810671527198
-Epoch:  10%|███████▏                                                                | 5/50 [1:29:00<13:21:04, 1068.10s/it]Train loss: 0.8490173409768439
-Epoch:  12%|████████▋                                                               | 6/50 [1:46:48<13:03:18, 1068.14s/it]Train loss: 0.6849591544557713
-Epoch:  14%|██████████                                                              | 7/50 [2:04:35<12:45:20, 1067.92s/it]Train loss: 0.5542085553474632
-Epoch:  16%|███████████▌                                                            | 8/50 [2:22:24<12:27:36, 1068.01s/it]Train loss: 0.4561905977314634
-Epoch:  18%|████████████▉                                                           | 9/50 [2:40:14<12:09:58, 1068.25s/it]Train loss: 0.377173168479449
-Epoch:  20%|██████████████▏                                                        | 10/50 [2:58:06<11:52:25, 1068.64s/it]Train loss: 0.3102066176143101
-Epoch:  22%|███████████████▌                                                       | 11/50 [3:15:58<11:34:50, 1068.98s/it]Train loss: 0.25661311305719786
-Epoch:  24%|█████████████████                                                      | 12/50 [3:33:50<11:17:10, 1069.22s/it]Train loss: 0.21756048614689888
-Epoch:  26%|██████████████████▍                                                    | 13/50 [3:51:40<10:59:22, 1069.25s/it]Train loss: 0.18237891109466672
-Epoch:  28%|███████████████████▉                                                   | 14/50 [4:09:28<10:41:31, 1069.21s/it]Train loss: 0.1503624618047171
-Epoch:  30%|█████████████████████▎                                                 | 15/50 [4:27:18<10:23:43, 1069.25s/it]Train loss: 0.13359277084466037
-Epoch:  32%|██████████████████████▋                                                | 16/50 [4:45:08<10:05:54, 1069.26s/it]Train loss: 0.11574524983806297
-Epoch:  34%|████████████████████████▍                                               | 17/50 [5:02:57<9:48:04, 1069.24s/it]Train loss: 0.10085200278435856
-Epoch:  36%|█████████████████████████▉                                              | 18/50 [5:20:48<9:30:19, 1069.35s/it]Train loss: 0.09232247500842343
-Epoch:  38%|███████████████████████████▎                                            | 19/50 [5:38:37<9:12:29, 1069.34s/it]Train loss: 0.08414467063497813
-Epoch:  40%|████████████████████████████▊                                           | 20/50 [5:56:26<8:54:39, 1069.33s/it]Train loss: 0.07534860586794516
-Epoch:  42%|██████████████████████████████▏                                         | 21/50 [6:14:14<8:36:48, 1069.26s/it]Train loss: 0.07012139305631666
-Epoch:  44%|███████████████████████████████▋                                        | 22/50 [6:32:02<8:18:57, 1069.19s/it]Train loss: 0.06564476711014468
-Epoch:  46%|█████████████████████████████████                                       | 23/50 [6:49:51<8:01:08, 1069.19s/it]Train loss: 0.06318819698334283
-Epoch:  48%|██████████████████████████████████▌                                     | 24/50 [7:07:44<7:43:23, 1069.35s/it]Train loss: 0.05966068262601941
-Epoch:  50%|████████████████████████████████████                                    | 25/50 [7:25:35<7:25:35, 1069.42s/it]Train loss: 0.055536700025421847
-Epoch:  52%|█████████████████████████████████████▍                                  | 26/50 [7:43:23<7:07:45, 1069.38s/it]Train loss: 0.05227770374590283
-Epoch:  54%|██████████████████████████████████████▉                                 | 27/50 [8:01:11<6:49:54, 1069.32s/it]Train loss: 0.05489318380426195
-Epoch:  56%|████████████████████████████████████████▎                               | 28/50 [8:18:58<6:32:02, 1069.21s/it]Train loss: 0.05079912804638443
-Epoch:  58%|█████████████████████████████████████████▊                              | 29/50 [8:36:44<6:14:11, 1069.11s/it]Train loss: 0.051553530889097525
-Epoch:  60%|███████████████████████████████████████████▏                            | 30/50 [8:54:32<5:56:21, 1069.08s/it]Train loss: 0.048817103673371366
-Epoch:  62%|████████████████████████████████████████████▋                           | 31/50 [9:12:16<5:38:29, 1068.92s/it]Train loss: 0.04839805739072764
-Epoch:  64%|██████████████████████████████████████████████                          | 32/50 [9:30:02<5:20:38, 1068.82s/it]Train loss: 0.04799910042609143
-Epoch:  66%|███████████████████████████████████████████████▌                        | 33/50 [9:47:48<5:02:48, 1068.75s/it]Train loss: 0.04382633000370735
-Epoch:  68%|████████████████████████████████████████████████▎                      | 34/50 [10:05:30<4:44:56, 1068.55s/it]Train loss: 0.04636507763420551
-Epoch:  70%|█████████████████████████████████████████████████▋                     | 35/50 [10:23:13<4:27:05, 1068.39s/it]Train loss: 0.042595538248358045
-Epoch:  72%|███████████████████████████████████████████████████                    | 36/50 [10:40:55<4:09:15, 1068.22s/it]Train loss: 0.044169028855559817
-Epoch:  74%|████████████████████████████████████████████████████▌                  | 37/50 [10:58:37<3:51:24, 1068.03s/it]Train loss: 0.040956565657484664
-Epoch:  76%|█████████████████████████████████████████████████████▉                 | 38/50 [11:16:18<3:33:34, 1067.86s/it]Train loss: 0.03999303679737974
-Epoch:  78%|███████████████████████████████████████████████████████▍               | 39/50 [11:34:00<3:15:44, 1067.72s/it]Train loss: 0.0386582498185361
-Epoch:  80%|████████████████████████████████████████████████████████▊              | 40/50 [11:51:45<2:57:56, 1067.64s/it]Train loss: 0.04050320706756587
-Epoch:  82%|██████████████████████████████████████████████████████████▏            | 41/50 [12:09:27<2:40:07, 1067.51s/it]Train loss: 0.039436732018581624
-Epoch:  84%|███████████████████████████████████████████████████████████▋           | 42/50 [12:27:10<2:22:19, 1067.40s/it]Train loss: 0.0411044497790994
-Epoch:  86%|█████████████████████████████████████████████████████████████          | 43/50 [12:44:53<2:04:31, 1067.30s/it]Train loss: 0.04007753901399226
-Epoch:  88%|██████████████████████████████████████████████████████████████▍        | 44/50 [13:02:36<1:46:43, 1067.19s/it]Train loss: 0.0399215093396388
-Epoch:  90%|███████████████████████████████████████████████████████████████▉       | 45/50 [13:20:19<1:28:55, 1067.10s/it]Train loss: 0.03525442803811636
-Epoch:  92%|█████████████████████████████████████████████████████████████████▎     | 46/50 [13:38:04<1:11:08, 1067.06s/it]Train loss: 0.03607145626488377
-Epoch:  94%|████████████████████████████████████████████████████████████████████▌    | 47/50 [13:55:51<53:21, 1067.06s/it]Train loss: 0.03982303607646593
-Epoch:  96%|██████████████████████████████████████████████████████████████████████   | 48/50 [14:13:37<35:34, 1067.02s/it]Train loss: 0.03912217635509139
-Epoch:  98%|███████████████████████████████████████████████████████████████████████▌ | 49/50 [14:31:25<17:47, 1067.05s/it]Train loss: 0.0372570595019707
-Epoch: 100%|█████████████████████████████████████████████████████████████████████████| 50/50 [14:49:13<00:00, 1067.07s/it]
-...training is done
-# of instances in trn: 19391
-# of instances in dev: 2272
-# of instances in tst: 6714
-data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
-
-MODEL: framenet
-LANGUAGE: en
-your model would be saved at /disk/data/models/en-framenet-tgt-1117/
-I1119 00:03:26.428253 139697907730176 configuration_utils.py:151] loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-config.json from cache at /home/hahmyg/.cache/torch/transformers/45629519f3117b89d89fd9c740073d8e4c1f0a70f9842476185100a8afe715d1.83b0fa3d7f1ac0e113ad300189a938c6f14d0588a4200f30eef109d0a047c484
-I1119 00:03:26.429919 139697907730176 configuration_utils.py:168] Model config {
-  "attention_probs_dropout_prob": 0.1,
-  "directionality": "bidi",
-  "finetuning_task": null,
-  "hidden_act": "gelu",
-  "hidden_dropout_prob": 0.1,
-  "hidden_size": 768,
-  "initializer_range": 0.02,
-  "intermediate_size": 3072,
-  "layer_norm_eps": 1e-12,
-  "max_position_embeddings": 512,
-  "num_attention_heads": 12,
-  "num_hidden_layers": 12,
-  "num_labels": 2,
-  "output_attentions": false,
-  "output_hidden_states": false,
-  "output_past": true,
-  "pooler_fc_size": 768,
-  "pooler_num_attention_heads": 12,
-  "pooler_num_fc_layers": 3,
-  "pooler_size_per_head": 128,
-  "pooler_type": "first_token_transform",
-  "pruned_heads": {},
-  "torchscript": false,
-  "type_vocab_size": 2,
-  "use_bfloat16": false,
-  "vocab_size": 119547
-}
-
-I1119 00:03:27.577846 139697907730176 modeling_utils.py:337] loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-pytorch_model.bin from cache at /home/hahmyg/.cache/torch/transformers/5b5b80054cd2c95a946a8e0ce0b93f56326dff9fbda6a6c3e02de3c91c918342.7131dcb754361639a7d5526985f880879c9bfd144b65a0bf50590bddb7de9059
-I1119 00:03:31.197482 139697907730176 modeling_utils.py:405] Weights of BertForJointShallowSemanticParsing not initialized from pretrained model: ['sense_classifier.weight', 'sense_classifier.bias', 'arg_classifier.weight', 'arg_classifier.bias']
-I1119 00:03:31.197599 139697907730176 modeling_utils.py:408] Weights from pretrained model not used in BertForJointShallowSemanticParsing: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
-Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]Train loss: 2.7033351189318564
-Epoch:   2%|█▍                                                                        | 1/50 [19:25<15:51:40, 1165.32s/it]Train loss: 1.3006098812035662
-Epoch:   4%|██▉                                                                       | 2/50 [38:59<15:35:53, 1169.87s/it]Train loss: 0.7973281569884961
-Epoch:   6%|████▍                                                                     | 3/50 [58:32<15:17:16, 1170.99s/it]Train loss: 0.5491755680748178
-Epoch:   8%|█████▊                                                                  | 4/50 [1:18:07<14:58:25, 1171.87s/it]

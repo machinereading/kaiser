@@ -33,13 +33,15 @@ n_gpu = torch.cuda.device_count()
 
 class ShallowSemanticParser():
     def __init__(self, fnversion=1.1, language='ko',masking=True, srl='framenet', 
-                 model_path=False, gold_pred=False, viterbi=False, tgt=True):
+                 model_path=False, gold_pred=False, viterbi=False, tgt=True, 
+                 pretrained='bert-base-multilingual-cased'):
         self.fnversion = fnversion
         self.language = language
         self.masking = masking
         self.srl = srl
         self.gold_pred = gold_pred
         self.viterbi = viterbi
+        self.pretrained = pretrained
         self.tgt = tgt #using <tgt> and </tgt> as a special token
         
         if self.masking==True:
@@ -65,7 +67,9 @@ class ShallowSemanticParser():
         self.model.eval()
         print('...model is loaded')
         
-        self.bert_io = utils.for_BERT(mode='predict', srl=self.srl, language=self.language, masking=self.masking, fnversion=self.fnversion)      
+        self.bert_io = utils.for_BERT(mode='predict', srl=self.srl, language=self.language, 
+                                      masking=self.masking, fnversion=self.fnversion,
+                                      pretrained=self.pretrained)      
         
         # trainsition parameter for vitervi decoding
         if self.srl != 'propbank-dp':

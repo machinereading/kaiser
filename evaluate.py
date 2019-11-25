@@ -68,7 +68,9 @@ def weighting(frame, args):
 # In[5]:
 
 
-def test(srl=False, masking=False, viterbi=False, language=False, model_dir=False, result_dir=False, train_lang=False, tgt=False):
+def test(srl=False, masking=False, viterbi=False, language=False, model_path=False, 
+         result_dir=False, train_lang=False, tgt=False, 
+         pretrained="bert-base-multilingual-cased"):
     if not result_dir:
         result_dir = '/disk/data/models/'+model_dir.split('/')[-2]+'-result/'
     else:
@@ -92,7 +94,10 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
     else:
         pass
         
-    fname = fname + '_tgt_result.txt'
+    if 'large' in model_path:
+        fname = fname + '_large_tgt_result.txt'
+    else:
+        fname = fname + '_tgt_result.txt'
         
     print('### Your result would be saved to:', fname)
         
@@ -105,14 +110,16 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
     print('masking:', masking)
     tic()    
         
-    models = glob.glob(model_dir+'*.pt')
+    models = glob.glob(model_path+'*.pt')
     
     eval_result = []
     for m in models:
         
         print('model:', m)
 
-        model = parser.ShallowSemanticParser(srl=srl,gold_pred=True, model_dir=m, viterbi=viterbi, masking=masking, language=language, tgt=tgt)
+        model = parser.ShallowSemanticParser(srl=srl,gold_pred=True, model_path=m, viterbi=viterbi, 
+                                             masking=masking, language=language, tgt=tgt,
+                                             pretrained=pretrained)
 
         gold_senses, pred_senses, gold_args, pred_args = [],[],[],[]        
         gold_full_all, pred_full_all = [],[]
@@ -219,49 +226,77 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_dir=Fals
 # In[ ]:
 
 
-print('\t###ko-for-ko-masking')
-srl = 'framenet'
-language = 'ko'
-model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
+# print('\t###ko-for-ko-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
 
-result_dir = '/disk/data/models/results/tgt/'
-test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
 
 
 # In[ ]:
 
 
-print('\t###en-for-en-masking')
+# print('\t###en-for-en-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###ko-for-ko-no-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###en-for-en-no-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+
+# result_dir = '/disk/data/models/results/tgt/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+print('\t###en-large-for-en-masking')
 srl = 'framenet'
 language = 'en'
-model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+model_path = '/disk/data/models/en-framenet-tgt-large/'
 
 result_dir = '/disk/data/models/results/tgt/'
-test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en', 
+     model_path=model_path, result_dir=result_dir, 
+     pretrained='bert-large-cased')
 
 
 # In[ ]:
 
 
-print('\t###ko-for-ko-no-masking')
-srl = 'framenet'
-language = 'ko'
-model_dir = '/disk/data/models/ko-framenet-tgt-1117/'
-
-result_dir = '/disk/data/models/results/tgt/'
-test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', model_dir=model_dir, result_dir=result_dir)
-
-
-# In[ ]:
-
-
-print('\t###en-for-en-no-masking')
+print('\t###en-large-for-en-no-masking')
 srl = 'framenet'
 language = 'en'
-model_dir = '/disk/data/models/en-framenet-tgt-1117/'
+model_path = '/disk/data/models/en-framenet-tgt-large/'
 
 result_dir = '/disk/data/models/results/tgt/'
-test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en', model_dir=model_dir, result_dir=result_dir)
+test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en', 
+     model_path=model_path, result_dir=result_dir, 
+     pretrained='bert-large-cased')
 
 
 # In[ ]:
