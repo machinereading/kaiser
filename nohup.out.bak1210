@@ -1,0 +1,364 @@
+I1125 21:07:13.676367 140560491566848 file_utils.py:39] PyTorch version 0.4.1 available.
+I1125 21:07:13.806114 140560491566848 modeling_xlnet.py:194] Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+# of instances in trn: 19391
+# of instances in dev: 2272
+# of instances in tst: 6714
+data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
+
+### TRAINING
+MODEL: framenet
+LANGUAGE: en
+PRETRAINED BERT: bert-large-cased
+BATCH_SIZE: 1
+MAX_LEN: 256
+
+your model would be saved at /disk/data/models/en-framenet-tgt-large/
+I1125 21:07:16.306560 140560491566848 configuration_utils.py:151] loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-large-cased-config.json from cache at /home/hahmyg/.cache/torch/transformers/90deb4d9dd705272dc4b3db1364d759d551d72a9f70a91f60e3a1f5e278b985d.e1d0cd972de64b28f3a5bee0ffccda07658b2b3e827e0ef38c5799e9aaa23f19
+I1125 21:07:16.307757 140560491566848 configuration_utils.py:168] Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "directionality": "bidi",
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 1024,
+  "initializer_range": 0.02,
+  "intermediate_size": 4096,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 16,
+  "num_hidden_layers": 24,
+  "num_labels": 2,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pooler_fc_size": 768,
+  "pooler_num_attention_heads": 12,
+  "pooler_num_fc_layers": 3,
+  "pooler_size_per_head": 128,
+  "pooler_type": "first_token_transform",
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 2,
+  "use_bfloat16": false,
+  "vocab_size": 28996
+}
+
+I1125 21:07:17.141674 140560491566848 modeling_utils.py:337] loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/bert-large-cased-pytorch_model.bin from cache at /home/hahmyg/.cache/torch/transformers/56c451878be53ca1e310764d1e8312301f3d921378919467947ddd53fef6ba2b.b5f1c2070e0a0c189ca3b08270b0cb5bd0635b7319e74e93bd0dc26689953c27
+I1125 21:07:25.105031 140560491566848 modeling_utils.py:405] Weights of BertForJointShallowSemanticParsing not initialized from pretrained model: ['sense_classifier.weight', 'sense_classifier.bias', 'arg_classifier.weight', 'arg_classifier.bias']
+I1125 21:07:25.105147 140560491566848 modeling_utils.py:408] Weights from pretrained model not used in BertForJointShallowSemanticParsing: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+Epoch:   0%|                                              | 0/11 [00:00<?, ?it/s]../kaiser/src/utils.py:241: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)
+Train loss: 2.359431213035541
+Epoch:   9%|██▊                            | 1/11 [1:41:49<16:58:14, 6109.44s/it]Train loss: 0.9866019219328902
+Epoch:  18%|█████▋                         | 2/11 [3:23:21<15:15:08, 6100.94s/it]Train loss: 0.6928561757360628
+Epoch:  27%|████████▍                      | 3/11 [5:04:44<13:32:39, 6094.90s/it]Train loss: 0.5623774283040339
+Epoch:  36%|███████████▎                   | 4/11 [6:45:51<11:50:14, 6087.81s/it]Train loss: 0.4805747769889518
+Epoch:  45%|██████████████                 | 5/11 [8:26:48<10:08:09, 6081.62s/it]Train loss: 0.4530192781724228
+Epoch:  55%|████████████████▉              | 6/11 [10:07:34<8:26:19, 6075.83s/it]Train loss: 0.3858642921823109
+Epoch:  64%|███████████████████▋           | 7/11 [11:48:22<6:44:46, 6071.74s/it]Train loss: 0.6033387345328027
+Epoch:  73%|██████████████████████▌        | 8/11 [13:29:16<5:03:28, 6069.51s/it]Train loss: 3.8807058968097565
+Epoch:  82%|█████████████████████████▎     | 9/11 [15:11:41<3:22:35, 6077.99s/it]Train loss: 3.8536840231755747
+Epoch:  91%|███████████████████████████▎  | 10/11 [16:53:57<1:41:23, 6083.72s/it]Train loss: 3.8419806838026362
+Epoch: 100%|████████████████████████████████| 11/11 [18:36:39<00:00, 6090.82s/it]
+...training is done
+I1202 18:34:21.467064 140536930735872 file_utils.py:39] PyTorch version 0.4.1 available.
+I1202 18:34:21.596792 140536930735872 modeling_xlnet.py:194] Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+# of instances in trn: 19391
+# of instances in dev: 2272
+# of instances in tst: 6714
+data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
+
+### loading Korean FrameNet 1.1 data...
+	# of instances in training data: 17838
+	# of instances in dev data: 2548
+	# of instances in test data: 5097
+# of instances in trn: 17838
+# of instances in dev: 2548
+# of instances in tst: 5097
+data example: [['태풍', 'Hugo가', '남긴', '피해들과', '회사', '내', '몇몇', '주요', '부서들의', '저조한', '실적들을', '반영하여,', 'Aetna', 'Life', 'and', 'Casualty', 'Co.의', '3분기', '<tgt>', '순이익이', '</tgt>', '182.6', '백만', '달러', '또는', '주당', '1.63', '달러로', '22', '%', '하락하였다.'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '이익.n', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'Earnings_and_losses', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'B-Time', 'X', 'O', 'X', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O']]
+
+### TRAINING
+MODEL: framenet
+LANGUAGE: multi
+PRETRAINED BERT: bert-base-multilingual-cased
+training data:
+	(en): 19391
+	(ko): 17838
+	(all): 37229
+BATCH_SIZE: 6
+MAX_LEN: 256
+
+your model would be saved at /disk/data/models/multilingual-framenet-tgt/
+I1202 18:34:26.142482 140536930735872 configuration_utils.py:151] loading configuration file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-config.json from cache at /home/hahmyg/.cache/torch/transformers/45629519f3117b89d89fd9c740073d8e4c1f0a70f9842476185100a8afe715d1.83b0fa3d7f1ac0e113ad300189a938c6f14d0588a4200f30eef109d0a047c484
+I1202 18:34:26.146038 140536930735872 configuration_utils.py:168] Model config {
+  "attention_probs_dropout_prob": 0.1,
+  "directionality": "bidi",
+  "finetuning_task": null,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 768,
+  "initializer_range": 0.02,
+  "intermediate_size": 3072,
+  "layer_norm_eps": 1e-12,
+  "max_position_embeddings": 512,
+  "num_attention_heads": 12,
+  "num_hidden_layers": 12,
+  "num_labels": 2,
+  "output_attentions": false,
+  "output_hidden_states": false,
+  "output_past": true,
+  "pooler_fc_size": 768,
+  "pooler_num_attention_heads": 12,
+  "pooler_num_fc_layers": 3,
+  "pooler_size_per_head": 128,
+  "pooler_type": "first_token_transform",
+  "pruned_heads": {},
+  "torchscript": false,
+  "type_vocab_size": 2,
+  "use_bfloat16": false,
+  "vocab_size": 119547
+}
+
+I1202 18:34:26.971019 140536930735872 modeling_utils.py:337] loading weights file https://s3.amazonaws.com/models.huggingface.co/bert/bert-base-multilingual-cased-pytorch_model.bin from cache at /home/hahmyg/.cache/torch/transformers/5b5b80054cd2c95a946a8e0ce0b93f56326dff9fbda6a6c3e02de3c91c918342.7131dcb754361639a7d5526985f880879c9bfd144b65a0bf50590bddb7de9059
+I1202 18:34:32.504922 140536930735872 modeling_utils.py:405] Weights of BertForJointShallowSemanticParsing not initialized from pretrained model: ['sense_classifier.weight', 'sense_classifier.bias', 'arg_classifier.weight', 'arg_classifier.bias']
+I1202 18:34:32.505040 140536930735872 modeling_utils.py:408] Weights from pretrained model not used in BertForJointShallowSemanticParsing: ['cls.predictions.bias', 'cls.predictions.transform.dense.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.seq_relationship.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.LayerNorm.bias']
+Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]../kaiser/src/utils.py:245: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)
+Train loss: 2.527871612470828
+Epoch:   2%|█▍                                                                        | 1/50 [36:33<29:51:26, 2193.60s/it]Train loss: 1.3620468429662738
+Epoch:   4%|██▉                                                                     | 2/50 [1:13:33<29:25:22, 2206.73s/it]Train loss: 0.9620029585077265
+Epoch:   6%|████▎                                                                   | 3/50 [1:50:30<28:51:23, 2210.29s/it]Train loss: 0.7227069294703021
+Epoch:   8%|█████▊                                                                  | 4/50 [2:27:37<28:17:37, 2214.29s/it]Train loss: 0.5616751911915616
+Epoch:  10%|███████▏                                                                | 5/50 [3:04:51<27:43:43, 2218.31s/it]Train loss: 0.43889727586044314
+Epoch:  12%|████████▋                                                               | 6/50 [3:42:11<27:09:24, 2221.91s/it]Train loss: 0.3520011220256423
+Epoch:  14%|██████████                                                              | 7/50 [4:19:35<26:34:36, 2225.04s/it]Train loss: 0.2799281473083183
+Epoch:  16%|███████████▌                                                            | 8/50 [4:57:00<25:59:17, 2227.57s/it]Train loss: 0.2281793221321008
+Epoch:  18%|████████████▉                                                           | 9/50 [5:34:32<25:24:03, 2230.32s/it]Train loss: 0.18971037937029536
+Epoch:  20%|██████████████▏                                                        | 10/50 [6:12:26<24:49:46, 2234.66s/it]Train loss: 0.15518749680262778
+Epoch:  22%|███████████████▌                                                       | 11/50 [6:50:18<24:14:42, 2238.00s/it]Train loss: 0.13109280270318696
+Epoch:  24%|█████████████████                                                      | 12/50 [7:28:33<23:40:26, 2242.80s/it]Train loss: 0.11288508564463796
+Epoch:  26%|██████████████████▍                                                    | 13/50 [8:07:02<23:06:11, 2247.87s/it]Train loss: 0.09853452242211808
+Epoch:  28%|███████████████████▉                                                   | 14/50 [8:45:45<22:31:58, 2253.28s/it]Train loss: 0.08605145637870344
+Epoch:  30%|█████████████████████▎                                                 | 15/50 [9:24:43<21:57:40, 2258.88s/it]Train loss: 0.07803768937666034
+Epoch:  32%|██████████████████████▍                                               | 16/50 [10:03:51<21:23:12, 2264.50s/it]Train loss: 0.07037992011923151
+Epoch:  34%|███████████████████████▊                                              | 17/50 [10:43:03<20:48:17, 2269.63s/it]Train loss: 0.06841733983415235
+Epoch:  36%|█████████████████████████▏                                            | 18/50 [11:22:11<20:12:47, 2273.97s/it]Train loss: 0.06087753018183262
+Epoch:  38%|██████████████████████████▌                                           | 19/50 [12:01:16<19:36:49, 2277.71s/it]Train loss: 0.05750384950673999
+Epoch:  40%|████████████████████████████                                          | 20/50 [12:40:17<19:00:26, 2280.87s/it]Train loss: 0.05582131209639168
+Epoch:  42%|█████████████████████████████▍                                        | 21/50 [13:19:09<18:23:35, 2283.30s/it]Train loss: 0.05278859524600212
+Epoch:  44%|██████████████████████████████▊                                       | 22/50 [13:58:24<17:47:03, 2286.56s/it]Train loss: 0.047574663860437266
+Epoch:  46%|████████████████████████████████▏                                     | 23/50 [14:38:03<17:10:45, 2290.59s/it]Train loss: 0.04718290557219001
+Epoch:  48%|█████████████████████████████████▌                                    | 24/50 [15:15:31<16:31:48, 2288.81s/it]Train loss: 0.0463714447108188
+Epoch:  50%|███████████████████████████████████                                   | 25/50 [15:54:31<15:54:31, 2290.87s/it]Train loss: 0.042546881240077807
+Epoch:  52%|████████████████████████████████████▍                                 | 26/50 [16:33:39<15:17:13, 2293.04s/it]Train loss: 0.043729017876763046
+Epoch:  54%|█████████████████████████████████████▊                                | 27/50 [17:13:19<14:40:14, 2296.27s/it]Train loss: 0.04423014746118217
+Epoch:  56%|███████████████████████████████████████▏                              | 28/50 [17:52:48<14:02:55, 2298.88s/it]Train loss: 0.04074702417987646
+Epoch:  58%|████████████████████████████████████████▌                             | 29/50 [18:32:15<13:25:25, 2301.22s/it]Train loss: 0.03862861500759405
+Epoch:  60%|██████████████████████████████████████████                            | 30/50 [19:12:16<12:48:10, 2304.55s/it]Train loss: 0.03875229228533946
+Epoch:  62%|███████████████████████████████████████████▍                          | 31/50 [19:52:31<12:10:53, 2308.10s/it]Train loss: 0.04061651643626923
+Epoch:  64%|████████████████████████████████████████████▊                         | 32/50 [20:32:30<11:33:17, 2310.97s/it]Train loss: 0.039185150456674596
+Epoch:  66%|██████████████████████████████████████████████▏                       | 33/50 [21:12:22<10:55:27, 2313.40s/it]Train loss: 0.03778120408840068
+Epoch:  68%|███████████████████████████████████████████████▌                      | 34/50 [21:52:14<10:17:31, 2315.71s/it]Train loss: 0.03744207434432783
+Epoch:  70%|█████████████████████████████████████████████████▋                     | 35/50 [22:31:38<9:39:16, 2317.11s/it]Train loss: 0.03686660692498379
+Epoch:  72%|███████████████████████████████████████████████████                    | 36/50 [23:11:26<9:01:06, 2319.06s/it]Train loss: 0.03698485693709877
+Epoch:  74%|████████████████████████████████████████████████████▌                  | 37/50 [23:51:06<8:22:49, 2320.72s/it]Train loss: 0.03698726269873718
+Epoch:  76%|█████████████████████████████████████████████████████▉                 | 38/50 [24:28:41<7:43:47, 2318.97s/it]Train loss: 0.03440877289370048
+Epoch:  78%|███████████████████████████████████████████████████████▍               | 39/50 [25:05:40<7:04:40, 2316.42s/it]Train loss: 0.03425525010182492
+Epoch:  80%|████████████████████████████████████████████████████████▊              | 40/50 [25:42:31<6:25:37, 2313.79s/it]Train loss: 0.035598834928407715
+Epoch:  82%|██████████████████████████████████████████████████████████▏            | 41/50 [26:19:42<5:46:45, 2311.76s/it]Train loss: 0.03552270417919473
+Epoch:  84%|███████████████████████████████████████████████████████████▋           | 42/50 [26:57:30<5:08:05, 2310.72s/it]Train loss: 0.03518555007913626
+Epoch:  86%|█████████████████████████████████████████████████████████████          | 43/50 [27:35:16<4:29:27, 2309.68s/it]Train loss: 0.031463607958330635
+Epoch:  88%|██████████████████████████████████████████████████████████████▍        | 44/50 [28:13:12<3:50:53, 2308.91s/it]Train loss: 0.03331019671661372
+Epoch:  90%|███████████████████████████████████████████████████████████████▉       | 45/50 [28:51:04<3:12:20, 2308.09s/it]Train loss: 0.0339281765302895
+Epoch:  92%|█████████████████████████████████████████████████████████████████▎     | 46/50 [29:28:57<2:33:49, 2307.34s/it]Train loss: 0.03226165363823316
+Epoch:  94%|██████████████████████████████████████████████████████████████████▋    | 47/50 [30:06:52<1:55:19, 2306.64s/it]Train loss: 0.03308348687266027
+Epoch:  96%|████████████████████████████████████████████████████████████████████▏  | 48/50 [30:44:52<1:16:52, 2306.09s/it]Train loss: 0.032378807353360205
+Epoch:  98%|███████████████████████████████████████████████████████████████████████▌ | 49/50 [31:22:57<38:25, 2305.66s/it]Train loss: 0.03312116756103018
+Epoch: 100%|█████████████████████████████████████████████████████████████████████████| 50/50 [32:00:52<00:00, 2305.06s/it]
+...training is done
+I1209 22:17:42.465788 140111770568448 file_utils.py:39] PyTorch version 0.4.1 available.
+I1209 22:17:42.596867 140111770568448 modeling_xlnet.py:194] Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+	###multilingual-for-en-masking
+### Your result would be saved to: /disk/data/models/results/framenet/enModel-with-exemplar/en_with_exem_for_en_with_masking_result.txt
+# of instances in trn: 211812
+# of instances in dev: 2272
+# of instances in tst: 6714
+data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
+### EVALUATION
+MODE: framenet
+target LANGUAGE: en
+trained LANGUAGE: en_with_exem
+Viterbi: False
+masking: True
+using TGT token: True
+model: /disk/data/models/framenet/enModel-with-exemplar/epoch-15-joint.pt
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+...model is loaded
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+../kaiser/src/utils.py:253: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)
+# EPOCH: 15
+SenseId Accuracy: 0.9012511170688114
+ArgId Precision: 0.5945816733067729
+ArgId Recall: 0.6602371261723589
+ArgId F1: 0.6256917658896529
+full-structure Precision: 0.7109593751535098
+full-structure Recall: 0.7587815875013106
+full-structure F1: 0.734092465319165
+-----processing time: 0hour:7min:13sec
+
+model: /disk/data/models/framenet/enModel-with-exemplar/epoch-7-joint.pt
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+...model is loaded
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+# EPOCH: 7
+SenseId Accuracy: 0.8999106344950849
+ArgId Precision: 0.5964305812364338
+ArgId Recall: 0.6564324898248097
+ArgId F1: 0.6249947348468893
+full-structure Precision: 0.7118811392467546
+full-structure Recall: 0.7561077907098669
+full-structure F1: 0.7333282485444792
+-----processing time: 0hour:14min:31sec
+
+model: /disk/data/models/framenet/enModel-with-exemplar/epoch-8-joint.pt
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+...model is loaded
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+# EPOCH: 8
+SenseId Accuracy: 0.9018468871015788
+ArgId Precision: 0.5906098818304386
+ArgId Recall: 0.6589099274464697
+ArgId F1: 0.6228932290577559
+full-structure Precision: 0.7078475555990986
+full-structure Recall: 0.7575757575757576
+full-structure F1: 0.7318679092382495
+-----processing time: 0hour:21min:50sec
+
+model: /disk/data/models/framenet/enModel-with-exemplar/epoch-12-joint.pt
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+...model is loaded
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+Traceback (most recent call last):
+  File "evaluate_multilingual.py", line 218, in <module>
+    model_path=model_path, result_dir=result_dir)
+  File "evaluate_multilingual.py", line 122, in test
+    result = model.parser(instance)
+  File "/disk/kaiser/kaiser/parser.py", line 113, in parser
+    lus=b_lus, attention_mask=b_masks)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "../kaiser/src/modeling.py", line 47, in forward
+    sequence_output, pooled_output = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_bert.py", line 627, in forward
+    head_mask=head_mask)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_bert.py", line 348, in forward
+    layer_outputs = layer_module(hidden_states, attention_mask, head_mask[i])
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_bert.py", line 328, in forward
+    intermediate_output = self.intermediate(attention_output)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/transformers/modeling_bert.py", line 299, in forward
+    hidden_states = self.dense(hidden_states)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 477, in __call__
+    result = self.forward(*input, **kwargs)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/linear.py", line 55, in forward
+    return F.linear(input, self.weight, self.bias)
+  File "/usr/local/lib/python3.6/dist-packages/torch/nn/functional.py", line 1026, in linear
+    output = input.matmul(weight.t())
+RuntimeError: cublas runtime error : an internal operation failed at /pytorch/aten/src/THC/THCBlas.cu:249
+I1210 00:20:49.134703 140690889996032 file_utils.py:39] PyTorch version 1.3.1 available.
+I1210 00:20:49.270746 140690889996032 modeling_xlnet.py:194] Better speed can be achieved with apex installed from https://www.github.com/nvidia/apex .
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+	###multilingual-for-en-masking
+### Your result would be saved to: /disk/data/models/results/framenet/enModel-with-exemplar/en_with_exem_for_en_with_masking_result.txt
+# of instances in trn: 211812
+# of instances in dev: 2272
+# of instances in tst: 6714
+data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
+### EVALUATION
+MODE: framenet
+target LANGUAGE: en
+trained LANGUAGE: en_with_exem
+Viterbi: False
+masking: True
+using TGT token: True
+model: /disk/data/models/framenet/enModel-with-exemplar/epoch-15-joint.pt
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+/usr/local/lib/python3.6/dist-packages/torch/serialization.py:493: SourceChangeWarning: source code of class 'torch.nn.modules.sparse.Embedding' has changed. you can retrieve the original source code by accessing the object's source attribute or set `torch.nn.Module.dump_patches = True` and use the patch tool to revert the changes.
+  warnings.warn(msg, SourceChangeWarning)
+/usr/local/lib/python3.6/dist-packages/torch/serialization.py:493: SourceChangeWarning: source code of class 'torch.nn.modules.normalization.LayerNorm' has changed. you can retrieve the original source code by accessing the object's source attribute or set `torch.nn.Module.dump_patches = True` and use the patch tool to revert the changes.
+  warnings.warn(msg, SourceChangeWarning)
+/usr/local/lib/python3.6/dist-packages/torch/serialization.py:493: SourceChangeWarning: source code of class 'torch.nn.modules.dropout.Dropout' has changed. you can retrieve the original source code by accessing the object's source attribute or set `torch.nn.Module.dump_patches = True` and use the patch tool to revert the changes.
+  warnings.warn(msg, SourceChangeWarning)
+/usr/local/lib/python3.6/dist-packages/torch/serialization.py:493: SourceChangeWarning: source code of class 'torch.nn.modules.container.ModuleList' has changed. you can retrieve the original source code by accessing the object's source attribute or set `torch.nn.Module.dump_patches = True` and use the patch tool to revert the changes.
+  warnings.warn(msg, SourceChangeWarning)
+/usr/local/lib/python3.6/dist-packages/torch/serialization.py:493: SourceChangeWarning: source code of class 'torch.nn.modules.linear.Linear' has changed. you can retrieve the original source code by accessing the object's source attribute or set `torch.nn.Module.dump_patches = True` and use the patch tool to revert the changes.
+  warnings.warn(msg, SourceChangeWarning)
+/usr/local/lib/python3.6/dist-packages/torch/serialization.py:493: SourceChangeWarning: source code of class 'torch.nn.modules.activation.Tanh' has changed. you can retrieve the original source code by accessing the object's source attribute or set `torch.nn.Module.dump_patches = True` and use the patch tool to revert the changes.
+  warnings.warn(msg, SourceChangeWarning)
+...model is loaded
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+../kaiser/src/utils.py:253: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)

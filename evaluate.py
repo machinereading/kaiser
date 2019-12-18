@@ -94,7 +94,7 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
     else:
         pass
         
-    if 'large' in model_path:
+    if 'large' in pretrained:
         fname = fname + '_large_tgt_result.txt'
     else:
         fname = fname + '_tgt_result.txt'
@@ -102,12 +102,13 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
     print('### Your result would be saved to:', fname)
         
     trn, dev, tst = dataio.load_data(srl=srl, language=language)
-    print('')
+    print('### EVALUATION')
     print('MODE:', srl)
     print('target LANGUAGE:', language)
     print('trained LANGUAGE:', train_lang)
     print('Viterbi:', viterbi)
     print('masking:', masking)
+    print('using TGT token:', tgt)
     tic()    
         
     models = glob.glob(model_path+'*.pt')
@@ -130,6 +131,7 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
 
             gold_sense = [i for i in instance[2] if i != '_'][0]
             pred_sense = [i for i in result[0][2] if i != '_'][0]
+
 
             gold_arg = [i for i in instance[3] if i != 'X']
             pred_arg = [i for i in result[0][3]]

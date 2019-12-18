@@ -125,10 +125,11 @@ def train():
 #             break
 
         # print train loss per epoch
-    print("Train loss: {}".format(tr_loss/nb_tr_steps))
-    model_saved_path = model_dir+'epoch-'+str(num_of_epoch)+'-joint.pt'        
-    torch.save(model, model_saved_path)
-    num_of_epoch += 1
+        print("Train loss: {}".format(tr_loss/nb_tr_steps))
+        model_saved_path = model_dir+'epoch-'+str(num_of_epoch)+'-joint.pt'
+        torch.save(model, model_saved_path)
+        num_of_epoch += 1
+
         
 #         break
     print('...training is done')
@@ -247,12 +248,17 @@ else:
     MAX_LEN = 256
     batch_size = 6
 
-epochs = 16
+epochs = 11
 
 trn, dev, tst = dataio.load_data(srl=srl, language=language)
 print('')
+print('### TRAINING')
 print('MODEL:', srl)
 print('LANGUAGE:', language)
+print('PRETRAINED BERT:', PRETRAINED_MODEL)
+print('BATCH_SIZE:', batch_size)
+print('MAX_LEN:', MAX_LEN)
+print('')
 
 bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
 

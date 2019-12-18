@@ -16,8 +16,9 @@ kkma = Kkma()
 import jpype
 jpype.attachThreadToJVM()
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-n_gpu = torch.cuda.device_count()
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device('cpu')
+# n_gpu = torch.cuda.device_count()
 
 import os
 try:
@@ -65,6 +66,9 @@ def load_data(srl='framenet', language='ko', fnversion=1.1, path=False):
             with open(fn_dir+'fn1.7.fulltext.train.syntaxnet.conll') as f:
                 d = f.readlines()
             trn_d = conll2tagseq(d)
+            with open(fn_dir+'fn1.7.exemplar.train.syntaxnet.conll') as f:
+                d = f.readlines()
+            exem_d = conll2tagseq(d)
             with open(fn_dir+'fn1.7.dev.syntaxnet.conll') as f:
                 d = f.readlines()
             dev_d = conll2tagseq(d)
@@ -95,11 +99,37 @@ def load_data(srl='framenet', language='ko', fnversion=1.1, path=False):
                 tst_d = conll2tagseq(d)
                 dev_d = []
     trn = data2tgt_data(trn_d, mode='train')
+    if language == 'en':
+        exem = data2tgt_data(exem_d, mode='train')
     tst = data2tgt_data(tst_d, mode='train')
     if dev_d:
         dev = data2tgt_data(dev_d, mode='train')
     else:
         dev = []
+        
+#     too_long_in_exem = [35285, 35286, 58002, 77448, 77993, 82010, 82061, 98118, 120524, 153131]
+# #     too_long_in_exem = []
+#     new_exem = []
+#     for idx in range(len(exem)):
+#         if idx in too_long_in_exem:
+#             pass
+#         else:
+#             item = exem[idx]
+#             new_exem.append(item)
+        
+#     trn += new_exem
+    if language == 'en':
+        ori_trn = trn + exem
+        trn = []    
+
+        too_long = [35285, 35286, 58002, 77448, 77993, 82010, 82061, 98118, 120524, 153131]
+        for idx in range(len(ori_trn)):
+            if idx in too_long:
+                pass
+            else:
+                item = ori_trn[idx]
+                trn.append(item)
+    
         
     print('# of instances in trn:', len(trn))
     print('# of instances in dev:', len(dev))

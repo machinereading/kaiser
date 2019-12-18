@@ -14,9 +14,6 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
 if device != "cpu":
     torch.cuda.set_device(0)
-# torch.backends.cudnn.deterministic = True
-# device = torch.device('cpu')
-# torch.cuda.set_device(device)
 # torch.backends.cudnn.benchmark = True
 
 MAX_LEN = 256
@@ -51,60 +48,59 @@ class for_BERT():
             self.tokenizer = BertTokenizer(vocab_file_path, do_lower_case=False, max_len=256)
             self.tokenizer.additional_special_tokens = ['<tgt>', '</tgt>']
         
-#         if srl == 'framenet':
-        if language == 'en':
-            fnversion=1.7
-            data_path = dir_path+'/koreanframenet/resource/info/fn'+str(fnversion)+'_'
-        elif language == 'ko':
-            data_path = dir_path+'/koreanframenet/resource/info/kfn'+str(fnversion)+'_'
-        elif 'mul' in language:
-            data_path = dir_path+'/koreanframenet/resource/info/mul_'
+        if srl == 'framenet':
+            if language == 'en':
+                fnversion=1.7
+                data_path = dir_path+'/koreanframenet/resource/info/fn'+str(fnversion)+'_'
+            elif language == 'ko':
+                data_path = dir_path+'/koreanframenet/resource/info/kfn'+str(fnversion)+'_'
+            elif 'mul' in language:
+                data_path = dir_path+'/koreanframenet/resource/info/mul_'
+            else:
+                data_path = dir_path+'/koreanframenet/resource/info/kfn'+str(fnversion)+'_'
+            with open(data_path+'lu2idx.json','r') as f:
+                self.lu2idx = json.load(f)
+            self.idx2lu = dict(zip(self.lu2idx.values(),self.lu2idx.keys()))
+                
+            fname = dir_path+'/koreanframenet/resource/info/fn1.7_frame2idx.json'
+            with open(fname,'r') as f:
+                self.sense2idx = json.load(f)
+                
+            with open(data_path+'lufrmap.json','r') as f:
+                self.lufrmap = json.load(f)
+                
+            with open(dir_path+'/koreanframenet/resource/info/fn1.7_fe2idx.json','r') as f:
+                self.arg2idx = json.load(f)
+                
+            with open(dir_path+'/koreanframenet/resource/info/fn1.7_bio_fe2idx.json','r') as f:
+                self.bio_arg2idx = json.load(f)
+            self.idx2bio_arg = dict(zip(self.bio_arg2idx.values(),self.bio_arg2idx.keys()))
+            
+            
+            print('used dictionary:')
+            print('\t', data_path+'lu2idx.json')
+            print('\t', data_path+'lufrmap.json')
+                
         else:
-            data_path = dir_path+'/koreanframenet/resource/info/kfn'+str(fnversion)+'_'
-        with open(data_path+'lu2idx.json','r') as f:
-            self.lu2idx = json.load(f)
-        self.idx2lu = dict(zip(self.lu2idx.values(),self.lu2idx.keys()))
-
-        fname = dir_path+'/koreanframenet/resource/info/fn1.7_frame2idx.json'
-        with open(fname,'r') as f:
-            self.sense2idx = json.load(f)
-
-        with open(data_path+'lufrmap.json','r') as f:
-            self.lufrmap = json.load(f)
-
-        with open(dir_path+'/koreanframenet/resource/info/fn1.7_fe2idx.json','r') as f:
-            self.arg2idx = json.load(f)
-
-        with open(dir_path+'/koreanframenet/resource/info/fn1.7_bio_fe2idx.json','r') as f:
-            self.bio_arg2idx = json.load(f)
-        self.idx2bio_arg = dict(zip(self.bio_arg2idx.values(),self.bio_arg2idx.keys()))
+            if language =='en':
+                pred2idx_fname = dir_path+'/data/enpb-pred2idx.json'
+                arg2idx_fname = dir_path+'/data/enpb-arg2idx.json'
+            else:
+                pred2idx_fname = dir_path+'/data/kopb-pred2idx.json'
+                arg2idx_fname = dir_path+'/data/kopb-arg2idx.json'
+            with open(dir_path+'/data/pb-pred2idx.json','r') as f:
+                self.lu2idx = json.load(f)
+            with open(pred2idx_fname, 'r') as f:
+                self.sense2idx = json.load(f)
+            with open(arg2idx_fname, 'r') as f:
+                self.arg2idx = json.load(f)
+            self.lufrmap = None
+        with open(dir_path+'/koreanframenet/resource/info/fn1.7_frargmap.json','r') as f:
+            self.frargmap = json.load(f)
         with open(dir_path+'/koreanframenet/resource/info/fn1.7_bio_fe2idx.json','r') as f:
             self.bio_arg2idx = json.load(f)
         with open(dir_path+'/koreanframenet/resource/info/mul_bio_frargmap.json','r') as f:
             self.bio_frargmap = json.load(f)
-            
-        print('used dictionary:')
-        print('\t', data_path+'lu2idx.json')
-        print('\t', data_path+'lufrmap.json')
-        print('\t', dir_path+'/koreanframenet/resource/info/mul_bio_frargmap.json')
-                
-#         else:
-#             if language =='en':
-#                 pred2idx_fname = dir_path+'/data/enpb-pred2idx.json'
-#                 arg2idx_fname = dir_path+'/data/enpb-arg2idx.json'
-#             else:
-#                 pred2idx_fname = dir_path+'/data/kopb-pred2idx.json'
-#                 arg2idx_fname = dir_path+'/data/kopb-arg2idx.json'
-#             with open(dir_path+'/data/pb-pred2idx.json','r') as f:
-#                 self.lu2idx = json.load(f)
-#             with open(pred2idx_fname, 'r') as f:
-#                 self.sense2idx = json.load(f)
-#             with open(arg2idx_fname, 'r') as f:
-#                 self.arg2idx = json.load(f)
-#             self.lufrmap = None
-#         with open(dir_path+'/koreanframenet/resource/info/fn1.7_frargmap.json','r') as f:
-#             self.frargmap = json.load(f)
-
             
         self.idx2sense = dict(zip(self.sense2idx.values(),self.sense2idx.keys()))
         self.idx2arg = dict(zip(self.arg2idx.values(),self.arg2idx.keys()))
@@ -235,12 +231,24 @@ def get_masks(datas, mapdata, num_label=2, masking=True):
         if masking == True:
             for idx in datas:
                 torch.cuda.set_device(0)
-#                 torch.cuda.set_device(device)
                 indx = str(idx).split('[')[-1].split(']')[0]
-#                 mask = [3e-5 for i in range(num_label)]
-#                 mask = torch.tensor(mask)
+#                 indx = idx.to(device)
+#                 indx = indx.data
+#                 indx = indx.cpu()
+#                 indx = indx.numpy()
+#                 indx = indx[0]
+#                 indx = str(indx)
                 mask = torch.zeros(num_label)
                 candis = mapdata[indx]
+        #         mask[mask==0] = np.NINF
+    #             candis = mapdata[str(int(idx[0]))]
+
+    #             try:
+    #                 candis = mapdata[str(int(idx[0]))]
+    #             except KeyboardInterrupt:
+    #                 raise
+    #             except:
+    #                 candis = mapdata[int(idx[0])]
                 for candi_idx in candis:
                     mask[candi_idx] = 1
                 masks.append(mask)
@@ -248,7 +256,13 @@ def get_masks(datas, mapdata, num_label=2, masking=True):
             for idx in datas:
                 mask = torch.ones(num_label)
                 masks.append(mask)
-    masks = torch.stack(masks)
+    inf_masks = []
+    for m in mask:
+        if m == 0:
+            inf_masks.append(np.NINF)
+        else:
+            inf_masks.append(m)
+    masks = torch.stack(inf_masks)
     return masks
 
 def masking_logit(logit, mask):

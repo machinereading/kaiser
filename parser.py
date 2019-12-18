@@ -24,8 +24,14 @@ from torch.optim import Adam
 from tqdm import tqdm, trange
 
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
+if device != "cpu":
+    torch.cuda.set_device(device)
+
+print('\n\t###DEVICE:', device)
+
+torch.backends.cudnn.benchmark = True
 
 
 # In[1]:
@@ -55,21 +61,33 @@ class ShallowSemanticParser():
         
         print('srl model:', self.srl)
         print('language:', self.language)
+        print('version:', self.fnversion)
         print('using viterbi:', self.viterbi)
         print('using masking:', self.masking)
+        print('pretrained BERT:', self.pretrained)
+        print('using TGT special token:', self.tgt)
+        
+        self.bert_io = utils.for_BERT(mode='predict', srl=self.srl, language=self.language, 
+                              masking=self.masking, fnversion=self.fnversion,
+                              pretrained=self.pretrained)  
         
         #load model
         if model_path:
             self.model_path = model_path
         else:
-            print('model_path={your_model.pt}')
-        self.model = torch.load(model_path, map_location=device)
+            print('model_path={your_model_dir}')
+#         self.model = torch.load(model_path, map_location=device)
+
+        self.model = BertForJointShallowSemanticParsing.from_pretrained(self.model_path, 
+                                                                   num_senses = len(self.bert_io.sense2idx), 
+                                                                   num_args = len(self.bert_io.bio_arg2idx),
+                                                                   lufrmap=self.bert_io.lufrmap, 
+                                                                   frargmap = self.bert_io.bio_frargmap)
+        self.model.to(device)
+#         self.model = BertForJointShallowSemanticParsing
         self.model.eval()
+        print(self.model_path)
         print('...model is loaded')
-        
-        self.bert_io = utils.for_BERT(mode='predict', srl=self.srl, language=self.language, 
-                                      masking=self.masking, fnversion=self.fnversion,
-                                      pretrained=self.pretrained)      
         
         # trainsition parameter for vitervi decoding
         if self.srl != 'propbank-dp':
@@ -102,14 +120,15 @@ class ShallowSemanticParser():
             
             pred_senses, pred_args = [],[]            
             for batch in dataloader:
+                torch.cuda.set_device(device)
                 batch = tuple(t.to(device) for t in batch)
-                b_input_ids, b_orig_tok_to_maps, b_lus, b_masks = batch
+                b_input_ids, b_orig_tok_to_maps, b_lus, b_token_type_ids, b_masks = batch
                 
                 with torch.no_grad():
-                    tmp_eval_loss = self.model(b_input_ids, token_type_ids=None, 
-                                         lus=b_lus, attention_mask=b_masks)
-                    sense_logits, arg_logits = self.model(b_input_ids, token_type_ids=None, 
-                                    lus=b_lus, attention_mask=b_masks)
+                    tmp_eval_loss = self.model(b_input_ids, lus=b_lus, 
+                                               token_type_ids=b_token_type_ids, attention_mask=b_masks)
+                    sense_logits, arg_logits = self.model(b_input_ids, lus=b_lus, 
+                                                          token_type_ids=b_token_type_ids, attention_mask=b_masks)
                 
                 if self.srl == 'framenet':
                     lufr_masks = utils.get_masks(b_lus, 
@@ -119,8 +138,11 @@ class ShallowSemanticParser():
                 else:
                     pass
 
-                b_input_ids_np = b_input_ids.detach().cpu().numpy()  
+                b_input_ids_np = b_input_ids.detach().cpu().numpy()
+                
+#                 sense_logits_np = sense_logits.detach().cpu().numpy()
                 arg_logits_np = arg_logits.detach().cpu().numpy()
+#                 arg_logits_np = arg_logits
                 
                 b_input_ids, arg_logits = [],[]
                 
@@ -147,6 +169,7 @@ class ShallowSemanticParser():
                 for b_idx in range(len(sense_logits)):
                     input_id = b_input_ids[b_idx]
                     sense_logit = sense_logits[b_idx]
+#                     sense_logit = sense_logits_np[b_idx]
                     arg_logit = arg_logits[b_idx]
                     
                     if self.srl == 'framenet':
