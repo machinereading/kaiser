@@ -1,7 +1,7 @@
-
+#!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 
 import json
@@ -73,7 +73,7 @@ def weighting(frame, args):
     return weighted_args
 
 
-# In[5]:
+# In[15]:
 
 
 def test(srl=False, masking=False, viterbi=False, language=False, model_path=False, 
@@ -113,8 +113,8 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
         
     models = glob.glob(model_path+'*/')
     
-    models = []
-    models.append('/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
+#     models = []
+#     models.append('/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
     
     eval_result = []
     for m in models:
@@ -170,8 +170,6 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
             
 #             break
             
-            
-            
         acc = accuracy_score(gold_senses, pred_senses)
         arg_f1 = f1_score(gold_args, pred_args)
         arg_precision = precision_score(gold_args, pred_args)
@@ -222,61 +220,63 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
         for i in eval_result:
             line = '\t'.join(i)
             f.write(line+'\n')
+            
+        print('\n\t### Your result is saved at:', fname)
 
 
-# In[ ]:
+# In[16]:
 
 
 print('\t###multilingual-for-en-masking')
 srl = 'framenet'
 language = 'en'
-model_path = '/disk/data/models/dict_framenet/enModel-with-exemplar/'
-
-result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[ ]:
-
-
-print('\t###multilingual-for-ko-masking')
-srl = 'framenet'
-language = 'ko'
-model_path = '/disk/data/models/dict_framenet/enModel-with-exemplar/'
+model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
 
 result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
 test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
      model_path=model_path, result_dir=result_dir)
 
 
-# In[ ]:
+# In[7]:
+
+
+print('\t###multilingual-for-ko-masking')
+srl = 'framenet'
+language = 'ko'
+model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
+
+result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# In[8]:
 
 
 print('\t###multilingual-for-en-without-masking')
 srl = 'framenet'
 language = 'en'
-model_path = '/disk/data/models/dict_framenet/enModel-with-exemplar/'
+model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
 
 result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
-     model_path=model_path, result_dir=result_dir)
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
+#      model_path=model_path, result_dir=result_dir)
 
 
-# In[ ]:
+# In[9]:
 
 
 print('\t###multilingual-for-en-without-masking')
 srl = 'framenet'
 language = 'ko'
-model_path = '/disk/data/models/dict_framenet/enModel-with-exemplar/'
+model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
 
 result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
-     model_path=model_path, result_dir=result_dir)
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
+#      model_path=model_path, result_dir=result_dir)
 
 
-# In[7]:
+# In[10]:
 
 
 # import glob
@@ -293,7 +293,7 @@ test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_l
 #     break
 
 
-# In[ ]:
+# In[11]:
 
 
 # print('\t###multilingual-for-en-masking')
@@ -306,7 +306,7 @@ test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_l
 #      model_path=model_path, result_dir=result_dir)
 
 
-# In[ ]:
+# In[12]:
 
 
 # print('\t###multilingual-for-en-masking')
@@ -319,7 +319,7 @@ test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_l
 #      model_path=model_path, result_dir=result_dir)
 
 
-# In[ ]:
+# In[13]:
 
 
 # print('\t###multilingual-for-en-masking')
@@ -332,7 +332,7 @@ test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_l
 #      model_path=model_path, result_dir=result_dir)
 
 
-# In[ ]:
+# In[14]:
 
 
 # print('\t###multilingual-for-en-no-masking')

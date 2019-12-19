@@ -31,7 +31,7 @@ if device != "cpu":
 
 print('\n\t###DEVICE:', device)
 
-torch.backends.cudnn.benchmark = True
+# torch.backends.cudnn.benchmark = True
 
 
 # In[1]:
@@ -78,12 +78,14 @@ class ShallowSemanticParser():
             print('model_path={your_model_dir}')
 #         self.model = torch.load(model_path, map_location=device)
 
+
         self.model = BertForJointShallowSemanticParsing.from_pretrained(self.model_path, 
                                                                    num_senses = len(self.bert_io.sense2idx), 
                                                                    num_args = len(self.bert_io.bio_arg2idx),
-                                                                   lufrmap=self.bert_io.lufrmap, 
+                                                                   lufrmap=self.bert_io.lufrmap, masking=self.masking,
                                                                    frargmap = self.bert_io.bio_frargmap)
         self.model.to(device)
+        print('...loaded model path:', self.model_path)
 #         self.model = BertForJointShallowSemanticParsing
         self.model.eval()
         print(self.model_path)
@@ -116,7 +118,7 @@ class ShallowSemanticParser():
             
             # convert conll to bert inputs
             bert_inputs = self.bert_io.convert_to_bert_input_JointShallowSemanticParsing(tgt_data)
-            dataloader = DataLoader(bert_inputs, sampler=None, batch_size=6)
+            dataloader = DataLoader(bert_inputs, sampler=None, batch_size=1)
             
             pred_senses, pred_args = [],[]            
             for batch in dataloader:

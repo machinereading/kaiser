@@ -89,12 +89,14 @@ def train(retrain=False, pretrained_dir=False):
 
     # load a model first
     if retrain:
+#         model_saved_path = pretrained_dir
         model = BertForJointShallowSemanticParsing.from_pretrained(pretrained_dir, 
                                                                    num_senses = len(bert_io.sense2idx), 
                                                                    num_args = len(bert_io.bio_arg2idx),
                                                                    lufrmap=bert_io.lufrmap, 
                                                                    frargmap = bert_io.bio_frargmap)
     else:
+#         model_saved_path = PRETRAINED_MODEL
         model = BertForJointShallowSemanticParsing.from_pretrained(PRETRAINED_MODEL, 
                                                                    num_senses = len(bert_io.sense2idx), 
                                                                    num_args = len(bert_io.bio_arg2idx),
@@ -112,32 +114,48 @@ def train(retrain=False, pretrained_dir=False):
     trn_dataloader = DataLoader(trn_data, sampler=sampler, batch_size=batch_size)
     
     # load optimizer
-#     FULL_FINETUNING = True
-#     if FULL_FINETUNING:
-#         param_optimizer = list(model.named_parameters())
-#         no_decay = ['bias', 'gamma', 'beta']
-#         optimizer_grouped_parameters = [
-#             {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)],
-#              'weight_decay_rate': 0.01},
-#             {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)],
-#              'weight_decay_rate': 0.0}
-#         ]
-#     else:
-#         param_optimizer = list(model.classifier.named_parameters()) 
-#         optimizer_grouped_parameters = [{"params": [p for n, p in param_optimizer]}]
-#     optimizer = Adam(optimizer_grouped_parameters, lr=3e-5)
+    FULL_FINETUNING = True
+    if FULL_FINETUNING:
+        param_optimizer = list(model.named_parameters())
+        no_decay = ['bias', 'gamma', 'beta']
+        optimizer_grouped_parameters = [
+            {'params': [p for n, p in param_optimizer if not any(nd in n for nd in no_decay)],
+             'weight_decay_rate': 0.01},
+            {'params': [p for n, p in param_optimizer if any(nd in n for nd in no_decay)],
+             'weight_decay_rate': 0.0}
+        ]
+    else:
+        param_optimizer = list(model.classifier.named_parameters()) 
+        optimizer_grouped_parameters = [{"params": [p for n, p in param_optimizer]}]
+    optimizer = Adam(optimizer_grouped_parameters, lr=3e-5)
 
-#     lr = 1e-3
-    lr = 5e-5
-    optimizer = AdamW(model.parameters(), lr=lr, eps=1e-8)
-    num_training_steps = len(trn_dataloader) // epochs
-    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=num_training_steps)  # PyTorch scheduler
+#     lr = 5e-5
+#     lr =3e-5
+#     optimizer = AdamW(model.parameters(), lr=lr, eps=1e-8)
+#     num_training_steps = len(trn_dataloader) // epochs
+#     scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=num_training_steps)  # PyTorch scheduler
     
     max_grad_norm = 1.0
 #     global_step = 0
-    num_of_epoch = 1
+#     num_of_epoch = 1
+    num_of_epoch = 0
     accuracy_result = []
     for _ in trange(epochs, desc="Epoch"):
+        # load a fine-tuned model
+#         print('epoch:', num_of_epoch)
+#         print('epoch-1 model:', model_saved_path)
+#         model = BertForJointShallowSemanticParsing.from_pretrained(model_saved_path, 
+#                                                                    num_senses = len(bert_io.sense2idx), 
+#                                                                    num_args = len(bert_io.bio_arg2idx),
+#                                                                    lufrmap=bert_io.lufrmap, 
+#                                                                    frargmap = bert_io.bio_frargmap)
+#         model.to(device)
+        
+#         lr = 5e-5
+#         optimizer = AdamW(model.parameters(), lr=lr, eps=1e-8)
+#         num_training_steps = len(trn_dataloader) // epochs
+#         scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=0, num_training_steps=num_training_steps)  # PyTorch scheduler
+        
         # TRAIN loop
         tr_loss = 0
         nb_tr_examples, nb_tr_steps = 0, 0
@@ -165,21 +183,9 @@ def train(retrain=False, pretrained_dir=False):
             torch.nn.utils.clip_grad_norm_(parameters=model.parameters(), max_norm=max_grad_norm)
             # update parameters
             optimizer.step()
-            scheduler.step()
+#             scheduler.step()
             model.zero_grad()
-            
-            # empty cuda cache
-#         torch.cuda.empty_cache()
-            
-    #             scheduler.step()
-#                 optimizer.zero_grad()
-#             model.zero_grad()
-            
-#             break
 
-        # print train loss per epoch
-    
-#         return global_step, tr_loss / global_step
         print("Train loss: {}".format(tr_loss/nb_tr_steps))
         
         # save your model
@@ -190,12 +196,12 @@ def train(retrain=False, pretrained_dir=False):
         model.save_pretrained(model_saved_path)
         
         # load a fine-tuned model
-        model = BertForJointShallowSemanticParsing.from_pretrained(model_saved_path, 
-                                                                   num_senses = len(bert_io.sense2idx), 
-                                                                   num_args = len(bert_io.bio_arg2idx),
-                                                                   lufrmap=bert_io.lufrmap, 
-                                                                   frargmap = bert_io.bio_frargmap)
-        model.to(device)
+#         model = BertForJointShallowSemanticParsing.from_pretrained(model_saved_path, 
+#                                                                    num_senses = len(bert_io.sense2idx), 
+#                                                                    num_args = len(bert_io.bio_arg2idx),
+#                                                                    lufrmap=bert_io.lufrmap, 
+#                                                                    frargmap = bert_io.bio_frargmap)
+#         model.to(device)
         
         num_of_epoch += 1
 
@@ -204,7 +210,7 @@ def train(retrain=False, pretrained_dir=False):
     print('...training is done')
 
 
-# In[1]:
+# In[6]:
 
 
 srl = 'framenet'
@@ -218,7 +224,7 @@ language = 'multi'
 
 # # (1) train En-FN with exemplars model
 
-# In[14]:
+# In[7]:
 
 
 model_dir = '/disk/data/models/framenet/enModel-with-exemplar/'
@@ -238,8 +244,8 @@ print('MAX_LEN:', MAX_LEN)
 print('')
 
 bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-# train()
-train(retrain=True, pretrained_dir='/disk/data/models/framenet/enModel-with-exemplar/0/')
+train()
+# train(retrain=True, pretrained_dir='/disk/data/models/framenet/enModel-with-exemplar/0/')
 
 
 # # (2) fine-tuning by Korean FrameNet
@@ -247,59 +253,57 @@ train(retrain=True, pretrained_dir='/disk/data/models/framenet/enModel-with-exem
 # In[ ]:
 
 
-# by 100%
+# # by 100%
 
-model_dir = '/disk/data/models/framenet/mulModel-100/'
-epochs = 20
+# model_dir = '/disk/data/models/framenet/mulModel-100/'
+# epochs = 20
 
-trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn, dev, tst = dataio.load_data(srl=srl, language='ko')
 
-language = 'multi'
+# language = 'multi'
 
-print('')
-print('### TRAINING')
-print('MODEL:', srl)
-print('LANGUAGE:', language)
-print('PRETRAINED BERT:', PRETRAINED_MODEL)
-print('training data:')
-print('\t(ko):', len(trn))
-print('BATCH_SIZE:', batch_size)
-print('MAX_LEN:', MAX_LEN)
-print('')
+# print('')
+# print('### TRAINING')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+# print('PRETRAINED BERT:', PRETRAINED_MODEL)
+# print('training data:')
+# print('\t(ko):', len(trn))
+# print('BATCH_SIZE:', batch_size)
+# print('MAX_LEN:', MAX_LEN)
+# print('')
 
-bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
 # train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
 
 
-# In[7]:
+# In[ ]:
 
 
 # by 25% (4460)
 
-model_dir = '/disk/data/models/framenet/mulModel-25/'
-epochs = 50
+# model_dir = '/disk/data/models/framenet/mulModel-25/'
+# epochs = 50
 
-trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn, dev, tst = dataio.load_data(srl=srl, language='ko')
 
-# trn = random.sample(trn, k=4460)
-trn = random.sample(trn, k=500)
-language = 'multi'
+# # trn = random.sample(trn, k=4460)
+# trn = random.sample(trn, k=50)
+# language = 'multi'
 
-print('')
-print('### TRAINING')
-print('MODEL:', srl)
-print('LANGUAGE:', language)
-print('PRETRAINED BERT:', PRETRAINED_MODEL)
-print('training data:')
-print('\t(ko):', len(trn))
-print('BATCH_SIZE:', batch_size)
-print('MAX_LEN:', MAX_LEN)
-print('')
+# print('')
+# print('### TRAINING')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+# print('PRETRAINED BERT:', PRETRAINED_MODEL)
+# print('training data:')
+# print('\t(ko):', len(trn))
+# print('BATCH_SIZE:', batch_size)
+# print('MAX_LEN:', MAX_LEN)
+# print('')
 
-bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-
-# train(retrain=True, pretrained_dir='/disk/data/models/framenet/enModel-with-exemplar/0/')
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
+# # train(retrain=True, pretrained_dir='/disk/data/models/framenet/enModel-with-exemplar/0/')
 
 
 # In[ ]:
@@ -326,8 +330,7 @@ print('BATCH_SIZE:', batch_size)
 print('MAX_LEN:', MAX_LEN)
 print('')
 
-bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
 # train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
 
 
@@ -355,7 +358,6 @@ print('BATCH_SIZE:', batch_size)
 print('MAX_LEN:', MAX_LEN)
 print('')
 
-bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
 # train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
 
