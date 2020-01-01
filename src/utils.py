@@ -61,10 +61,15 @@ class for_BERT():
             data_path = dir_path+'/koreanframenet/resource/info/mul_'
         else:
             data_path = dir_path+'/koreanframenet/resource/info/kfn'+str(fnversion)+'_'
+        
+        
+        # lu dic = multilingual
         with open(data_path+'lu2idx.json','r') as f:
             self.lu2idx = json.load(f)
         self.idx2lu = dict(zip(self.lu2idx.values(),self.lu2idx.keys()))
-
+        
+        
+        # frame, fe dic = FN1.7
         fname = dir_path+'/koreanframenet/resource/info/fn1.7_frame2idx.json'
         with open(fname,'r') as f:
             self.sense2idx = json.load(f)
@@ -78,15 +83,25 @@ class for_BERT():
         with open(dir_path+'/koreanframenet/resource/info/fn1.7_bio_fe2idx.json','r') as f:
             self.bio_arg2idx = json.load(f)
         self.idx2bio_arg = dict(zip(self.bio_arg2idx.values(),self.bio_arg2idx.keys()))
+        
+        
         with open(dir_path+'/koreanframenet/resource/info/fn1.7_bio_fe2idx.json','r') as f:
             self.bio_arg2idx = json.load(f)
-        with open(dir_path+'/koreanframenet/resource/info/mul_bio_frargmap.json','r') as f:
+            
+        if language == 'en':
+            frargmap_path = dir_path+'/koreanframenet/resource/info/fn1.7_bio_frargmap.json'
+        else:
+            frargmap_path = dir_path+'/koreanframenet/resource/info/mul_bio_frargmap.json'
+            
+#         frargmap_path = dir_path+'/koreanframenet/resource/info/fn1.7_bio_frargmap.json'
+
+        with open(frargmap_path,'r') as f:
             self.bio_frargmap = json.load(f)
             
         print('used dictionary:')
         print('\t', data_path+'lu2idx.json')
         print('\t', data_path+'lufrmap.json')
-        print('\t', dir_path+'/koreanframenet/resource/info/mul_bio_frargmap.json')
+        print('\t', frargmap_path)
                 
 #         else:
 #             if language =='en':

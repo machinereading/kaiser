@@ -1,0 +1,46 @@
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+
+	###DEVICE: cuda:0
+	###multilingual-for-en-without-masking
+### Your result would be saved to: /disk/data/models/results/framenet/enModel-with-exemplar/en_with_exem_for_en_result.txt
+# of instances in trn: 19391
+# of instances in dev: 2272
+# of instances in tst: 6714
+data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
+### EVALUATION
+MODE: framenet
+target LANGUAGE: en
+trained LANGUAGE: en_with_exem
+Viterbi: False
+masking: False
+using TGT token: True
+### model dir: /disk/data/models/dict_framenet/enModel-with-exemplar/9/
+### TARGET LANGUAGE: en
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: False
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/dict_framenet/enModel-with-exemplar/9/
+/disk/data/models/dict_framenet/enModel-with-exemplar/9/
+...model is loaded
+# EPOCH: 9
+SenseId Accuracy: 0.8507596067917784
+ArgId Precision: 0.5836469928725875
+ArgId Recall: 0.6448416209520439
+ArgId F1: 0.612720164782042
+full-structure Precision: 0.6855817625579789
+full-structure Recall: 0.7284261298102128
+full-structure F1: 0.7063548551093035
+-----processing time: 0hour:20min:50sec
+
+
+	### Your result is saved at: /disk/data/models/results/framenet/enModel-with-exemplar/en_with_exem_for_en_result.txt

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+
 # coding: utf-8
 
 # In[1]:
@@ -73,7 +73,7 @@ def weighting(frame, args):
     return weighted_args
 
 
-# In[15]:
+# In[19]:
 
 
 def test(srl=False, masking=False, viterbi=False, language=False, model_path=False, 
@@ -101,7 +101,7 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
         
     print('### Your result would be saved to:', fname)
         
-    trn, dev, tst = dataio.load_data(srl=srl, language=language)
+    trn, dev, tst = dataio.load_data(srl=srl, language=language, exem=False)
     print('### EVALUATION')
     print('MODE:', srl)
     print('target LANGUAGE:', language)
@@ -114,12 +114,23 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
     models = glob.glob(model_path+'*/')
     
 #     models = []
-#     models.append('/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
+    
+    # en_exemplar best
+#     models.append('/disk/data/models/dict_framenet/enModel-with-exemplar/9/')
+#     models.append('/disk/data/models/frameBERT/frameBERT_en/')
+    
+#     # ko best
+#     models.append('/disk/data/models/framenet/koModel/35/')
+    
+    # mul best
+#     models.append('/disk/data/models/framenet_old/mulModel-100/39/')
+#     models.append('/disk/data/models/dict_framenet/mulModel-100/39/')
     
     eval_result = []
     for m in models:
 #         m = '/disk/data/models/framenet/enModel-with-exemplar/epoch-8-joint.pt'
-        print('model dir:', m)
+        print('### model dir:', m)
+        print('### TARGET LANGUAGE:', language)
         torch.cuda.set_device(device)
         model = parser.ShallowSemanticParser(srl=srl,gold_pred=True, model_path=m, viterbi=viterbi, 
                                              masking=masking, language='multilingual', tgt=tgt,
@@ -161,6 +172,7 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
 
                 gold_full_all.append(gold_full)
                 pred_full_all.append(pred_full)
+                
                     
 #             except KeyboardInterrupt:
 #                 raise
@@ -224,123 +236,165 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
         print('\n\t### Your result is saved at:', fname)
 
 
-# In[16]:
+# # eval for en for en
+
+# In[ ]:
 
 
-print('\t###multilingual-for-en-masking')
-srl = 'framenet'
-language = 'en'
-model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
+# print('\t###multilingual-for-en-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
 
-result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
-     model_path=model_path, result_dir=result_dir)
+# result_dir = '/disk/data/models/eval_result/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# # eval for ko for ko
+
+# In[6]:
+
+
+# print('\t###multilingual-for-en-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
+
+# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
+#      model_path=model_path, result_dir=result_dir)
 
 
 # In[7]:
 
 
-print('\t###multilingual-for-ko-masking')
-srl = 'framenet'
-language = 'ko'
-model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
+# print('\t###multilingual-for-ko-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_path = '/disk/data/models/framenet/koModel/'
+# result_dir = '/disk/data/models/results/framenet/koModel/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', 
+#      model_path=model_path, result_dir=result_dir)
 
-result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
+
+# In[18]:
+
+
+# print('\t###multilingual-for-en-without-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
+# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# In[20]:
+
+
+# print('\t###ko-for-ko-without-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_path = '/disk/data/models/framenet/koModel/'
+# result_dir = '/disk/data/models/results/framenet/koModel/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###en-for-ko-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_path = ''
+# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
 # test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
 #      model_path=model_path, result_dir=result_dir)
 
 
-# In[8]:
+# In[ ]:
 
 
-print('\t###multilingual-for-en-without-masking')
-srl = 'framenet'
-language = 'en'
-model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
-
-result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
+# print('\t###en-for-ko-without-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_path = ''
+# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
 # test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
 #      model_path=model_path, result_dir=result_dir)
 
 
-# In[9]:
+# # eval for KFN
+
+# In[ ]:
 
 
-print('\t###multilingual-for-en-without-masking')
+# print('\t###multilingual-for-ko-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_path = '/disk/data/models/framenet/mulModel-100/'
+
+# result_dir = '/disk/data/models/eval_result/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###multilingual-for-ko-without-masking')
+# srl = 'framenet'
+# language = 'ko'
+# model_path = '/disk/data/models/framenet/mulModel-100/'
+# model_path = '/disk/data/models/framenet/mulModel-100/'
+
+# result_dir = '/disk/data/models/results/framenet/mulModel-100/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_ko', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# # eval for En again using mulModel
+
+# In[ ]:
+
+
+# print('\t###multilingual-for-en-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_path = '/disk/data/models/framenet/mulModel-100/'
+
+# result_dir = '/disk/data/models/eval_result/'
+# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# In[ ]:
+
+
+# print('\t###multilingual-for-en-without-masking')
+# srl = 'framenet'
+# language = 'en'
+# model_path = '/disk/data/models/framenet/mulModel-100/'
+# model_path = '/disk/data/models/framenet/mulModel-100/'
+
+# result_dir = '/disk/data/models/results/framenet/mulModel-100-for-en/'
+# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_ko', 
+#      model_path=model_path, result_dir=result_dir)
+
+
+# # eval for distilling
+
+# In[ ]:
+
+
+print('\t###multilingual-for-ko-masking')
 srl = 'framenet'
 language = 'ko'
-model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
+model_path = '/disk/data/models/framenet/distilling/'
 
-result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[10]:
-
-
-# import glob
-# import os
-# model_path = '/disk/data/models/dict_framenet/enModel-with-exemplar/'
-# # models = [os.path.join(model_path, o) for o in os.listdir(model_path) if os.path.isdir(os.path.join(model_path,o))]
-# models = glob.glob(model_path+'*/')
-
-# print(models)
-
-# for i in models:
-#     e = i.split('/')[-2]
-#     print(e)
-#     break
-
-
-# In[11]:
-
-
-# print('\t###multilingual-for-en-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/multilingual-framenet-tgt/'
-
-# result_dir = '/disk/data/models/results/multilingual/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='multilingual', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[12]:
-
-
-# print('\t###multilingual-for-en-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/multilingual-framenet-tgt/'
-
-# result_dir = '/disk/data/models/results/multilingual/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='multilingual', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[13]:
-
-
-# print('\t###multilingual-for-en-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/multilingual-framenet-tgt/'
-
-# result_dir = '/disk/data/models/results/multilingual/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='multilingual', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[14]:
-
-
-# print('\t###multilingual-for-en-no-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/multilingual-framenet-tgt/'
-
-# result_dir = '/disk/data/models/results/multilingual/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='multilingual', 
-#      model_path=model_path, result_dir=result_dir)
+result_dir = '/disk/data/models/distilling/'
+test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='distilling', 
+     model_path=model_path, result_dir=result_dir)
 

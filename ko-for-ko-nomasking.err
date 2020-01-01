@@ -1,0 +1,3 @@
+Using TensorFlow backend.
+../kaiser/src/utils.py:284: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)

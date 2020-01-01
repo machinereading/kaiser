@@ -53,7 +53,7 @@ def conll2tagseq(data):
             
     return result
     
-def load_data(srl='framenet', language='ko', fnversion=1.1, path=False):
+def load_data(srl='framenet', language='ko', fnversion=1.1, path=False, exem=True):
     if srl == 'framenet':
         if language == 'ko':
             kfn = koreanframenet.interface(version=fnversion)
@@ -119,16 +119,17 @@ def load_data(srl='framenet', language='ko', fnversion=1.1, path=False):
         
 #     trn += new_exem
     if language == 'en':
-        ori_trn = trn + exem
-        trn = []    
+        if exem == True:
+            ori_trn = trn + exem
+            trn = []    
 
-        too_long = [35285, 35286, 58002, 77448, 77993, 82010, 82061, 98118, 120524, 153131]
-        for idx in range(len(ori_trn)):
-            if idx in too_long:
-                pass
-            else:
-                item = ori_trn[idx]
-                trn.append(item)
+            too_long = [35285, 35286, 58002, 77448, 77993, 82010, 82061, 98118, 120524, 153131]
+            for idx in range(len(ori_trn)):
+                if idx in too_long:
+                    pass
+                else:
+                    item = ori_trn[idx]
+                    trn.append(item)
     
         
     print('# of instances in trn:', len(trn))

@@ -185,6 +185,8 @@ def train(retrain=False, pretrained_dir=False):
             optimizer.step()
 #             scheduler.step()
             model.zero_grad()
+    
+#             break
 
         print("Train loss: {}".format(tr_loss/nb_tr_steps))
         
@@ -227,42 +229,39 @@ language = 'multi'
 # In[7]:
 
 
-model_dir = '/disk/data/models/framenet/enModel-with-exemplar/'
-trn, dev, tst = dataio.load_data(srl=srl, language='en')
-# epochs = 10
-epochs = 9
+# model_dir = '/disk/data/models/framenet/enModel-with-exemplar/'
+# trn, dev, tst = dataio.load_data(srl=srl, language='en')
+# # trn = random.sample(trn, k=50)
+# # epochs = 10
+# epochs = 20
 
-print('')
-print('### TRAINING')
-print('MODEL:', srl)
-print('LANGUAGE:', language)
-print('PRETRAINED BERT:', PRETRAINED_MODEL)
-print('training data:')
-print('\t(en):', len(trn))
-print('BATCH_SIZE:', batch_size)
-print('MAX_LEN:', MAX_LEN)
-print('')
+# print('')
+# print('### TRAINING')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+# print('PRETRAINED BERT:', PRETRAINED_MODEL)
+# print('training data:')
+# print('\t(en):', len(trn))
+# print('BATCH_SIZE:', batch_size)
+# print('MAX_LEN:', MAX_LEN)
+# print('')
 
-bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-train()
+# bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
+# train()
 # train(retrain=True, pretrained_dir='/disk/data/models/framenet/enModel-with-exemplar/0/')
 
 
-# # (2) fine-tuning by Korean FrameNet
+# # (2) train KFN
 
-# In[ ]:
+# In[8]:
 
 
-# # by 100%
-
-# model_dir = '/disk/data/models/framenet/mulModel-100/'
-# epochs = 20
-
+# model_dir = '/disk/data/models/framenet/koModel/'
 # trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# # trn = random.sample(trn, k=50)
+# epochs = 50
 
-# language = 'multi'
-
-# print('')
+# print('\nFrameBERT(ko)')
 # print('### TRAINING')
 # print('MODEL:', srl)
 # print('LANGUAGE:', language)
@@ -274,7 +273,35 @@ train()
 # print('')
 
 # bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-# train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
+# train()
+
+
+# # (3) fine-tuning by Korean FrameNet
+
+# In[9]:
+
+
+# by 100%
+
+model_dir = '/disk/data/models/dict_framenet/mulModel-100/'
+trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn = random.sample(trn, k=20)
+epochs = 50
+
+
+print('\nFineTuning Multilingual')
+print('### TRAINING')
+print('MODEL:', srl)
+print('LANGUAGE:', language)
+print('PRETRAINED BERT:', PRETRAINED_MODEL)
+print('training data:')
+print('\t(ko):', len(trn))
+print('BATCH_SIZE:', batch_size)
+print('MAX_LEN:', MAX_LEN)
+print('')
+
+bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
+train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/9/')
 
 
 # In[ ]:
@@ -311,24 +338,24 @@ train()
 
 # by 50% (8919)
 
-model_dir = '/disk/data/models/framenet/mulModel-50/'
-epochs = 20
+# model_dir = '/disk/data/models/framenet/mulModel-50/'
+# epochs = 20
 
-trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn, dev, tst = dataio.load_data(srl=srl, language='ko')
 
-trn = random.sample(trn, k=8919)
-language = 'multi'
+# trn = random.sample(trn, k=8919)
+# language = 'multi'
 
-print('')
-print('### TRAINING')
-print('MODEL:', srl)
-print('LANGUAGE:', language)
-print('PRETRAINED BERT:', PRETRAINED_MODEL)
-print('training data:')
-print('\t(ko):', len(trn))
-print('BATCH_SIZE:', batch_size)
-print('MAX_LEN:', MAX_LEN)
-print('')
+# print('')
+# print('### TRAINING')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+# print('PRETRAINED BERT:', PRETRAINED_MODEL)
+# print('training data:')
+# print('\t(ko):', len(trn))
+# print('BATCH_SIZE:', batch_size)
+# print('MAX_LEN:', MAX_LEN)
+# print('')
 
 # bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
 # train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
@@ -339,24 +366,24 @@ print('')
 
 # by 75% (13378)
 
-model_dir = '/disk/data/models/framenet/mulModel-75/'
-epochs = 20
+# model_dir = '/disk/data/models/framenet/mulModel-75/'
+# epochs = 20
 
-trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn, dev, tst = dataio.load_data(srl=srl, language='ko')
 
-trn = random.sample(trn, k=13378)
-language = 'multi'
+# trn = random.sample(trn, k=13378)
+# language = 'multi'
 
-print('')
-print('### TRAINING')
-print('MODEL:', srl)
-print('LANGUAGE:', language)
-print('PRETRAINED BERT:', PRETRAINED_MODEL)
-print('training data:')
-print('\t(ko):', len(trn))
-print('BATCH_SIZE:', batch_size)
-print('MAX_LEN:', MAX_LEN)
-print('')
+# print('')
+# print('### TRAINING')
+# print('MODEL:', srl)
+# print('LANGUAGE:', language)
+# print('PRETRAINED BERT:', PRETRAINED_MODEL)
+# print('training data:')
+# print('\t(ko):', len(trn))
+# print('BATCH_SIZE:', batch_size)
+# print('MAX_LEN:', MAX_LEN)
+# print('')
 
 # bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
 # train(retrain=True, pretrained_dir='/disk/data/models/dict_framenet/enModel-with-exemplar/6/')
