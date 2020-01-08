@@ -1,0 +1,237 @@
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+... loading FN data
+# of instances in trn: 211812
+# of instances in dev: 2272
+# of instances in tst: 6714
+data example: [['Greece', 'wildfires', 'force', 'thousands', 'to', '<tgt>', 'evacuate', '</tgt>'], ['_', '_', '_', '_', '_', '_', 'evacuate.v', '_'], ['_', '_', '_', '_', '_', '_', 'Escaping', '_'], ['O', 'O', 'O', 'B-Escapee', 'O', 'X', 'O', 'X']]
+... converting FN data to BERT
+0hour:7min:4sec
+trn_target_frames: 945
+dev_target_frames: 132
+tst_target_frames: 285
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+
+...training
+Avg Train Loss: 5.365763840675354, Avg Train Acc: 0.0536666701361537
+Avg Val Loss: 2.8620307773351668, Avg Val Acc: 0.30600000604987143 (Best)
+Avg Train Loss: 3.7739917778968812, Avg Train Acc: 0.12083333987742663
+Avg Val Loss: 2.3985421714186668, Avg Val Acc: 0.3800000074505806 (Best)
+Avg Train Loss: 2.9982328176498414, Avg Train Acc: 0.23716668032109736
+Avg Val Loss: 2.012644044756889, Avg Val Acc: 0.4320000088214874 (Best)
+Avg Train Loss: 2.406242938041687, Avg Train Acc: 0.3775000213086605
+Avg Val Loss: 1.698902648165822, Avg Val Acc: 0.5080000102519989 (Best)
+Avg Train Loss: 1.9200240182876587, Avg Train Acc: 0.5085000258684158
+Avg Val Loss: 1.4286703075096012, Avg Val Acc: 0.5420000095665455 (Best)
+Avg Train Loss: 1.5149298155307769, Avg Train Acc: 0.6251667007803917
+Avg Val Loss: 1.2031812955625356, Avg Val Acc: 0.5920000113546848 (Best)
+Avg Train Loss: 1.1787861669063568, Avg Train Acc: 0.7256667047739029
+Avg Val Loss: 1.0102133036404848, Avg Val Acc: 0.6560000123083591 (Best)
+Avg Train Loss: 0.9034723496437073, Avg Train Acc: 0.8011667102575302
+Avg Val Loss: 0.8499862199369818, Avg Val Acc: 0.7040000113844872 (Best)
+Avg Train Loss: 0.682324284017086, Avg Train Acc: 0.866166712641716
+Avg Val Loss: 0.7147790690464899, Avg Val Acc: 0.7320000107586384 (Best)
+Avg Train Loss: 0.5085179655253887, Avg Train Acc: 0.9116667115688324
+Avg Val Loss: 0.6025368419592269, Avg Val Acc: 0.7740000100433826 (Best)
+Avg Train Loss: 0.3745454667508602, Avg Train Acc: 0.9465000367164612
+Avg Val Loss: 0.5094567194371484, Avg Val Acc: 0.7980000096559524 (Best)
+Avg Train Loss: 0.2734214632958174, Avg Train Acc: 0.9666667079925537
+Avg Val Loss: 0.43196950960205865, Avg Val Acc: 0.8240000087022782 (Best)
+Avg Train Loss: 0.19826771408319474, Avg Train Acc: 0.979166699051857
+Avg Val Loss: 0.3690496323973639, Avg Val Acc: 0.8440000084042549 (Best)
+Avg Train Loss: 0.14264268279075623, Avg Train Acc: 0.9881666934490204
+Avg Val Loss: 0.3170892131578876, Avg Val Acc: 0.8660000073909759 (Best)
+Avg Train Loss: 0.10242302186787128, Avg Train Acc: 0.9923333543539047
+Avg Val Loss: 0.2790115929140302, Avg Val Acc: 0.8860000064969062 (Best)
+Avg Train Loss: 0.07524367393925786, Avg Train Acc: 0.9941666835546493
+Avg Val Loss: 0.24585115257541473, Avg Val Acc: 0.8960000061988831 (Best)
+Avg Train Loss: 0.05782250627875328, Avg Train Acc: 0.9951666849851608
+Avg Val Loss: 0.22587238619904382, Avg Val Acc: 0.910000005364418 (Best)
+Avg Train Loss: 0.043214848106727, Avg Train Acc: 0.9960000121593475
+Avg Val Loss: 0.21082819406015915, Avg Val Acc: 0.9180000048875808 (Best)
+Avg Train Loss: 0.036597365727648136, Avg Train Acc: 0.9958333474397659
+Avg Val Loss: 0.217989699048876, Avg Val Acc: 0.9220000046491623 (Best)
+Avg Train Loss: 0.031972292214632034, Avg Train Acc: 0.9958333444595336
+Avg Val Loss: 0.1927989191596862, Avg Val Acc: 0.9340000039339066 (Best)
+Avg Train Loss: 0.020780557477846743, Avg Train Acc: 0.9985000067949295
+Avg Val Loss: 0.19924478449850994, Avg Val Acc: 0.9340000039339066 (Best)
+Avg Train Loss: 0.01763792648445815, Avg Train Acc: 0.998000009059906
+Avg Val Loss: 0.1794377367074958, Avg Val Acc: 0.9360000038146973 (Best)
+Avg Train Loss: 0.015580413336865604, Avg Train Acc: 0.9976666754484177
+Avg Val Loss: 0.18244822573527017, Avg Val Acc: 0.9340000039339066 (Best: 0.9360000038146973)
+Avg Train Loss: 0.009809702083002777, Avg Train Acc: 0.9995000022649765
+Avg Val Loss: 0.16002668082400306, Avg Val Acc: 0.9440000033378602 (Best)
+Avg Train Loss: 0.008607607639860362, Avg Train Acc: 0.998666672706604
+Avg Val Loss: 0.15191778291953142, Avg Val Acc: 0.9440000033378602 (Best)
+Avg Train Loss: 0.007605808650841936, Avg Train Acc: 0.998666672706604
+Avg Val Loss: 0.14106762959677555, Avg Val Acc: 0.9480000030994415 (Best)
+Avg Train Loss: 0.0050153820624109354, Avg Train Acc: 0.999666668176651
+Avg Val Loss: 0.15313310837443453, Avg Val Acc: 0.9460000032186509 (Best: 0.9480000030994415)
+Avg Train Loss: 0.004111510481452569, Avg Train Acc: 1.0
+Avg Val Loss: 0.13627232009563273, Avg Val Acc: 0.9500000029802322 (Best)
+Avg Train Loss: 0.003913267028983682, Avg Train Acc: 1.0
+Avg Val Loss: 0.1346006764973555, Avg Val Acc: 0.9480000030994415 (Best: 0.9500000029802322)
+Avg Train Loss: 0.003621727485442534, Avg Train Acc: 0.999666668176651
+Avg Val Loss: 0.12513291123888223, Avg Val Acc: 0.9480000030994415 (Best: 0.9500000029802322)
+Avg Train Loss: 0.003354276832542382, Avg Train Acc: 0.9998333340883255
+Avg Val Loss: 0.11989048564954373, Avg Val Acc: 0.9520000028610229 (Best)
+Avg Train Loss: 0.0028701580344932154, Avg Train Acc: 0.999666668176651
+Avg Val Loss: 0.12959103301862512, Avg Val Acc: 0.9500000029802322 (Best: 0.9520000028610229)
+Avg Train Loss: 0.0022007854440016673, Avg Train Acc: 1.0
+Avg Val Loss: 0.12626942632316343, Avg Val Acc: 0.9540000027418136 (Best)
+Avg Train Loss: 0.0015067575010471047, Avg Train Acc: 1.0
+Avg Val Loss: 0.12884060142969872, Avg Val Acc: 0.9460000032186509 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0012483521155081689, Avg Train Acc: 1.0
+Avg Val Loss: 0.12328216010929055, Avg Val Acc: 0.9460000032186509 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0010903537028934807, Avg Train Acc: 1.0
+Avg Val Loss: 0.12200136101082876, Avg Val Acc: 0.9480000030994415 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0009928497162763961, Avg Train Acc: 1.0
+Avg Val Loss: 0.12126366284144638, Avg Val Acc: 0.9480000030994415 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0009092255105497316, Avg Train Acc: 1.0
+Avg Val Loss: 0.12019162238966202, Avg Val Acc: 0.9480000030994415 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0008355528925312683, Avg Train Acc: 1.0
+Avg Val Loss: 0.1192963654547799, Avg Val Acc: 0.9480000030994415 (Best: 0.9540000027418136)
+Avg Train Loss: 0.000770042143703904, Avg Train Acc: 1.0
+Avg Val Loss: 0.11839705901623063, Avg Val Acc: 0.9500000029802322 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0007111546557280235, Avg Train Acc: 1.0
+Avg Val Loss: 0.11758728533494263, Avg Val Acc: 0.9500000029802322 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0006580327689880506, Avg Train Acc: 1.0
+Avg Val Loss: 0.11676250271150934, Avg Val Acc: 0.9520000028610229 (Best: 0.9540000027418136)
+Avg Train Loss: 0.000609903053555172, Avg Train Acc: 1.0
+Avg Val Loss: 0.11601724490500487, Avg Val Acc: 0.9520000028610229 (Best: 0.9540000027418136)
+Avg Train Loss: 0.0005660896611516363, Avg Train Acc: 1.0
+Avg Val Loss: 0.11526329246575984, Avg Val Acc: 0.9560000026226043 (Best)
+Avg Train Loss: 0.0005261059073382057, Avg Train Acc: 1.0
+Avg Val Loss: 0.1145361114067265, Avg Val Acc: 0.9560000026226043 (Best)
+Avg Train Loss: 0.0004895493444928434, Avg Train Acc: 1.0
+Avg Val Loss: 0.11386646396765115, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.0004559774647350423, Avg Train Acc: 1.0
+Avg Val Loss: 0.11320564670201691, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.0004251200596627314, Avg Train Acc: 1.0
+Avg Val Loss: 0.11257882858919459, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.00039670787402428686, Avg Train Acc: 1.0
+Avg Val Loss: 0.1119817175782498, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.0003705072593584191, Avg Train Acc: 1.0
+Avg Val Loss: 0.11137407445040821, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.0003462734405184165, Avg Train Acc: 1.0
+Avg Val Loss: 0.11081895256188147, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.00032386336417403075, Avg Train Acc: 1.0
+Avg Val Loss: 0.11027966129044899, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.00030312317161587996, Avg Train Acc: 1.0
+Avg Val Loss: 0.1097727990152157, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.00028381953059579244, Avg Train Acc: 1.0
+Avg Val Loss: 0.10926533828722995, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.0002658910887839738, Avg Train Acc: 1.0
+Avg Val Loss: 0.10879101028782542, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.00024923039803979917, Avg Train Acc: 1.0
+Avg Val Loss: 0.1082984949939123, Avg Val Acc: 0.9580000025033951 (Best)
+Avg Train Loss: 0.00023372969269985333, Avg Train Acc: 1.0
+Avg Val Loss: 0.10786133899120387, Avg Val Acc: 0.9600000023841858 (Best)
+Avg Train Loss: 0.00021925291570369155, Avg Train Acc: 1.0
+Avg Val Loss: 0.1074101351968443, Avg Val Acc: 0.9600000023841858 (Best)
+Avg Train Loss: 0.00020579116629960482, Avg Train Acc: 1.0
+Avg Val Loss: 0.10698219597074513, Avg Val Acc: 0.9620000022649765 (Best)
+Avg Train Loss: 0.0001932414480688749, Avg Train Acc: 1.0
+Avg Val Loss: 0.10658783261522956, Avg Val Acc: 0.9620000022649765 (Best)
+Avg Train Loss: 0.00018144544927054085, Avg Train Acc: 1.0
+Avg Val Loss: 0.10618821956284479, Avg Val Acc: 0.9620000022649765 (Best)
+Avg Train Loss: 0.00017047596862539648, Avg Train Acc: 1.0
+Avg Val Loss: 0.10577743008480525, Avg Val Acc: 0.9620000022649765 (Best)
+Avg Train Loss: 0.0001601842328091152, Avg Train Acc: 1.0
+Avg Val Loss: 0.10543513658582014, Avg Val Acc: 0.9640000021457672 (Best)
+Avg Train Loss: 0.00015055053285323083, Avg Train Acc: 1.0
+Avg Val Loss: 0.10505332411880772, Avg Val Acc: 0.9660000020265579 (Best)
+Avg Train Loss: 0.00014155356817354913, Avg Train Acc: 1.0
+Avg Val Loss: 0.10470626241512719, Avg Val Acc: 0.9660000020265579 (Best)
+Avg Train Loss: 0.00013317077078681906, Avg Train Acc: 1.0
+Avg Val Loss: 0.10435288407922372, Avg Val Acc: 0.9660000020265579 (Best)
+Avg Train Loss: 0.00012524478279374307, Avg Train Acc: 1.0
+Avg Val Loss: 0.10402599655409063, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 0.0001178105735743884, Avg Train Acc: 1.0
+Avg Val Loss: 0.10373597774923723, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 0.00011088022150943289, Avg Train Acc: 1.0
+Avg Val Loss: 0.10346360103348047, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 0.00010438093089760513, Avg Train Acc: 1.0
+Avg Val Loss: 0.10315524518467441, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 9.82589773775544e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10285972237824695, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 9.250514165614731e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.1026120473115759, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 8.71028944311547e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10231575941772916, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 8.204619556636317e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10209261657370405, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 7.726955838734284e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.1018436076667939, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 7.282130300154677e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10158082780295274, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 6.856823354610242e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10130283537738194, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 6.459935839302489e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10110147291639521, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 6.0857140251755485e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10086734308869154, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 5.734571128414245e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10068778412277198, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 5.406125685112784e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10047445763969108, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 5.093543006296386e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10035230522543202, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 4.8007331643020734e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.10014087107551234, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 4.5241994175739816e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09995047174383728, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 4.2658172169467435e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09974402805800821, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 4.0212315416283675e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09963164516430197, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 3.7912052848696474e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09945578956106829, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 3.57675570921856e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09931409635885757, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 3.371652141140658e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09917515667365479, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 3.175417731654306e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09908282833749751, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.9945693058834876e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.0988806322854856, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.8217635090186378e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09885853713893028, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.6587169822960278e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09875196188530311, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.507209912437247e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09863692728650392, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.365334951718978e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09842889519509697, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.2312483333735146e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09841978582386389, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 2.1013896712247516e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09832927983444392, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 1.9839605738525278e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09825243477901381, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 1.8695514345381525e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.0982541908618839, Avg Val Acc: 0.9680000019073486 (Best)
+Avg Train Loss: 1.7591159466974203e-05, Avg Train Acc: 1.0
+Avg Val Loss: 0.09815830469112825, Avg Val Acc: 0.9680000019073486 (Best)
+24hour:35min:55sec
+
+...testing
+Test Acc: 0.9040000051259994
+24hour:47min:15sec

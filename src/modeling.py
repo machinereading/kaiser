@@ -49,7 +49,7 @@ class FrameBERT(BertPreTrainedModel):
         return sequence_output, pooled_output
 
 class BertForJointShallowSemanticParsing(BertPreTrainedModel):
-    def __init__(self, config, num_senses=2, num_args=2, lufrmap=None, frargmap=None, masking=True):
+    def __init__(self, config, num_senses=2, num_args=2, lufrmap=None, frargmap=None, masking=True, return_pooled_output=False, original_loss=False):
         super(BertForJointShallowSemanticParsing, self).__init__(config)
         self.masking = masking
         self.num_senses = num_senses # total number of all frames
@@ -60,6 +60,8 @@ class BertForJointShallowSemanticParsing(BertPreTrainedModel):
         self.arg_classifier = nn.Linear(config.hidden_size, num_args)
         self.lufrmap = lufrmap # mapping table for lu to its frame candidates    
         self.frargmap = frargmap # mapping table for lu to its frame candidates
+        self.return_pooled_output = return_pooled_output
+        self.original_loss = original_loss
         
         self.init_weights()
 
@@ -110,8 +112,18 @@ class BertForJointShallowSemanticParsing(BertPreTrainedModel):
                 arg_loss += loss_per_seq_for_arg
             
             # 0.5 weighted loss
+#             if self.original_loss:
+#                 loss = (sense_loss, arg_loss)
+#             else:
             total_loss = 0.5*sense_loss + 0.5*arg_loss
             loss = total_loss / len(sense_logits)
-            return loss
+            
+            if self.return_pooled_output:
+                return pooled_output, loss
+            else:
+                return loss
         else:
-            return sense_logits, arg_logits
+            if self.return_pooled_output:
+                return pooled_output, sense_logits, arg_logits
+            else:
+                return sense_logits, arg_logits

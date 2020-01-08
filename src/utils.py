@@ -242,6 +242,31 @@ class for_BERT():
         else:
             bert_inputs = TensorDataset(data_inputs, data_orig_tok_to_maps, data_lus, data_token_type_ids, data_masks)
         return bert_inputs
+    
+    def convert_to_bert_input_label_definition(self, input_data, label2idx):
+        tokenized_texts, orig_tok_to_maps = [],[]
+        labels = []
+        for label in input_data:    
+            text = input_data[label]
+            orig_tokens, bert_tokens, orig_to_tok_map = self.bert_tokenizer(text)
+            orig_tok_to_maps.append(orig_to_tok_map)
+            tokenized_texts.append(bert_tokens)
+            labels.append(label2idx[label])
+
+        input_ids = pad_sequences([self.tokenizer.convert_tokens_to_ids(txt) for txt in tokenized_texts],maxlen=MAX_LEN, dtype="long", truncating="post", padding="post")
+        
+        orig_tok_to_maps = pad_sequences(orig_tok_to_maps, maxlen=MAX_LEN, dtype="long", truncating="post", padding="post", value=-1)
+
+        attention_masks = [[float(i>0) for i in ii] for ii in input_ids]
+        token_type_ids = [[0 if idx > 0 else 1 for idx in input_id]for input_id in input_ids]
+        
+        data_inputs = torch.tensor(input_ids)
+        data_orig_tok_to_maps = torch.tensor(orig_tok_to_maps)
+        data_masks = torch.tensor(attention_masks)
+        data_token_type_ids = torch.tensor(token_type_ids)
+        
+        bert_inputs = TensorDataset(data_inputs, data_orig_tok_to_maps, data_token_type_ids, data_masks)
+        return bert_inputs, tuple(labels)
 
     
 def get_masks(datas, mapdata, num_label=2, masking=True):

@@ -1,0 +1,540 @@
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+
+### loading Korean FrameNet 1.1 data...
+	# of instances in training data: 17838
+	# of instances in dev data: 2548
+	# of instances in test data: 5097
+# of instances in trn: 17838
+# of instances in dev: 2548
+# of instances in tst: 5097
+data example: [['태풍', 'Hugo가', '남긴', '피해들과', '회사', '내', '몇몇', '주요', '부서들의', '저조한', '실적들을', '반영하여,', 'Aetna', 'Life', 'and', 'Casualty', 'Co.의', '3분기', '<tgt>', '순이익이', '</tgt>', '182.6', '백만', '달러', '또는', '주당', '1.63', '달러로', '22', '%', '하락하였다.'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '이익.n', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'Earnings_and_losses', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'B-Time', 'X', 'O', 'X', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O']]
+
+	### training instance: 4460
+
+### TRAINING
+MODEL: framenet
+LANGUAGE: multi
+PRETRAINED BERT: bert-base-multilingual-cased
+training data:
+	(ko): 4460
+BATCH_SIZE: 6
+MAX_LEN: 256
+
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+original model: BERT-multilingual-base
+
+	your model would be saved at /disk/data/models/framenet/proto_distilling-25/
+
+### converting data to BERT input...
+	 ...is done: 0hour:0min:6sec
+	#of instance: 4460 4460
+Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]../kaiser/src/utils.py:309: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)
+Train loss: 2.2286578816592053
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/0/
+Epoch:   2%|█▌                                                                          | 1/50 [04:54<4:00:33, 294.57s/it]Train loss: 1.477816732540246
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/1/
+Epoch:   4%|███                                                                         | 2/50 [11:41<4:22:41, 328.36s/it]Train loss: 1.05076659516862
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/2/
+Epoch:   6%|████▌                                                                       | 3/50 [18:50<4:40:50, 358.51s/it]Train loss: 0.7650950981844817
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/3/
+Epoch:   8%|██████                                                                      | 4/50 [25:59<4:51:08, 379.75s/it]Train loss: 0.5530413828479747
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/4/
+Epoch:  10%|███████▌                                                                    | 5/50 [33:11<4:56:22, 395.18s/it]Train loss: 0.4008220521362639
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/5/
+Epoch:  12%|█████████                                                                   | 6/50 [40:22<4:57:50, 406.15s/it]Train loss: 0.30083541304714256
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/6/
+Epoch:  14%|██████████▋                                                                 | 7/50 [47:38<4:57:29, 415.10s/it]Train loss: 0.2321381770494965
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/7/
+Epoch:  16%|████████████▏                                                               | 8/50 [54:52<4:54:27, 420.66s/it]Train loss: 0.17991350257959499
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/8/
+Epoch:  18%|█████████████▎                                                            | 9/50 [1:02:02<4:49:16, 423.34s/it]Train loss: 0.14228547719978196
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/9/
+Epoch:  20%|██████████████▌                                                          | 10/50 [1:09:11<4:43:31, 425.28s/it]Train loss: 0.11286779313087864
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/10/
+Epoch:  22%|████████████████                                                         | 11/50 [1:16:24<4:37:49, 427.43s/it]Train loss: 0.08984379333779416
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/11/
+Epoch:  24%|█████████████████▌                                                       | 12/50 [1:23:34<4:31:16, 428.32s/it]Train loss: 0.07934235304879446
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/12/
+Epoch:  26%|██████████████████▉                                                      | 13/50 [1:30:48<4:25:13, 430.09s/it]Train loss: 0.06385512252072854
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/13/
+Epoch:  28%|████████████████████▍                                                    | 14/50 [1:38:05<4:19:10, 431.96s/it]Train loss: 0.061886993780111275
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/14/
+Epoch:  30%|█████████████████████▉                                                   | 15/50 [1:45:13<4:11:18, 430.82s/it]Train loss: 0.05006577722447854
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/15/
+Epoch:  32%|███████████████████████▎                                                 | 16/50 [1:52:22<4:03:45, 430.17s/it]Train loss: 0.04800111368068204
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/16/
+Epoch:  34%|████████████████████████▊                                                | 17/50 [1:59:30<3:56:19, 429.69s/it]Train loss: 0.04010535092017944
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/17/
+Epoch:  36%|██████████████████████████▎                                              | 18/50 [2:06:39<3:49:05, 429.55s/it]Train loss: 0.03528236383472078
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/18/
+Epoch:  38%|███████████████████████████▋                                             | 19/50 [2:13:49<3:41:56, 429.58s/it]Train loss: 0.03551915481371144
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/19/
+Epoch:  40%|█████████████████████████████▏                                           | 20/50 [2:21:02<3:35:20, 430.67s/it]Train loss: 0.031327851415832116
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/20/
+Epoch:  42%|██████████████████████████████▋                                          | 21/50 [2:28:13<3:28:08, 430.65s/it]Train loss: 0.03173691097907321
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/21/
+Epoch:  44%|████████████████████████████████                                         | 22/50 [2:35:20<3:20:25, 429.50s/it]Train loss: 0.030748855347634965
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/22/
+Epoch:  46%|█████████████████████████████████▌                                       | 23/50 [2:42:27<3:12:57, 428.80s/it]Train loss: 0.028002513836698748
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/23/
+Epoch:  48%|███████████████████████████████████                                      | 24/50 [2:49:37<3:05:56, 429.11s/it]Train loss: 0.029154579722202353
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/24/
+Epoch:  50%|████████████████████████████████████▌                                    | 25/50 [2:56:44<2:58:36, 428.67s/it]Train loss: 0.024232694603783148
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/25/
+Epoch:  52%|█████████████████████████████████████▉                                   | 26/50 [3:03:56<2:51:49, 429.54s/it]Train loss: 0.02274150154816227
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/26/
+Epoch:  54%|███████████████████████████████████████▍                                 | 27/50 [3:11:09<2:45:02, 430.55s/it]Train loss: 0.026483377580711197
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/27/
+Epoch:  56%|████████████████████████████████████████▉                                | 28/50 [3:18:15<2:37:23, 429.25s/it]Train loss: 0.028304692419115655
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/28/
+Epoch:  58%|██████████████████████████████████████████▎                              | 29/50 [3:25:22<2:30:00, 428.60s/it]Train loss: 0.023179254362544907
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/29/
+Epoch:  60%|███████████████████████████████████████████▊                             | 30/50 [3:32:29<2:22:43, 428.19s/it]Train loss: 0.025002579766160417
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/30/
+Epoch:  62%|█████████████████████████████████████████████▎                           | 31/50 [3:39:38<2:15:40, 428.45s/it]Train loss: 0.022233960258784474
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/31/
+Epoch:  64%|██████████████████████████████████████████████▋                          | 32/50 [3:46:48<2:08:36, 428.71s/it]Train loss: 0.0185780202349027
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/32/
+Epoch:  66%|████████████████████████████████████████████████▏                        | 33/50 [3:54:01<2:01:51, 430.07s/it]Train loss: 0.023288031385946137
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/33/
+Epoch:  68%|█████████████████████████████████████████████████▋                       | 34/50 [4:01:12<1:54:46, 430.38s/it]Train loss: 0.02722552885621866
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/34/
+Epoch:  70%|███████████████████████████████████████████████████                      | 35/50 [4:08:19<1:47:18, 429.27s/it]Train loss: 0.022750187178282567
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/35/
+Epoch:  72%|████████████████████████████████████████████████████▌                    | 36/50 [4:15:25<1:39:57, 428.40s/it]Train loss: 0.021786733415924135
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/36/
+Epoch:  74%|██████████████████████████████████████████████████████                   | 37/50 [4:22:35<1:32:53, 428.71s/it]Train loss: 0.024502890029301245
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/37/
+Epoch:  76%|███████████████████████████████████████████████████████▍                 | 38/50 [4:29:42<1:25:40, 428.34s/it]Train loss: 0.02295771115509573
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/38/
+Epoch:  78%|████████████████████████████████████████████████████████▉                | 39/50 [4:36:54<1:18:43, 429.37s/it]Train loss: 0.021897316774508607
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/39/
+Epoch:  80%|██████████████████████████████████████████████████████████▍              | 40/50 [4:44:07<1:11:45, 430.57s/it]Train loss: 0.024425001744235997
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/40/
+Epoch:  82%|███████████████████████████████████████████████████████████▊             | 41/50 [4:51:13<1:04:23, 429.24s/it]Train loss: 0.01873810007174309
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/41/
+Epoch:  84%|███████████████████████████████████████████████████████████████            | 42/50 [4:58:20<57:07, 428.47s/it]Train loss: 0.018824372391757226
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/42/
+Epoch:  86%|████████████████████████████████████████████████████████████████▌          | 43/50 [5:05:27<49:55, 428.00s/it]Train loss: 0.017445682057289667
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/43/
+Epoch:  88%|██████████████████████████████████████████████████████████████████         | 44/50 [5:12:36<42:49, 428.21s/it]Train loss: 0.02205265662382527
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/44/
+Epoch:  90%|███████████████████████████████████████████████████████████████████▌       | 45/50 [5:19:44<35:41, 428.38s/it]Train loss: 0.018956103668202676
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/45/
+Epoch:  92%|█████████████████████████████████████████████████████████████████████      | 46/50 [5:26:57<28:38, 429.66s/it]Train loss: 0.0218325548458554
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/46/
+Epoch:  94%|██████████████████████████████████████████████████████████████████████▌    | 47/50 [5:34:07<21:29, 429.84s/it]Train loss: 0.019284456354936443
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/47/
+Epoch:  96%|████████████████████████████████████████████████████████████████████████   | 48/50 [5:41:13<14:17, 428.62s/it]Train loss: 0.019624631780560217
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/48/
+Epoch:  98%|█████████████████████████████████████████████████████████████████████████▌ | 49/50 [5:48:19<07:07, 427.83s/it]Train loss: 0.019528372369716645
+
+	your model is saved: /disk/data/models/framenet/proto_distilling-25/49/
+Epoch: 100%|███████████████████████████████████████████████████████████████████████████| 50/50 [5:55:28<00:00, 428.05s/it]Epoch: 100%|███████████████████████████████████████████████████████████████████████████| 50/50 [5:55:28<00:00, 426.56s/it]
+...training is done
+
+FineTuning Multilingual
+### TRAINING
+MODEL: framenet
+LANGUAGE: multi
+PRETRAINED BERT: bert-base-multilingual-cased
+training data:
+	(ko): 4460
+BATCH_SIZE: 6
+MAX_LEN: 256
+
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+original model: BERT-multilingual-base
+
+	your model would be saved at /disk/data/models/framenet/koModel-25/
+retrain: False
+
+### converting data to BERT input...
+	 ...is done: 0hour:0min:6sec
+	#of instance: 4460 4460
+Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]Train loss: 3.5577254388281094
+
+	your model is saved: /disk/data/models/framenet/koModel-25/0/
+Epoch:   2%|█▌                                                                          | 1/50 [07:11<5:52:20, 431.44s/it]Train loss: 3.1263306541468507
+
+	your model is saved: /disk/data/models/framenet/koModel-25/1/
+Epoch:   4%|███                                                                         | 2/50 [14:27<5:46:13, 432.77s/it]Train loss: 2.93162626284425
+
+	your model is saved: /disk/data/models/framenet/koModel-25/2/
+Epoch:   6%|████▌                                                                       | 3/50 [21:44<5:40:06, 434.18s/it]Train loss: 2.684558873695712
+
+	your model is saved: /disk/data/models/framenet/koModel-25/3/
+Epoch:   8%|██████                                                                      | 4/50 [28:53<5:31:40, 432.62s/it]Train loss: 2.4071397669212793
+
+	your model is saved: /disk/data/models/framenet/koModel-25/4/
+Epoch:  10%|███████▌                                                                    | 5/50 [36:04<5:23:58, 431.97s/it]Train loss: 2.1278904109231886
+
+	your model is saved: /disk/data/models/framenet/koModel-25/5/
+Epoch:  12%|█████████                                                                   | 6/50 [43:15<5:16:38, 431.78s/it]Train loss: 1.871304826310245
+
+	your model is saved: /disk/data/models/framenet/koModel-25/6/
+Epoch:  14%|██████████▋                                                                 | 7/50 [50:27<5:09:25, 431.76s/it]Train loss: 1.6437845051048263
+
+	your model is saved: /disk/data/models/framenet/koModel-25/7/
+Epoch:  16%|████████████▏                                                               | 8/50 [57:40<5:02:36, 432.29s/it]Train loss: 1.4444077962268425
+
+	your model is saved: /disk/data/models/framenet/koModel-25/8/
+Epoch:  18%|█████████████▎                                                            | 9/50 [1:04:58<4:56:27, 433.85s/it]Train loss: 1.262146107491947
+
+	your model is saved: /disk/data/models/framenet/koModel-25/9/
+Epoch:  20%|██████████████▌                                                          | 10/50 [1:12:10<4:48:52, 433.31s/it]Train loss: 1.1063101635544852
+
+	your model is saved: /disk/data/models/framenet/koModel-25/10/
+Epoch:  22%|████████████████                                                         | 11/50 [1:19:20<4:41:04, 432.43s/it]Train loss: 0.951385570970434
+
+	your model is saved: /disk/data/models/framenet/koModel-25/11/
+Epoch:  24%|█████████████████▌                                                       | 12/50 [1:26:30<4:33:27, 431.78s/it]Train loss: 0.8188656345009804
+
+	your model is saved: /disk/data/models/framenet/koModel-25/12/
+Epoch:  26%|██████████████████▉                                                      | 13/50 [1:33:43<4:26:27, 432.09s/it]Train loss: 0.6989667341163162
+
+	your model is saved: /disk/data/models/framenet/koModel-25/13/
+Epoch:  28%|████████████████████▍                                                    | 14/50 [1:40:54<4:19:02, 431.73s/it]Train loss: 0.5987560899066989
+
+	your model is saved: /disk/data/models/framenet/koModel-25/14/
+Epoch:  30%|█████████████████████▉                                                   | 15/50 [1:48:10<4:12:34, 432.98s/it]Train loss: 0.5073740775346436
+
+	your model is saved: /disk/data/models/framenet/koModel-25/15/
+Epoch:  32%|███████████████████████▎                                                 | 16/50 [1:55:28<4:06:11, 434.47s/it]Train loss: 0.425687881707344
+
+	your model is saved: /disk/data/models/framenet/koModel-25/16/
+Epoch:  34%|████████████████████████▊                                                | 17/50 [2:02:35<3:57:46, 432.31s/it]Train loss: 0.36032586574794784
+
+	your model is saved: /disk/data/models/framenet/koModel-25/17/
+Epoch:  36%|██████████████████████████▎                                              | 18/50 [2:09:46<3:50:17, 431.79s/it]Train loss: 0.29520468552777124
+
+	your model is saved: /disk/data/models/framenet/koModel-25/18/
+Epoch:  38%|███████████████████████████▋                                             | 19/50 [2:16:57<3:42:58, 431.56s/it]Train loss: 0.24374067267372965
+
+	your model is saved: /disk/data/models/framenet/koModel-25/19/
+Epoch:  40%|█████████████████████████████▏                                           | 20/50 [2:24:08<3:35:44, 431.48s/it]Train loss: 0.203910238357381
+
+	your model is saved: /disk/data/models/framenet/koModel-25/20/
+Epoch:  42%|██████████████████████████████▋                                          | 21/50 [2:31:22<3:28:49, 432.06s/it]Train loss: 0.16727803648394401
+
+	your model is saved: /disk/data/models/framenet/koModel-25/21/
+Epoch:  44%|████████████████████████████████                                         | 22/50 [2:38:38<3:22:14, 433.37s/it]Train loss: 0.13459392110516707
+
+	your model is saved: /disk/data/models/framenet/koModel-25/22/
+Epoch:  46%|█████████████████████████████████▌                                       | 23/50 [2:45:49<3:14:39, 432.59s/it]Train loss: 0.10959637905746418
+
+	your model is saved: /disk/data/models/framenet/koModel-25/23/
+Epoch:  48%|███████████████████████████████████                                      | 24/50 [2:52:58<3:07:01, 431.61s/it]Train loss: 0.09022191657918825
+
+	your model is saved: /disk/data/models/framenet/koModel-25/24/
+Epoch:  50%|████████████████████████████████████▌                                    | 25/50 [3:00:07<2:59:31, 430.88s/it]Train loss: 0.07299920274833498
+
+	your model is saved: /disk/data/models/framenet/koModel-25/25/
+Epoch:  52%|█████████████████████████████████████▉                                   | 26/50 [3:07:18<2:52:22, 430.95s/it]Train loss: 0.06026253472592416
+
+	your model is saved: /disk/data/models/framenet/koModel-25/26/
+Epoch:  54%|███████████████████████████████████████▍                                 | 27/50 [3:14:27<2:44:58, 430.38s/it]Train loss: 0.0485577964433907
+
+	your model is saved: /disk/data/models/framenet/koModel-25/27/
+Epoch:  56%|████████████████████████████████████████▉                                | 28/50 [3:21:40<2:38:04, 431.12s/it]Train loss: 0.0425788632323978
+
+	your model is saved: /disk/data/models/framenet/koModel-25/28/
+Epoch:  58%|██████████████████████████████████████████▎                              | 29/50 [3:28:55<2:31:14, 432.11s/it]Train loss: 0.03336497373385756
+
+	your model is saved: /disk/data/models/framenet/koModel-25/29/
+Epoch:  60%|███████████████████████████████████████████▊                             | 30/50 [3:36:00<2:23:21, 430.06s/it]Train loss: 0.02637453484461613
+
+	your model is saved: /disk/data/models/framenet/koModel-25/30/
+Epoch:  62%|█████████████████████████████████████████████▎                           | 31/50 [3:43:07<2:15:54, 429.16s/it]Train loss: 0.02535609312318591
+
+	your model is saved: /disk/data/models/framenet/koModel-25/31/
+Epoch:  64%|██████████████████████████████████████████████▋                          | 32/50 [3:50:15<2:08:37, 428.74s/it]Train loss: 0.021307673712726682
+
+	your model is saved: /disk/data/models/framenet/koModel-25/32/
+Epoch:  66%|████████████████████████████████████████████████▏                        | 33/50 [3:57:23<2:01:27, 428.69s/it]Train loss: 0.023693038442958225
+
+	your model is saved: /disk/data/models/framenet/koModel-25/33/
+Epoch:  68%|█████████████████████████████████████████████████▋                       | 34/50 [4:04:33<1:54:23, 428.97s/it]Train loss: 0.020993394328455595
+
+	your model is saved: /disk/data/models/framenet/koModel-25/34/
+Epoch:  70%|███████████████████████████████████████████████████                      | 35/50 [4:11:45<1:47:29, 430.00s/it]Train loss: 0.020298586361996156
+
+	your model is saved: /disk/data/models/framenet/koModel-25/35/
+Epoch:  72%|████████████████████████████████████████████████████▌                    | 36/50 [4:18:53<1:40:11, 429.40s/it]Train loss: 0.019899048494182586
+
+	your model is saved: /disk/data/models/framenet/koModel-25/36/
+Epoch:  74%|██████████████████████████████████████████████████████                   | 37/50 [4:26:00<1:32:51, 428.55s/it]Train loss: 0.029831326304310908
+
+	your model is saved: /disk/data/models/framenet/koModel-25/37/
+Epoch:  76%|███████████████████████████████████████████████████████▍                 | 38/50 [4:33:07<1:25:36, 428.03s/it]Train loss: 0.020898022103132442
+
+	your model is saved: /disk/data/models/framenet/koModel-25/38/
+Epoch:  78%|████████████████████████████████████████████████████████▉                | 39/50 [4:40:16<1:18:31, 428.36s/it]Train loss: 0.0216349600049525
+
+	your model is saved: /disk/data/models/framenet/koModel-25/39/
+Epoch:  80%|██████████████████████████████████████████████████████████▍              | 40/50 [4:47:23<1:11:20, 428.08s/it]Train loss: 0.024729860627997768
+
+	your model is saved: /disk/data/models/framenet/koModel-25/40/
+Epoch:  82%|███████████████████████████████████████████████████████████▊             | 41/50 [4:54:36<1:04:23, 429.30s/it]Train loss: 0.02467710412716398
+
+	your model is saved: /disk/data/models/framenet/koModel-25/41/
+Epoch:  84%|███████████████████████████████████████████████████████████████            | 42/50 [5:01:49<57:25, 430.69s/it]Train loss: 0.019211311568513887
+
+	your model is saved: /disk/data/models/framenet/koModel-25/42/
+Epoch:  86%|████████████████████████████████████████████████████████████████▌          | 43/50 [5:08:54<50:02, 428.91s/it]Train loss: 0.014664039406481059
+
+	your model is saved: /disk/data/models/framenet/koModel-25/43/
+Epoch:  88%|██████████████████████████████████████████████████████████████████         | 44/50 [5:16:02<42:50, 428.45s/it]Train loss: 0.016924555700981767
+
+	your model is saved: /disk/data/models/framenet/koModel-25/44/
+Epoch:  90%|███████████████████████████████████████████████████████████████████▌       | 45/50 [5:23:09<35:41, 428.28s/it]Train loss: 0.020057860348021667
+
+	your model is saved: /disk/data/models/framenet/koModel-25/45/
+Epoch:  92%|█████████████████████████████████████████████████████████████████████      | 46/50 [5:30:19<28:34, 428.60s/it]Train loss: 0.019313422987100346
+
+	your model is saved: /disk/data/models/framenet/koModel-25/46/
+Epoch:  94%|██████████████████████████████████████████████████████████████████████▌    | 47/50 [5:37:29<21:27, 429.02s/it]Train loss: 0.017914391194784503
+
+	your model is saved: /disk/data/models/framenet/koModel-25/47/
+Epoch:  96%|████████████████████████████████████████████████████████████████████████   | 48/50 [5:44:42<14:20, 430.34s/it]Train loss: 0.01617563880649037
+
+	your model is saved: /disk/data/models/framenet/koModel-25/48/
+Epoch:  98%|█████████████████████████████████████████████████████████████████████████▌ | 49/50 [5:51:52<07:10, 430.24s/it]Train loss: 0.014878902916974258
+
+	your model is saved: /disk/data/models/framenet/koModel-25/49/
+Epoch: 100%|███████████████████████████████████████████████████████████████████████████| 50/50 [5:59:00<00:00, 429.41s/it]Epoch: 100%|███████████████████████████████████████████████████████████████████████████| 50/50 [5:59:00<00:00, 430.80s/it]
+...training is done
+
+FineTuning FrameBERT
+### TRAINING
+MODEL: framenet
+LANGUAGE: multi
+PRETRAINED BERT: bert-base-multilingual-cased
+training data:
+	(ko): 4460
+BATCH_SIZE: 6
+MAX_LEN: 256
+
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+original model: /disk/data/models/frameBERT/frameBERT_en/
+
+	your model would be saved at /disk/data/models/framenet/mulModel-25/
+retrain: True
+
+### converting data to BERT input...
+	 ...is done: 0hour:0min:6sec
+	#of instance: 4460 4460
+Epoch:   0%|                                                                                       | 0/50 [00:00<?, ?it/s]Train loss: 2.7652157813070284
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/0/
+Epoch:   2%|█▌                                                                          | 1/50 [07:11<5:52:41, 431.87s/it]Train loss: 1.8098853586481944
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/1/
+Epoch:   4%|███                                                                         | 2/50 [14:27<5:46:23, 432.99s/it]Train loss: 1.2762288179709225
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/2/
+Epoch:   6%|████▌                                                                       | 3/50 [21:41<5:39:25, 433.31s/it]Train loss: 0.9129991337697032
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/3/
+Epoch:   8%|██████                                                                      | 4/50 [29:00<5:33:31, 435.03s/it]Train loss: 0.6459471987991003
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/4/
+Epoch:  10%|███████▌                                                                    | 5/50 [36:21<5:27:37, 436.83s/it]Train loss: 0.4696307024487885
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/5/
+Epoch:  12%|█████████                                                                   | 6/50 [43:30<5:18:35, 434.44s/it]Train loss: 0.351881350025094
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/6/
+Epoch:  14%|██████████▋                                                                 | 7/50 [50:44<5:11:10, 434.20s/it]Train loss: 0.27590546791031156
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/7/
+Epoch:  16%|████████████▏                                                               | 8/50 [57:58<5:03:53, 434.14s/it]Train loss: 0.21400491652199097
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/8/
+Epoch:  18%|█████████████▎                                                            | 9/50 [1:05:13<4:56:53, 434.48s/it]Train loss: 0.16447385455987426
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/9/
+Epoch:  20%|██████████████▌                                                          | 10/50 [1:12:30<4:50:12, 435.32s/it]Train loss: 0.12472070504533207
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/10/
+Epoch:  22%|████████████████                                                         | 11/50 [1:19:51<4:43:59, 436.92s/it]Train loss: 0.10092984960396945
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/11/
+Epoch:  24%|█████████████████▌                                                       | 12/50 [1:27:06<4:36:24, 436.44s/it]Train loss: 0.08504889377765858
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/12/
+Epoch:  26%|██████████████████▉                                                      | 13/50 [1:34:19<4:28:33, 435.49s/it]Train loss: 0.07355568374905194
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/13/
+Epoch:  28%|████████████████████▍                                                    | 14/50 [1:41:33<4:20:59, 434.98s/it]Train loss: 0.060838307314884085
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/14/
+Epoch:  30%|█████████████████████▉                                                   | 15/50 [1:48:49<4:13:52, 435.21s/it]Train loss: 0.05076352433646999
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/15/
+Epoch:  32%|███████████████████████▎                                                 | 16/50 [1:56:03<4:06:25, 434.87s/it]Train loss: 0.044336293705371996
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/16/
+Epoch:  34%|████████████████████████▊                                                | 17/50 [2:03:21<3:59:42, 435.85s/it]Train loss: 0.03655323536929822
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/17/
+Epoch:  36%|██████████████████████████▎                                              | 18/50 [2:10:41<3:53:08, 437.15s/it]Train loss: 0.03463246296779553
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/18/
+Epoch:  38%|███████████████████████████▋                                             | 19/50 [2:17:50<3:44:35, 434.68s/it]Train loss: 0.035841780849178544
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/19/
+Epoch:  40%|█████████████████████████████▏                                           | 20/50 [2:25:02<3:36:58, 433.95s/it]Train loss: 0.02578230367248824
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/20/
+Epoch:  42%|██████████████████████████████▋                                          | 21/50 [2:32:15<3:29:33, 433.55s/it]Train loss: 0.02957374413295271
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/21/
+Epoch:  44%|████████████████████████████████                                         | 22/50 [2:39:28<3:22:14, 433.36s/it]Train loss: 0.023570659327316373
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/22/
+Epoch:  46%|█████████████████████████████████▌                                       | 23/50 [2:46:43<3:15:10, 433.73s/it]Train loss: 0.0253183389559713
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/23/
+Epoch:  48%|███████████████████████████████████                                      | 24/50 [2:54:00<3:08:24, 434.77s/it]Train loss: 0.023433490907415054
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/24/
+Epoch:  50%|████████████████████████████████████▌                                    | 25/50 [3:01:12<3:00:51, 434.07s/it]Train loss: 0.020888268072628297
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/25/
+Epoch:  52%|█████████████████████████████████████▉                                   | 26/50 [3:08:23<2:53:16, 433.21s/it]Train loss: 0.01919087644265708
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/26/
+Epoch:  54%|███████████████████████████████████████▍                                 | 27/50 [3:15:35<2:45:49, 432.57s/it]Train loss: 0.019797962723743928
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/27/
+Epoch:  56%|████████████████████████████████████████▉                                | 28/50 [3:22:49<2:38:46, 433.02s/it]Train loss: 0.020519111957035284
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/28/
+Epoch:  58%|██████████████████████████████████████████▎                              | 29/50 [3:30:02<2:31:33, 433.01s/it]Train loss: 0.01650896100909938
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/29/
+Epoch:  60%|███████████████████████████████████████████▊                             | 30/50 [3:37:19<2:24:43, 434.19s/it]Train loss: 0.018048731119090927
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/30/
+Epoch:  62%|█████████████████████████████████████████████▎                           | 31/50 [3:44:38<2:17:59, 435.77s/it]Train loss: 0.015881984123694487
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/31/
+Epoch:  64%|██████████████████████████████████████████████▋                          | 32/50 [3:51:47<2:10:04, 433.61s/it]Train loss: 0.019555231677195577
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/32/
+Epoch:  66%|████████████████████████████████████████████████▏                        | 33/50 [3:58:58<2:02:42, 433.09s/it]Train loss: 0.017450750470381672
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/33/
+Epoch:  68%|█████████████████████████████████████████████████▋                       | 34/50 [4:06:11<1:55:28, 433.03s/it]Train loss: 0.018744354369245944
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/34/
+Epoch:  70%|███████████████████████████████████████████████████                      | 35/50 [4:13:25<1:48:17, 433.17s/it]Train loss: 0.020701005613294108
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/35/
+Epoch:  72%|████████████████████████████████████████████████████▌                    | 36/50 [4:20:39<1:41:09, 433.56s/it]Train loss: 0.01656135641138384
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/36/
+Epoch:  74%|██████████████████████████████████████████████████████                   | 37/50 [4:27:57<1:34:12, 434.82s/it]Train loss: 0.014066035406387763
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/37/
+Epoch:  76%|███████████████████████████████████████████████████████▍                 | 38/50 [4:35:10<1:26:49, 434.14s/it]Train loss: 0.015783676763197536
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/38/
+Epoch:  78%|████████████████████████████████████████████████████████▉                | 39/50 [4:42:20<1:19:22, 432.92s/it]Train loss: 0.01726372542473029
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/39/
+Epoch:  80%|██████████████████████████████████████████████████████████▍              | 40/50 [4:49:31<1:12:03, 432.33s/it]Train loss: 0.010648324138401222
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/40/
+Epoch:  82%|███████████████████████████████████████████████████████████▊             | 41/50 [4:56:44<1:04:54, 432.72s/it]Train loss: 0.02256834328666442
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/41/
+Epoch:  84%|███████████████████████████████████████████████████████████████            | 42/50 [5:03:57<57:40, 432.60s/it]Train loss: 0.015042587695400286
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/42/
+Epoch:  86%|████████████████████████████████████████████████████████████████▌          | 43/50 [5:11:13<50:36, 433.73s/it]Train loss: 0.015046290251150148
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/43/
+Epoch:  88%|██████████████████████████████████████████████████████████████████         | 44/50 [5:18:32<43:31, 435.30s/it]Train loss: 0.018083879438935222
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/44/
+Epoch:  90%|███████████████████████████████████████████████████████████████████▌       | 45/50 [5:25:41<36:07, 433.40s/it]Train loss: 0.012484828804618183
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/45/
+Epoch:  92%|█████████████████████████████████████████████████████████████████████      | 46/50 [5:32:52<28:51, 432.81s/it]Train loss: 0.013194884197663893
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/46/
+Epoch:  94%|██████████████████████████████████████████████████████████████████████▌    | 47/50 [5:40:05<21:38, 432.69s/it]Train loss: 0.008421190925183529
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/47/
+Epoch:  96%|████████████████████████████████████████████████████████████████████████   | 48/50 [5:47:18<14:25, 432.90s/it]Train loss: 0.016467608185880587
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/48/
+Epoch:  98%|█████████████████████████████████████████████████████████████████████████▌ | 49/50 [5:54:33<07:13, 433.35s/it]Train loss: 0.01621415345711265
+
+	your model is saved: /disk/data/models/framenet/mulModel-25/49/
+Epoch: 100%|███████████████████████████████████████████████████████████████████████████| 50/50 [6:01:51<00:00, 434.75s/it]Epoch: 100%|███████████████████████████████████████████████████████████████████████████| 50/50 [6:01:51<00:00, 434.22s/it]
+...training is done

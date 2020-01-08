@@ -3925,3 +3925,7 @@ RuntimeError: CUDA error: an illegal memory access was encountered
     teacher_dir='/disk/data/models/frameBERT/frameBERT_en/
                                                          ^
 SyntaxError: EOL while scanning string literal
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
