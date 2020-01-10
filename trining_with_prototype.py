@@ -53,6 +53,41 @@ KD_loss = nn.KLDivLoss(reduction='batchmean')
 # In[3]:
 
 
+def euclidean_dist(x, y):
+    '''
+    Compute euclidean distance between two tensors
+    '''
+    # x: N x D
+    # y: M x D
+    n = x.size(0)
+    m = y.size(0)
+    d = x.size(1)
+    if d != y.size(1):
+        raise Exception
+
+    x = x.unsqueeze(1).expand(n, m, d)
+    y = y.unsqueeze(0).expand(n, m, d)
+
+    return torch.pow(x - y, 2).sum(2)
+
+def proto_loss(query_embs, prototypes, n_classes=6, n_query=1):
+    
+    dists = euclidean_dist(query_embs, prototypes)
+    log_p_y = F.log_softmax(-dists, dim=1).view(n_classes, n_query, -1)
+    
+    target_inds = torch.arange(0, n_classes)
+    target_inds = target_inds.view(n_classes, 1, 1)
+    target_inds = target_inds.expand(n_classes, n_query, 1).long().to(device)
+
+    loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
+    
+    return loss_val
+    
+
+
+# In[4]:
+
+
 # 실행시간 측정 함수
 import time
 
@@ -71,7 +106,7 @@ def tac():
     return result
 
 
-# In[4]:
+# In[5]:
 
 
 try:
@@ -80,7 +115,7 @@ except:
     dir_path = '.'
 
 
-# In[5]:
+# In[6]:
 
 
 class MLP(nn.Module):
@@ -98,7 +133,7 @@ class MLP(nn.Module):
         return x
 
 
-# In[6]:
+# In[7]:
 
 
 with open('./koreanframenet/resource/info/fn1.7_frame2idx.json', 'r') as f:
@@ -108,7 +143,7 @@ with open('./koreanframenet/resource/info/fn1.7_frame_definitions.json', 'r') as
 frame_prototype = torch.load('./data/frame_prototype.pt')
     
 
-def get_prototype(input_senses):
+def get_definition_embs(input_senses):
 
     frame_prototypes = []
     for i in input_senses:
@@ -122,11 +157,30 @@ def get_prototype(input_senses):
     
     return frame_prototypes
 
+# def get_prototype(b_input_senses, b_input_lus):
 
-# In[7]:
+#     with open('/disk/data/kaiser/kaiser/koreanframenet/resource/info/mul_lufrmap.json') as f:
+#         lufrmap = json.load(f)
+        
+#     y = []
+#     frame_prototypes = []
+#     for i in b_input_senses:
+#         frame_idx = i.item()
+#         y.append(frame_idx)
+        
+#         frame = bert_io.idx2sense[frame_idx]
+#         proto = frame_prototype[frame]
+#         frame_prototypes.append(proto)
+
+#     frame_prototypes = torch.stack(frame_prototypes).view(-1, 768)
+    
+#     return frame_prototypes
 
 
-def train(PRETRAINED_MODEL="bert-base-multilingual-cased", 
+# In[8]:
+
+
+def train_distil(PRETRAINED_MODEL="bert-base-multilingual-cased", 
           temperature=2.0, alpha_distilling=0.2, alpha_parsing=0.8, 
           model_dir=False, epoch=50):
 
@@ -140,12 +194,20 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
     mlp_model = MLP()
     mlp_model.to(device)
     mlp_model.load_state_dict(torch.load(model_path))
-    mlp_model.eval()
+#     mlp_model.eval()
     
     # FrameBERT_ko model
-#     frameBERT_dir = '/disk/data/models/frameBERT/frameBERT_en'
-    frameBERT_dir = '/disk/data/models/framenet_old/enModel-with-exemplar/14/'
+    frameBERT_dir = '/disk/data/models/frameBERT/frameBERT_en'
+#     frameBERT_dir = '/disk/data/models/framenet_old/enModel-with-exemplar/14/'
     print('original model:', frameBERT_dir)
+    
+    teacher = BertForJointShallowSemanticParsing.from_pretrained(frameBERT_dir, 
+                                                                 num_senses = len(bert_io.sense2idx), 
+                                                                 num_args = len(bert_io.bio_arg2idx),
+                                                                 lufrmap=bert_io.lufrmap, 
+                                                                 frargmap = bert_io.bio_frargmap,
+                                                                 return_pooled_output=True)
+    
     model = BertForJointShallowSemanticParsing.from_pretrained(frameBERT_dir, 
                                                                num_senses = len(bert_io.sense2idx), 
                                                                num_args = len(bert_io.bio_arg2idx),
@@ -153,6 +215,7 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
                                                                frargmap = bert_io.bio_frargmap, 
                                                                return_pooled_output=True)
     
+    teacher.to(device)
     model.to(device)  
 
     tic()
@@ -190,8 +253,10 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
         tr_loss = 0
         nb_tr_examples, nb_tr_steps = 0, 0
         for step, batch in enumerate(trn_dataloader):
-            mlp_model.eval()
+#             mlp_model.eval()
+            mlp_model.train()
             model.train()
+            teacher.eval()
             
             # add batch to gpu
             torch.cuda.set_device(0)
@@ -200,7 +265,15 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
             b_input_ids, b_input_orig_tok_to_maps, b_input_lus, b_input_senses, b_input_args, b_token_type_ids, b_input_masks = batch                      
             
             # get prototypes for frames
-            prototypes = get_prototype(b_input_senses)
+            query_embs = get_definition_embs(b_input_senses)
+            
+            with torch.no_grad():
+                teacher_logit, loss_teacher = teacher(b_input_ids, 
+                                                    token_type_ids=b_token_type_ids, 
+                                                    attention_mask=b_input_masks,
+                                                    lus=b_input_lus,
+                                                    senses=b_input_senses, 
+                                                    args=b_input_args)
             
             pooled_output, loss_parsing = model(b_input_ids, 
                                                 token_type_ids=b_token_type_ids, 
@@ -209,16 +282,19 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
                                                 senses=b_input_senses, 
                                                 args=b_input_args)
             
-            with torch.no_grad():
-                pooled_output = mlp_model(pooled_output)
+#             with torch.no_grad():
+            teacher_logit = mlp_model(teacher_logit)
+            student_logit = mlp_model(pooled_output)
             
             loss_distilling = (
                 KD_loss(
-                    F.log_softmax(pooled_output / temperature, dim=-1),
-                    F.softmax(prototypes / temperature, dim=-1),            
+                    F.log_softmax(student_logit / temperature, dim=-1),
+                    F.softmax(teacher_logit / temperature, dim=-1),            
                 )
                 * temperature **2
             )
+
+#             loss_distilling = proto_loss(prototypes, query_embs, n_classes=len(prototypes))
             
             loss = alpha_distilling * loss_distilling + alpha_parsing * loss_parsing
             
@@ -233,6 +309,7 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
             optimizer.step()
 #             scheduler.step()
             model.zero_grad()
+            mlp_model.zero_grad()
     
 #             break
 
@@ -253,36 +330,37 @@ def train(PRETRAINED_MODEL="bert-base-multilingual-cased",
     print('...training is done')
 
 
-# In[8]:
+# In[9]:
 
 
 srl = 'framenet'
 masking = True
 MAX_LEN = 256
-batch_size = 6
+batch_size = 3
 PRETRAINED_MODEL = "bert-base-multilingual-cased"
 fnversion = '1.7'
 language = 'multi'
+epochs = 50
 
+# by 100%
 
-# In[9]:
+model_dir = '/disk/data/models/framenet/withProto-100/'
+trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn = random.sample(trn, k=100)
 
-
-# PRETRAINED_MODEL = "bert-base-multilingual-cased"
-# teacher_dir='/disk/data/models/frameBERT/frameBERT_en/'
-# temperature=2.0
-# alpha_ce=0.5
-# alpha_frame=0.5
+# with open('./trn_10per.json','r') as f:
+#     trn = json.load(f)
+# epochs = 50
 
 
 # In[10]:
 
 
-model_dir = '/disk/data/models/framenet/proto_distilling_0109/'
-epochs = 50
-trn, dev, tst = dataio.load_data(srl=srl, language='ko')
-# trn = random.sample(trn, k=500)
-language = 'multi'
+# model_dir = '/disk/data/models/framenet/proto_distilling_0109/'
+
+# trn, dev, tst = dataio.load_data(srl=srl, language='ko')
+# trn = random.sample(trn, k=10)
+# language = 'multi'
 
 print('')
 print('### TRAINING')
@@ -296,6 +374,6 @@ print('MAX_LEN:', MAX_LEN)
 print('')
 
 bert_io = utils.for_BERT(mode='train', srl=srl, language=language, masking=masking, fnversion=fnversion, pretrained=PRETRAINED_MODEL)
-train(temperature=2.0, alpha_distilling=0.5, alpha_parsing=0.5, 
+train_distil(temperature=2.0, alpha_distilling=0.5, alpha_parsing=0.5, 
       model_dir=model_dir, epoch=epochs)
 

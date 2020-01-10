@@ -1,0 +1,39 @@
+Using TensorFlow backend.
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+
+withProto
+### TRAINING
+MODEL: framenet
+LANGUAGE: multi
+PRETRAINED BERT: bert-base-multilingual-cased
+training data:
+	(ko): 1783
+BATCH_SIZE: 6
+MAX_LEN: 256
+
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+original model: /disk/data/models/frameBERT/frameBERT_en/
+
+	your model would be saved at /disk/data/models/framenet/withProto-100/
+retrain: True
+
+### converting data to BERT input...
+	 ...is done: 0hour:0min:2sec
+	#of instance: 1783 1783
+Epoch:   0%|                                                | 0/50 [00:00<?, ?it/s]../kaiser/src/utils.py:309: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  pred_logits = sm(masked_logit).view(1,-1)
+Train loss: 3.634308519779436
+
+	your model is saved: /disk/data/models/framenet/withProto-100/0/
+Epoch:   2%|▋                                    | 1/50 [01:52<1:32:03, 112.73s/it]Train loss: 3.409669096837908
+
+	your model is saved: /disk/data/models/framenet/withProto-100/1/
+Epoch:   4%|█▍                                   | 2/50 [04:00<1:33:50, 117.31s/it]Train loss: 3.278326953817534
+
+	your model is saved: /disk/data/models/framenet/withProto-100/2/
+Epoch:   6%|██▏                                  | 3/50 [06:09<1:34:38, 120.82s/it]

@@ -1,0 +1,1325 @@
+### Korean FrameNet ###
+	# contact: hahmyg@kaist, hahmyg@gmail.com #
+
+
+	###DEVICE: cuda:0
+	###multilingual-for-ko (masking)
+### Your result would be saved to: /disk/data/models/eval_result-10/mul_for_ko_with_masking_result.txt
+
+### loading Korean FrameNet 1.1 data...
+	# of instances in training data: 17838
+	# of instances in dev data: 2548
+	# of instances in test data: 5097
+# of instances in trn: 17838
+# of instances in dev: 2548
+# of instances in tst: 5097
+data example: [['태풍', 'Hugo가', '남긴', '피해들과', '회사', '내', '몇몇', '주요', '부서들의', '저조한', '실적들을', '반영하여,', 'Aetna', 'Life', 'and', 'Casualty', 'Co.의', '3분기', '<tgt>', '순이익이', '</tgt>', '182.6', '백만', '달러', '또는', '주당', '1.63', '달러로', '22', '%', '하락하였다.'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '이익.n', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', 'Earnings_and_losses', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_'], ['O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'I-Earner', 'B-Time', 'X', 'O', 'X', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O']]
+### EVALUATION
+MODE: framenet
+target LANGUAGE: ko
+trained LANGUAGE: mul
+Viterbi: False
+masking: True
+using TGT token: True
+### model dir: /disk/data/models/framenet/mulModel-10/36/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/36/
+/disk/data/models/framenet/mulModel-10/36/
+...model is loaded
+# EPOCH: 36
+SenseId Accuracy: 0.7704532077692761
+ArgId Precision: 0.2846613292667429
+ArgId Recall: 0.27712482988989234
+ArgId F1: 0.2808425275827482
+full-structure Precision: 0.49286687217721703
+full-structure Recall: 0.48648457401641665
+full-structure F1: 0.4896549268188455
+-----processing time: 0hour:5min:54sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/3/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/3/
+/disk/data/models/framenet/mulModel-10/3/
+...model is loaded
+# EPOCH: 3
+SenseId Accuracy: 0.7690798508926819
+ArgId Precision: 0.2935081412560795
+ArgId Recall: 0.17171842137820117
+ArgId F1: 0.21667187012176087
+full-structure Precision: 0.556307350078784
+full-structure Recall: 0.42470987829040474
+full-structure F1: 0.4816821154849324
+-----processing time: 0hour:12min:6sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/15/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/15/
+/disk/data/models/framenet/mulModel-10/15/
+...model is loaded
+# EPOCH: 15
+SenseId Accuracy: 0.7720227584853836
+ArgId Precision: 0.2825524203986539
+ArgId Recall: 0.27007299270072993
+ArgId F1: 0.2761718008729205
+full-structure Precision: 0.4944178628389155
+full-structure Recall: 0.4825926974242853
+full-structure F1: 0.4884337176824465
+-----processing time: 0hour:18min:18sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/37/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/37/
+/disk/data/models/framenet/mulModel-10/37/
+...model is loaded
+# EPOCH: 37
+SenseId Accuracy: 0.773592309201491
+ArgId Precision: 0.2866161616161616
+ArgId Recall: 0.2808363231473463
+ArgId F1: 0.2836968068487159
+full-structure Precision: 0.49563224974939135
+full-structure Recall: 0.4898103594678743
+full-structure F1: 0.4927041070538828
+-----processing time: 0hour:24min:32sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/12/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/12/
+/disk/data/models/framenet/mulModel-10/12/
+...model is loaded
+# EPOCH: 12
+SenseId Accuracy: 0.7737885030410045
+ArgId Precision: 0.2940483205657042
+ArgId Recall: 0.24693801806260052
+ArgId F1: 0.2684419339654361
+full-structure Precision: 0.5173058933582788
+full-structure Recall: 0.4695726011887914
+full-structure F1: 0.49228486646884273
+-----processing time: 0hour:30min:46sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/23/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/23/
+/disk/data/models/framenet/mulModel-10/23/
+...model is loaded
+# EPOCH: 23
+SenseId Accuracy: 0.7761428291151657
+ArgId Precision: 0.29838056680161945
+ArgId Recall: 0.2735370530743536
+ArgId F1: 0.2854192215839412
+full-structure Precision: 0.5110929732136232
+full-structure Recall: 0.4874044721200113
+full-structure F1: 0.49896772791481037
+-----processing time: 0hour:37min:0sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/43/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/43/
+/disk/data/models/framenet/mulModel-10/43/
+...model is loaded
+# EPOCH: 43
+SenseId Accuracy: 0.7751618599175986
+ArgId Precision: 0.29097999748396025
+ArgId Recall: 0.2861561301496969
+ArgId F1: 0.2885479041916168
+full-structure Precision: 0.4978957129609815
+full-structure Recall: 0.4939145202377583
+full-structure F1: 0.49589712621221277
+-----processing time: 0hour:43min:15sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/38/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/38/
+/disk/data/models/framenet/mulModel-10/38/
+...model is loaded
+# EPOCH: 38
+SenseId Accuracy: 0.773984696880518
+ArgId Precision: 0.2889370379811369
+ArgId Recall: 0.2804651738216009
+ArgId F1: 0.2846380814865968
+full-structure Precision: 0.4976310122038765
+full-structure Recall: 0.4905179733937164
+full-structure F1: 0.4940488917397192
+-----processing time: 0hour:49min:30sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/45/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/45/
+/disk/data/models/framenet/mulModel-10/45/
+...model is loaded
+# EPOCH: 45
+SenseId Accuracy: 0.7763390229546793
+ArgId Precision: 0.2687413234613605
+ArgId Recall: 0.2873932945688482
+ArgId F1: 0.2777545286064447
+full-structure Precision: 0.4754832146490336
+full-structure Recall: 0.49610812340786864
+full-structure F1: 0.48557675658828825
+-----processing time: 0hour:55min:45sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/1/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/1/
+/disk/data/models/framenet/mulModel-10/1/
+...model is loaded
+# EPOCH: 1
+SenseId Accuracy: 0.7633902295467923
+ArgId Precision: 0.24451939291736932
+ArgId Recall: 0.1255721885438575
+ArgId F1: 0.16593101193395457
+full-structure Precision: 0.5477166276346604
+full-structure Recall: 0.3971836965751486
+full-structure F1: 0.46045939294503696
+-----processing time: 1hour:1min:59sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/34/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/34/
+/disk/data/models/framenet/mulModel-10/34/
+...model is loaded
+# EPOCH: 34
+SenseId Accuracy: 0.7759466352756523
+ArgId Precision: 0.2978494623655914
+ArgId Recall: 0.2741556352839292
+ArgId F1: 0.28551182116858853
+full-structure Precision: 0.5097835754521197
+full-structure Recall: 0.48669685819416925
+full-structure F1: 0.4979727772951057
+-----processing time: 1hour:8min:14sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/27/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/27/
+/disk/data/models/framenet/mulModel-10/27/
+...model is loaded
+# EPOCH: 27
+SenseId Accuracy: 0.7761428291151657
+ArgId Precision: 0.28338642489585886
+ArgId Recall: 0.2861561301496969
+ArgId F1: 0.28476454293628806
+full-structure Precision: 0.4903832654780289
+full-structure Recall: 0.49433908859326353
+full-structure F1: 0.49235323137641834
+-----processing time: 1hour:14min:37sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/49/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/49/
+/disk/data/models/framenet/mulModel-10/49/
+...model is loaded
+# EPOCH: 49
+SenseId Accuracy: 0.7737885030410045
+ArgId Precision: 0.28435906557571444
+ArgId Recall: 0.29667202771248297
+ArgId F1: 0.2903850811334463
+full-structure Precision: 0.4866951606231904
+full-structure Recall: 0.49957543164449475
+full-structure F1: 0.4930511907256093
+-----processing time: 1hour:20min:50sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/11/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/11/
+/disk/data/models/framenet/mulModel-10/11/
+...model is loaded
+# EPOCH: 11
+SenseId Accuracy: 0.7686874632136551
+ArgId Precision: 0.27879366812227074
+ArgId Recall: 0.25275269083261165
+ArgId F1: 0.2651352929725521
+full-structure Precision: 0.4974626865671642
+full-structure Recall: 0.4716954429663176
+full-structure F1: 0.48423652477117535
+-----processing time: 1hour:27min:2sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/25/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/25/
+/disk/data/models/framenet/mulModel-10/25/
+...model is loaded
+# EPOCH: 25
+SenseId Accuracy: 0.7769276044732195
+ArgId Precision: 0.28320358575135646
+ArgId Recall: 0.29704317703822836
+ArgId F1: 0.28995833584928443
+full-structure Precision: 0.4862284497561646
+full-structure Recall: 0.5009198981035947
+full-structure F1: 0.49346484960440556
+-----processing time: 1hour:33min:13sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/47/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/47/
+/disk/data/models/framenet/mulModel-10/47/
+...model is loaded
+# EPOCH: 47
+SenseId Accuracy: 0.7724151461644104
+ArgId Precision: 0.286236450718427
+ArgId Recall: 0.2809600395892614
+ArgId F1: 0.28357370294062556
+full-structure Precision: 0.49414202028861265
+full-structure Recall: 0.4894565525049533
+full-structure F1: 0.4917881265552791
+-----processing time: 1hour:39min:26sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/2/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/2/
+/disk/data/models/framenet/mulModel-10/2/
+...model is loaded
+# EPOCH: 2
+SenseId Accuracy: 0.7629978418677653
+ArgId Precision: 0.25870445344129556
+ArgId Recall: 0.1581096127675368
+ArgId F1: 0.1962681409813407
+full-structure Precision: 0.5321997105643994
+full-structure Recall: 0.41636003396546845
+full-structure F1: 0.46720660632047
+-----processing time: 1hour:45min:38sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/4/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/4/
+/disk/data/models/framenet/mulModel-10/4/
+...model is loaded
+# EPOCH: 4
+SenseId Accuracy: 0.7692760447321955
+ArgId Precision: 0.27624409734834726
+ArgId Recall: 0.1881727081529135
+ArgId F1: 0.2238575318272132
+full-structure Precision: 0.5299189515433695
+full-structure Recall: 0.4348995188225304
+full-structure F1: 0.47773027594247963
+-----processing time: 1hour:51min:51sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/9/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/9/
+/disk/data/models/framenet/mulModel-10/9/
+...model is loaded
+# EPOCH: 9
+SenseId Accuracy: 0.7698646262507357
+ArgId Precision: 0.28237570705567133
+ArgId Recall: 0.2346900903130026
+ArgId F1: 0.2563340314843592
+full-structure Precision: 0.5108465815647271
+full-structure Recall: 0.4615765638267761
+full-structure F1: 0.48496338426080815
+-----processing time: 1hour:58min:4sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/17/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/17/
+/disk/data/models/framenet/mulModel-10/17/
+...model is loaded
+# EPOCH: 17
+SenseId Accuracy: 0.7712379831273298
+ArgId Precision: 0.2961714747910488
+ArgId Recall: 0.27180502288754177
+ArgId F1: 0.2834655828656216
+full-structure Precision: 0.506827964969571
+full-structure Recall: 0.4832295499575432
+full-structure F1: 0.4947475186553648
+-----processing time: 2hour:4min:19sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/30/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/30/
+/disk/data/models/framenet/mulModel-10/30/
+...model is loaded
+# EPOCH: 30
+SenseId Accuracy: 0.7769276044732195
+ArgId Precision: 0.2834802035497083
+ArgId Recall: 0.2825683533341581
+ArgId F1: 0.28302354399008667
+full-structure Precision: 0.49260176991150445
+full-structure Recall: 0.49235776960090577
+full-structure F1: 0.49247973953356694
+-----processing time: 2hour:10min:33sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/40/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/40/
+/disk/data/models/framenet/mulModel-10/40/
+...model is loaded
+# EPOCH: 40
+SenseId Accuracy: 0.7757504414361389
+ArgId Precision: 0.27943625880845613
+ArgId Recall: 0.26982555981689965
+ArgId F1: 0.27454682779456197
+full-structure Precision: 0.4936553713049748
+full-structure Recall: 0.4845032550240589
+full-structure F1: 0.4890364973930434
+-----processing time: 2hour:16min:45sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/42/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/42/
+/disk/data/models/framenet/mulModel-10/42/
+...model is loaded
+# EPOCH: 42
+SenseId Accuracy: 0.7745732783990583
+ArgId Precision: 0.30470685383980184
+ArgId Recall: 0.273908202400099
+ArgId F1: 0.28848784937129457
+full-structure Precision: 0.5155428743054513
+full-structure Recall: 0.4858477214831588
+full-structure F1: 0.5002550091074681
+-----processing time: 2hour:22min:58sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/26/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/26/
+/disk/data/models/framenet/mulModel-10/26/
+...model is loaded
+# EPOCH: 26
+SenseId Accuracy: 0.7763390229546793
+ArgId Precision: 0.2781698423900259
+ArgId Recall: 0.2925893851292837
+ArgId F1: 0.28519746759119685
+full-structure Precision: 0.48222862632084534
+full-structure Recall: 0.4973110670818002
+full-structure F1: 0.4896537309273323
+-----processing time: 2hour:29min:15sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/10/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/10/
+/disk/data/models/framenet/mulModel-10/10/
+...model is loaded
+# EPOCH: 10
+SenseId Accuracy: 0.7684912693741417
+ArgId Precision: 0.2828773168578994
+ArgId Recall: 0.237906717802796
+ArgId F1: 0.2584503729588066
+full-structure Precision: 0.5086314152410576
+full-structure Recall: 0.46285026889329184
+full-structure F1: 0.48466212211025494
+-----processing time: 2hour:35min:28sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/8/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/8/
+/disk/data/models/framenet/mulModel-10/8/
+...model is loaded
+# EPOCH: 8
+SenseId Accuracy: 0.7667255248185207
+ArgId Precision: 0.26944203527030935
+ArgId Recall: 0.2306074477298033
+ArgId F1: 0.24851676554896343
+full-structure Precision: 0.4981885454405303
+full-structure Recall: 0.45733088027172375
+full-structure F1: 0.47688618336100347
+-----processing time: 2hour:41min:38sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/48/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/48/
+/disk/data/models/framenet/mulModel-10/48/
+...model is loaded
+# EPOCH: 48
+SenseId Accuracy: 0.7757504414361389
+ArgId Precision: 0.2890741662518666
+ArgId Recall: 0.2873932945688482
+ArgId F1: 0.28823127985607055
+full-structure Precision: 0.4955764739188902
+full-structure Recall: 0.4954712708746108
+full-structure F1: 0.4955238668129224
+-----processing time: 2hour:47min:50sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/22/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/22/
+/disk/data/models/framenet/mulModel-10/22/
+...model is loaded
+# EPOCH: 22
+SenseId Accuracy: 0.7741808907200314
+ArgId Precision: 0.3010928961748634
+ArgId Recall: 0.27267103798094766
+ArgId F1: 0.2861780172693631
+full-structure Precision: 0.5125242284180707
+full-structure Recall: 0.48648457401641665
+full-structure F1: 0.49916503303564946
+-----processing time: 2hour:54min:2sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/0/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/0/
+/disk/data/models/framenet/mulModel-10/0/
+...model is loaded
+# EPOCH: 0
+SenseId Accuracy: 0.7484794977437709
+ArgId Precision: 0.2492630199803472
+ArgId Recall: 0.09414821229741432
+ArgId F1: 0.13667385057471265
+full-structure Precision: 0.5760122230710466
+full-structure Recall: 0.37347863005943954
+full-structure F1: 0.45314445159905553
+-----processing time: 3hour:0min:19sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/31/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/31/
+/disk/data/models/framenet/mulModel-10/31/
+...model is loaded
+# EPOCH: 31
+SenseId Accuracy: 0.7690798508926819
+ArgId Precision: 0.2899527983816588
+ArgId Recall: 0.26599035011753064
+ArgId F1: 0.277455155503936
+full-structure Precision: 0.5021538918597742
+full-structure Recall: 0.47841777526181717
+full-structure F1: 0.4899985505145673
+-----processing time: 3hour:6min:32sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/6/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/6/
+/disk/data/models/framenet/mulModel-10/6/
+...model is loaded
+# EPOCH: 6
+SenseId Accuracy: 0.7647635864233863
+ArgId Precision: 0.29951254739122585
+ArgId Recall: 0.20524557713720154
+ArgId F1: 0.24357656731757452
+full-structure Precision: 0.5380509641873278
+full-structure Recall: 0.44225870365128783
+full-structure F1: 0.48547459996892955
+-----processing time: 3hour:12min:43sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/21/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/21/
+/disk/data/models/framenet/mulModel-10/21/
+...model is loaded
+# EPOCH: 21
+SenseId Accuracy: 0.7749656660780851
+ArgId Precision: 0.28817580222249967
+ArgId Recall: 0.28553754794012126
+ArgId F1: 0.28685060899826004
+full-structure Precision: 0.49528067560854444
+full-structure Recall: 0.49384375884517406
+full-structure F1: 0.49456117351096623
+-----processing time: 3hour:18min:53sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/28/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/28/
+/disk/data/models/framenet/mulModel-10/28/
+...model is loaded
+# EPOCH: 28
+SenseId Accuracy: 0.7720227584853836
+ArgId Precision: 0.28506271379703535
+ArgId Recall: 0.2783619943090437
+ArgId F1: 0.2816725087631447
+full-structure Precision: 0.4934154022330375
+full-structure Recall: 0.48782904047551656
+full-structure F1: 0.4906063193851409
+-----processing time: 3hour:25min:5sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/32/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/32/
+/disk/data/models/framenet/mulModel-10/32/
+...model is loaded
+# EPOCH: 32
+SenseId Accuracy: 0.7730037276829508
+ArgId Precision: 0.2921303656597774
+ArgId Recall: 0.2727947544228628
+ArgId F1: 0.28213166144200624
+full-structure Precision: 0.5033458342525186
+full-structure Recall: 0.48436173223889045
+full-structure F1: 0.4936713425408388
+-----processing time: 3hour:31min:17sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/7/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/7/
+/disk/data/models/framenet/mulModel-10/7/
+...model is loaded
+# EPOCH: 7
+SenseId Accuracy: 0.7704532077692761
+ArgId Precision: 0.2691436338921613
+ArgId Recall: 0.2204626994927626
+ArgId F1: 0.24238302502720346
+full-structure Precision: 0.5057561898754139
+full-structure Recall: 0.45386357203509764
+full-structure F1: 0.478406802416648
+-----processing time: 3hour:37min:29sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/13/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/13/
+/disk/data/models/framenet/mulModel-10/13/
+...model is loaded
+# EPOCH: 13
+SenseId Accuracy: 0.7665293309790072
+ArgId Precision: 0.2795412109895972
+ArgId Recall: 0.25930966225411356
+ArgId F1: 0.2690456325011232
+full-structure Precision: 0.4945768464546595
+full-structure Recall: 0.4743136144919332
+full-structure F1: 0.4842333393534405
+-----processing time: 3hour:43min:50sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/44/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/44/
+/disk/data/models/framenet/mulModel-10/44/
+...model is loaded
+# EPOCH: 44
+SenseId Accuracy: 0.7733961153619776
+ArgId Precision: 0.28126544735541276
+ArgId Recall: 0.2815786217988371
+ArgId F1: 0.2814219474497682
+full-structure Precision: 0.48970203128317646
+full-structure Recall: 0.4895980752901217
+full-structure F1: 0.48965004776901033
+-----processing time: 3hour:50min:2sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/16/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/16/
+/disk/data/models/framenet/mulModel-10/16/
+...model is loaded
+# EPOCH: 16
+SenseId Accuracy: 0.7763390229546793
+ArgId Precision: 0.2917760884588804
+ArgId Recall: 0.2611654088828405
+ArgId F1: 0.275623449536493
+full-structure Precision: 0.5095517448856799
+full-structure Recall: 0.47940843475799605
+full-structure F1: 0.4940207087647659
+-----processing time: 3hour:56min:12sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/33/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/33/
+/disk/data/models/framenet/mulModel-10/33/
+...model is loaded
+# EPOCH: 33
+SenseId Accuracy: 0.7733961153619776
+ArgId Precision: 0.27184582236054583
+ArgId Recall: 0.2809600395892614
+ArgId F1: 0.276327797043256
+full-structure Precision: 0.48000831543205597
+full-structure Recall: 0.49016416643079536
+full-structure F1: 0.4850330847600042
+-----processing time: 4hour:2min:23sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/29/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/29/
+/disk/data/models/framenet/mulModel-10/29/
+...model is loaded
+# EPOCH: 29
+SenseId Accuracy: 0.7741808907200314
+ArgId Precision: 0.2737449118046133
+ArgId Recall: 0.299517505876531
+ArgId F1: 0.2860518697938205
+full-structure Precision: 0.47440021444846536
+full-structure Recall: 0.5009198981035947
+full-structure F1: 0.48729951125490467
+-----processing time: 4hour:8min:34sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/41/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/41/
+/disk/data/models/framenet/mulModel-10/41/
+...model is loaded
+# EPOCH: 41
+SenseId Accuracy: 0.772218952324897
+ArgId Precision: 0.29373420247439136
+ArgId Recall: 0.27316590374860816
+ArgId F1: 0.28307692307692306
+full-structure Precision: 0.5047183721616042
+full-structure Recall: 0.48443249363147467
+full-structure F1: 0.494367417677643
+-----processing time: 4hour:14min:46sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/35/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/35/
+/disk/data/models/framenet/mulModel-10/35/
+...model is loaded
+# EPOCH: 35
+SenseId Accuracy: 0.7757504414361389
+ArgId Precision: 0.2758091188282542
+ArgId Recall: 0.2888778918718298
+ArgId F1: 0.2821922774790018
+full-structure Precision: 0.48197421934238643
+full-structure Recall: 0.4947636569487687
+full-structure F1: 0.48828520548901844
+-----processing time: 4hour:20min:58sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/19/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/19/
+/disk/data/models/framenet/mulModel-10/19/
+...model is loaded
+# EPOCH: 19
+SenseId Accuracy: 0.7733961153619776
+ArgId Precision: 0.29489993544222076
+ArgId Recall: 0.2825683533341581
+ArgId F1: 0.28860247662370475
+full-structure Precision: 0.5023161551823973
+full-structure Recall: 0.49108406453439
+full-structure F1: 0.496636610848719
+-----processing time: 4hour:27min:9sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/5/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/5/
+/disk/data/models/framenet/mulModel-10/5/
+...model is loaded
+# EPOCH: 5
+SenseId Accuracy: 0.7710417892878164
+ArgId Precision: 0.27423003306072735
+ArgId Recall: 0.1949771124582457
+ArgId F1: 0.22791033984092554
+full-structure Precision: 0.525915278599814
+full-structure Recall: 0.4401358618737617
+full-structure F1: 0.4792172271659155
+-----processing time: 4hour:33min:21sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/18/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/18/
+/disk/data/models/framenet/mulModel-10/18/
+...model is loaded
+# EPOCH: 18
+SenseId Accuracy: 0.7706494016087895
+ArgId Precision: 0.27235921972764077
+ArgId Recall: 0.2746505010515898
+ArgId F1: 0.27350006159911294
+full-structure Precision: 0.4819115990990991
+full-structure Recall: 0.4845032550240589
+full-structure F1: 0.48320395201129146
+-----processing time: 4hour:39min:34sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/20/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/20/
+/disk/data/models/framenet/mulModel-10/20/
+...model is loaded
+# EPOCH: 20
+SenseId Accuracy: 0.7706494016087895
+ArgId Precision: 0.28224061107574794
+ArgId Recall: 0.2742793517258444
+ArgId F1: 0.278203036767474
+full-structure Precision: 0.491963260619977
+full-structure Recall: 0.48514010755731674
+full-structure F1: 0.4885278609092204
+-----processing time: 4hour:45min:47sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/46/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/46/
+/disk/data/models/framenet/mulModel-10/46/
+...model is loaded
+# EPOCH: 46
+SenseId Accuracy: 0.7706494016087895
+ArgId Precision: 0.2900471517777495
+ArgId Recall: 0.2815786217988371
+ArgId F1: 0.2857501569365976
+full-structure Precision: 0.49684497346909506
+full-structure Recall: 0.4903056892159638
+full-structure F1: 0.493553671913954
+-----processing time: 4hour:52min:0sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/14/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/14/
+/disk/data/models/framenet/mulModel-10/14/
+...model is loaded
+# EPOCH: 14
+SenseId Accuracy: 0.7759466352756523
+ArgId Precision: 0.26789614171317644
+ArgId Recall: 0.27316590374860816
+ArgId F1: 0.2705053598774885
+full-structure Precision: 0.48069390039171794
+full-structure Recall: 0.48627228983866405
+full-structure F1: 0.4834670043618967
+-----processing time: 4hour:58min:12sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/24/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/24/
+/disk/data/models/framenet/mulModel-10/24/
+...model is loaded
+# EPOCH: 24
+SenseId Accuracy: 0.7773199921522465
+ArgId Precision: 0.27764733505517725
+ArgId Recall: 0.2925893851292837
+ArgId F1: 0.2849225950243961
+full-structure Precision: 0.4828367431003707
+full-structure Recall: 0.4976648740447212
+full-structure F1: 0.4901386856226915
+-----processing time: 5hour:4min:26sec
+
+### model dir: /disk/data/models/framenet/mulModel-10/39/
+### TARGET LANGUAGE: ko
+srl model: framenet
+language: multilingual
+version: 1.1
+using viterbi: False
+using masking: True
+pretrained BERT: bert-base-multilingual-cased
+using TGT special token: True
+used dictionary:
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lu2idx.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_lufrmap.json
+	 /disk/kaiser/kaiser/src/../koreanframenet/resource/info/mul_bio_frargmap.json
+...loaded model path: /disk/data/models/framenet/mulModel-10/39/
+/disk/data/models/framenet/mulModel-10/39/
+...model is loaded
+# EPOCH: 39
+SenseId Accuracy: 0.7737885030410045
+ArgId Precision: 0.27781342230206596
+ArgId Recall: 0.2678460967462576
+ArgId F1: 0.2727387251196775
+full-structure Precision: 0.49253192871058515
+full-structure Recall: 0.48301726577979054
+full-structure F1: 0.48772819834946946
+-----processing time: 5hour:10min:39sec
+
+
+	### Your result is saved at: /disk/data/models/eval_result-10/mul_for_ko_with_masking_result.txt

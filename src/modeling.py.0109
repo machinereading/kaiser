@@ -28,20 +28,6 @@ from transformers import *
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 n_gpu = torch.cuda.device_count()
 
-class MLP(nn.Module):
-    def __init__(self):
-        super(MLP, self).__init__()
-        self.layers = nn.Sequential(
-            nn.Linear(768, 768),
-            nn.ReLU(),
-            nn.Linear(768, 768)
-        )
-        
-    def forward(self, x):
-        x = x.view(x.size(0), -1)
-        x = self.layers(x)
-        return x
-
 class FrameBERT(BertPreTrainedModel):
     def __init__(self, config, num_senses=2, num_args=2, lufrmap=None, frargmap=None, masking=True):
         super(FrameBERT, self).__init__(config)
@@ -77,25 +63,12 @@ class BertForJointShallowSemanticParsing(BertPreTrainedModel):
         self.return_pooled_output = return_pooled_output
         self.original_loss = original_loss
         
-#         mlp_model_path = '/disk/data/models/framenet/prototype_mlp/prototype_mlp.pth'
-#         self.mlp_model = MLP()
-#         self.mlp_model.to(device)
-#         self.mlp_model.load_state_dict(torch.load(mlp_model_path))
-#         self.mlp_model.eval()
-        
         self.init_weights()
 
     def forward(self, input_ids, token_type_ids=None, attention_mask=None, lus=None, senses=None, args=None, using_gold_fame=False, position_ids=None, head_mask=None):
         sequence_output, pooled_output = self.bert(input_ids, token_type_ids=token_type_ids, attention_mask=attention_mask)
         sequence_output = self.dropout(sequence_output)
         pooled_output = self.dropout(pooled_output)
-        
-#         with torch.no_grad():
-#             pooled_output = self.mlp_model(pooled_output)
-#         self.mlp_model.train()
-#         self.mlp_model.eval()
-    
-#         pooled_output = self.mlp_model(pooled_output)
         
         sense_logits = self.sense_classifier(pooled_output)
         arg_logits = self.arg_classifier(sequence_output)        

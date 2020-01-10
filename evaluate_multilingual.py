@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 import json
@@ -22,7 +22,7 @@ if device != "cpu":
     torch.cuda.set_device(0)
 
 
-# In[2]:
+# In[3]:
 
 
 try:
@@ -31,7 +31,7 @@ except:
     dir_path = '.'
 
 
-# In[3]:
+# In[4]:
 
 
 # 실행시간 측정 함수
@@ -52,7 +52,7 @@ def tac():
     return result
 
 
-# In[4]:
+# In[5]:
 
 
 def flat_accuracy(preds, labels):
@@ -74,7 +74,7 @@ def weighting(frame, args):
     return weighted_args
 
 
-# In[5]:
+# In[6]:
 
 
 def test(srl=False, masking=False, viterbi=False, language=False, model_path=False, 
@@ -112,6 +112,8 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
     print('masking:', masking)
     print('using TGT token:', tgt)
     tic()    
+    
+#     models = [model_path]
         
     models = glob.glob(model_path+'*/')
     
@@ -130,7 +132,8 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
 
 #     mul best
 #     models.append('/disk/data/models/framenet_old/mulModel-100/39/')
-#     models.append(model_path+'33/')
+#     models.append(model_path+'36/')
+#     models.append(model_path+'37/')
     
     eval_result = []
     for m in models:
@@ -241,418 +244,16 @@ def test(srl=False, masking=False, viterbi=False, language=False, model_path=Fal
         print('\n\t### Your result is saved at:', fname)
 
 
-# # eval for 25%
-
-# In[6]:
+# In[ ]:
 
 
 srl = 'framenet'
 language = 'ko'
 
-
-# In[7]:
-
-
-# print('\t###eval for ko Model (masking)')
-# model_path = '/disk/data/models/framenet/koModel-25/'
-# result_dir = '/disk/data/models/eval_result-25'
-
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[7]:
-
-
-print('\t###eval for proto-distill (masking)')
-model_path = '/disk/data/models/framenet/proto_distilling-25/'
+print('\t###eval for ko Model (masking)')
+model_path = '/disk/data/models/framenet/koModel-25/'
 result_dir = '/disk/data/models/eval_result-25'
-test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='proto_distilling', 
+
+test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', 
      model_path=model_path, result_dir=result_dir)
-
-
-# In[8]:
-
-
-# print('\t###multilingual-for-ko (masking)')
-# model_path = '/disk/data/models/framenet/mulModel-25/'
-# result_dir = '/disk/data/models/eval_result-25'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[10]:
-
-
-# print('\t###eval for ko Model (no masking)')
-# model_path = '/disk/data/models/framenet/koModel-25/'
-# result_dir = '/disk/data/models/eval_result-25'
-
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[9]:
-
-
-# print('\t###eval for proto-distill (no masking)')
-# model_path = '/disk/data/models/framenet/proto_distilling-25/'
-# result_dir = '/disk/data/models/eval_result-25'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='proto_distilling', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[10]:
-
-
-# print('\t###multilingual-for-ko (no masking)')
-# model_path = '/disk/data/models/framenet/mulModel-25/'
-# result_dir = '/disk/data/models/eval_result-25'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for 100 (ko)
-
-# In[13]:
-
-
-srl = 'framenet'
-
-
-# In[14]:
-
-
-# srl = 'framenet'
-# language = 'ko'
-# print('\t###eval for ko Model (masking)')
-# model_path = '/disk/data/models/framenet/koModel/'
-# result_dir = '/disk/data/models/eval_result-100'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[15]:
-
-
-# print('\t###eval for proto-distill (masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/proto_distilling/'
-# result_dir = '/disk/data/models/eval_result-100'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='proto_distilling', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[16]:
-
-
-# print('\t###multilingual-for-ko (masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/dict_framenet/mulModel-100/'
-# result_dir = '/disk/data/models/eval_result-100'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[17]:
-
-
-# print('\t###eval for ko Model (no masking)')
-# model_path = '/disk/data/models/framenet/koModel/'
-# result_dir = '/disk/data/models/eval_result-100'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[18]:
-
-
-# print('\t###eval for proto-distill (no masking)')
-# model_path = '/disk/data/models/framenet/proto_distilling/'
-# result_dir = '/disk/data/models/eval_result-100'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='proto_distilling', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[19]:
-
-
-# print('\t###multilingual-for-ko (no masking)')
-# # model_path = '/disk/data/models/framenet/mulModel-100/'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-# result_dir = '/disk/data/models/eval_result-100'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# ## eval for 10%
-
-# In[20]:
-
-
-# print('\t###eval for ko Model (masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/koModel-10/'
-# result_dir = '/disk/data/models/eval_result-10'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[21]:
-
-
-print('\t###eval for proto-distill (masking)')
-language = 'ko'
-model_path = '/disk/data/models/framenet/proto_distilling-10/'
-result_dir = '/disk/data/models/eval_result-10'
-test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='proto_distilling', 
-     model_path=model_path, result_dir=result_dir)
-
-
-# In[22]:
-
-
-# print('\t###multilingual-for-ko (masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/mulModel-10/'
-# result_dir = '/disk/data/models/eval_result-10'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[23]:
-
-
-# print('\t###eval for ko Model (no masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/koModel-10/'
-# result_dir = '/disk/data/models/eval_result-10'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[24]:
-
-
-# print('\t###eval for proto-distill (no masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/proto_distilling-10/'
-# result_dir = '/disk/data/models/eval_result-10'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='proto_distilling', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[25]:
-
-
-# print('\t###multilingual-for-ko (no masking)')
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/mulModel-10/'
-# result_dir = '/disk/data/models/eval_result-10'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for proto-distill (ko)
-
-# In[26]:
-
-
-# print('\t###eval for proto-distill (masking)')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/proto_distilling/'
-
-# result_dir = '/disk/data/models/proto_distilling/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='prot-_distilling', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[27]:
-
-
-# print('\t###multilingual-for-ko-no-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-
-# result_dir = '/disk/data/models/eval_result/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[28]:
-
-
-# print('\t###eval for proto-distill (masking)')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/framenet/proto_distilling/'
-
-# result_dir = '/disk/data/models/proto_distilling/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='prot-_distilling', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for en for en
-
-# In[29]:
-
-
-# print('\t###multilingual-for-en-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
-
-# result_dir = '/disk/data/models/eval_result/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for ko for ko
-
-# In[30]:
-
-
-# print('\t###multilingual-for-en-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
-
-# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[31]:
-
-
-# print('\t###multilingual-for-ko-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/koModel/'
-# result_dir = '/disk/data/models/results/framenet/koModel/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[32]:
-
-
-# print('\t###multilingual-for-en-without-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/framenet/enModel-with-exemplar/'
-# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[33]:
-
-
-# print('\t###ko-for-ko-without-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/koModel/'
-# result_dir = '/disk/data/models/results/framenet/koModel/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[34]:
-
-
-# print('\t###en-for-ko-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = ''
-# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[35]:
-
-
-# print('\t###en-for-ko-without-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = ''
-# result_dir = '/disk/data/models/results/framenet/enModel-with-exemplar/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_with_exem', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for KFN
-
-# In[36]:
-
-
-# print('\t###multilingual-for-ko-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-
-# result_dir = '/disk/data/models/eval_result/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[37]:
-
-
-# print('\t###multilingual-for-ko-without-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-
-# result_dir = '/disk/data/models/results/framenet/mulModel-100/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for En again using mulModel
-
-# In[38]:
-
-
-# print('\t###multilingual-for-en-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-
-# result_dir = '/disk/data/models/eval_result/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='mul', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# In[39]:
-
-
-# print('\t###multilingual-for-en-without-masking')
-# srl = 'framenet'
-# language = 'en'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-# model_path = '/disk/data/models/framenet/mulModel-100/'
-
-# result_dir = '/disk/data/models/results/framenet/mulModel-100-for-en/'
-# test(srl=srl, language=language, masking=False, viterbi=False, tgt=True, train_lang='en_ko', 
-#      model_path=model_path, result_dir=result_dir)
-
-
-# # eval for distilling
-
-# In[40]:
-
-
-# print('\t###multilingual-for-ko-masking')
-# srl = 'framenet'
-# language = 'ko'
-# model_path = '/disk/data/models/framenet/distilling/'
-
-# result_dir = '/disk/data/models/distilling/'
-# test(srl=srl, language=language, masking=True, viterbi=False, tgt=True, train_lang='distilling', 
-#      model_path=model_path, result_dir=result_dir)
 
